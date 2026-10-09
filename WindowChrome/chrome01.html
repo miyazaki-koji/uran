@@ -1,0 +1,700 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング,WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" xml:lang="ja" />
+<meta name="description" content="高い表下力のWindowChromeを使うための準備を紹介します。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" xml:lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+<!-- <script type="text/javascript" src="./smoothScroll.js"></script> -->
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWindowChromeプログラミング</a></h1>
+			<span class="description">
+				高い表現力のWindowChromeを使うための準備を紹介します
+			</span>			
+		</div>
+     <div class="twitterlogo">
+     	<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+	 	<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+    </div> 
+
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->     	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 1000px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+		
+			<h3 class="title">1.DashboardSampleの移植</h3>
+			<br />
+			<h4>DashboardSample</h4>
+				<p>WPFのサンプルは、Googleで、「WPF Sample Download」と入力して検索するいろいろと表示されます。<br />
+				その中で見つけたのが、下記のサイトのDashboardSampleです。</p>
+				<p><a href="http://www.mindscapehq.com/blog/index.php/2012/07/05/building-dashboards-with-wpf-elements-part-3-getting-started/">「Building Dashboards With WPF Elements Part 3: Getting Started」</a></p>
+
+
+
+			<b>DashboardSample (クリックすると拡大)</b>
+			<div id="top">
+				<a href="images/DashboardSample.png" rel="lightbox"><img src="images/DashboardSample.png" alt=""  width="440" height="300" border="1"/></a>
+			</div>
+			<br />
+
+				<p>下の方のYou can download the Visual Studio 2010 solution of where we are at so far from here.をクリックしますとDashboardSample_Part3.zipのダウンロードが開始されます。<br />
+				解凍するとDashboardSampleというファイル（ソリューション)が出来ます。<br />
+				</p>
+			<br/>
+			<h4>移植</h4>
+				<p>Caliburnという開発者のライブラリ(dll)を使用しますが、これはDashboardView.xamlというZAMLのみが使用可能になっています。<br />
+				これを汎用化する為に、1.WindowCromeのプロジェクトにWindow3.xamlを作って、DashboardView.xamlのコードを一部修正してコピーしました。<br />
+				又、DashboardViewModel.csとPropertyChangedBase.csはコピーしました。</p>
+			<br />			
+				<p>Window3.xamlは下記の通りです。116～304行がCopyです。但し、129行目のtxtTitleへの変更や296～299のtxt本日の追加は修正箇所です。</p>
+			<br/>
+			
+			
+			
+			<b>View</b>
+			<div id="source"><pre class="brush:html; highlight:[116,129,296,297,298,299,301]; "title="Window3.xaml"  style="width: 666px">
+&lt;ccl:CustomChromeWindow 
+　x:Class=&quot;LivetWPFApplicationChrome1.Views.Window3&quot;
+　xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+　xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+　xmlns:mc=&quot;http://schemas.openxmlformats.org/markup-compatibility/2006&quot; 
+　xmlns:d=&quot;http://schemas.microsoft.com/expression/blend/2008&quot; 
+　xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;   
+　xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+　xmlns:local=&quot;clr-namespace:LivetWPFApplicationChrome1&quot;               
+　xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+　xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+　xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+　xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=
+	Microsoft.Expression.Interactions&quot;      
+　xmlns:v=&quot;clr-namespace:LivetWPFApplicationChrome1.Views&quot;
+　xmlns:vm=&quot;clr-namespace:LivetWPFApplicationChrome1.ViewModels&quot;
+　WindowStartupLocation=&quot;CenterScreen&quot;
+　mc:Ignorable=&quot;d&quot; 
+　d:DesignHeight=&quot;714&quot; d:DesignWidth=&quot;1035&quot; Background=&quot;Black&quot;
+　Height=&quot;714&quot; Width=&quot;1035&quot;
+　Title=&quot;Window3&quot; &gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:ViewModel3/&gt;
+    &lt;/Window.DataContext&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;vm:CaptionButtonRectToMarginConverter x:Key=
+            	&quot;CaptionButtonMarginConverter&quot;/&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;../Resources\GlassButton.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;../Resources\GlassIcon.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/StylesBG.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/FilterButtonStyle.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitialize
+        	呼ばれます--&gt;
+        &lt;i:EventTrigger EventName=&quot;ContentRendered&quot;&gt;
+            &lt;l:LivetCallMethodAction MethodTarget=&quot;{Binding}&quot; MethodName=
+            	&quot;Initialize&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey2&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window2}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+                                   CommandParameter=&quot;{Binding Mode=OneTime,
+                                   RelativeSource={RelativeSource Mode=
+                                  　FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+                                   CommandParameter=&quot;{Binding Mode=OneTime,
+                                   RelativeSource={RelativeSource Mode=
+                                   FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; Messenger=
+        	&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;Grid&gt;
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;!--title bar--&gt;
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; Margin=
+        	&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+
+            &lt;!--Window Icon and Title--&gt;
+           &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+             &lt;TextBlock Text=&quot;&quot; FontFamily=&quot;Calibri&quot; FontWeight=&quot;Bold&quot; 
+             	FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+           &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;Grid Margin=&quot;20,0,20,20&quot;&gt;
+            &lt;Grid.RowDefinitions&gt;
+                &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                &lt;RowDefinition Height=&quot;1*&quot; /&gt;
+                &lt;RowDefinition Height=&quot;2*&quot; /&gt;
+                &lt;RowDefinition Height=&quot;3*&quot; /&gt;
+            &lt;/Grid.RowDefinitions&gt;
+            &lt;Grid.ColumnDefinitions&gt;
+                &lt;ColumnDefinition Width=&quot;649*&quot; /&gt;
+                &lt;ColumnDefinition Width=&quot;92*&quot; /&gt;
+                &lt;ColumnDefinition Width=&quot;232*&quot; /&gt;
+            &lt;/Grid.ColumnDefinitions&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot; Grid.ColumnSpan=&quot;3&quot;&gt;
+                &lt;TextBlock Text=&quot;{Binding Path=txtTitle}&quot;  
+                	Style=&quot;{StaticResource MainTitleStyle}&quot; 
+                		HorizontalAlignment=&quot;Left&quot; Margin=&quot;0,0,0,8&quot; /&gt;
+                    &lt;Button Style=&quot;{StaticResource FilterButtonStyle}&quot; 
+                    	Margin=&quot;40,0,0,5&quot;&gt;
+                    &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                        &lt;Border Width=&quot;20&quot; Height=&quot;20&quot; Background=
+                        	&quot;{StaticResource ProductColor1}&quot; 
+                        		VerticalAlignment=&quot;Center&quot; /&gt;
+                  &lt;TextBlock Text=&quot;{x:Static vm:DashboardViewModel.ProductName1}&quot;  
+                  	Style=&quot;{StaticResource LegendTextStyle}&quot; 
+                  		VerticalAlignment=&quot;Center&quot; Margin=&quot;10,0,0,0&quot; /&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Button&gt;
+
+              &lt;Button Style=&quot;{StaticResource FilterButtonStyle}&quot; Margin=&quot;40,0,0,5&quot;&gt;
+                    &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                        &lt;Border Width=&quot;20&quot; Height=&quot;20&quot; Background=
+                        	&quot;{StaticResource ProductColor2}&quot; 
+                        		VerticalAlignment=&quot;Center&quot; /&gt;
+
+                   &lt;TextBlock Text=&quot;{x:Static vm:DashboardViewModel.ProductName2}&quot; 
+                   	Style=&quot;{StaticResource LegendTextStyle}&quot; VerticalAlignment=
+                   		&quot;Center&quot; Margin=&quot;10,0,0,0&quot; /&gt;
+                        
+                    &lt;/StackPanel&gt;
+                &lt;/Button&gt;
+
+                &lt;Button Style=&quot;{StaticResource FilterButtonStyle}&quot; 
+                	Margin=&quot;40,0,0,5&quot;&gt;
+                    &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                        &lt;Border Width=&quot;20&quot; Height=&quot;20&quot; Background=
+                        	&quot;{StaticResource ProductColor3}&quot; 
+                        		VerticalAlignment=&quot;Center&quot; /&gt;
+                        &lt;TextBlock Text=
+                        	&quot;{x:Static vm:DashboardViewModel.ProductName3}&quot; 
+                        		Style=&quot;{StaticResource LegendTextStyle}&quot; 
+                        		VerticalAlignment=&quot;Center&quot; 
+                        		Margin=&quot;10,0,0,0&quot; /&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Button&gt;
+                
+            &lt;/StackPanel&gt;
+
+            &lt;Border Grid.Row=&quot;1&quot; Grid.ColumnSpan=&quot;3&quot; Background=&quot;#0F6FC6&quot;&gt;
+                &lt;TextBlock Text=&quot;Time Explorer&quot; VerticalAlignment=&quot;Center&quot; 
+                HorizontalAlignment=&quot;Center&quot; /&gt;
+            &lt;/Border&gt;
+
+            &lt;Grid Grid.Row=&quot;2&quot; SnapsToDevicePixels=&quot;True&quot; Margin=&quot;0,10,0,10&quot;&gt;
+                &lt;Grid.RowDefinitions&gt;
+                    &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                    &lt;RowDefinition Height=&quot;*&quot; /&gt;
+                &lt;/Grid.RowDefinitions&gt;
+                &lt;ContentPresenter ContentTemplate=
+                &quot;{StaticResource GroupBoxHeaderTemplate}&quot; 
+                Content=&quot;Product Sales Breakdown&quot; /&gt;
+                &lt;Border CornerRadius=&quot;0,0,10,10&quot; Background=
+                &quot;{StaticResource GroupBoxBackground}&quot; Grid.Row=&quot;1&quot;&gt;
+                    &lt;Border Margin=&quot;10&quot; Background=&quot;#009DD9&quot;&gt;
+                        &lt;TextBlock Text=&quot;Product Breakdown Chart&quot; 
+                        VerticalAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Center&quot; /&gt;
+                    &lt;/Border&gt;
+                &lt;/Border&gt;
+            &lt;/Grid&gt;
+
+            &lt;Border Grid.Row=&quot;3&quot; Background=&quot;#10CF9B&quot;&gt;
+                &lt;TextBlock Text=&quot;Data Grid&quot; VerticalAlignment=&quot;Center&quot; 
+                HorizontalAlignment=&quot;Center&quot; /&gt;
+            &lt;/Border&gt;
+
+            &lt;Border Background=&quot;{StaticResource GroupBoxBackground}&quot; 
+            CornerRadius=&quot;10,10,0,0&quot; Grid.Column=&quot;1&quot; Grid.Row=&quot;2&quot; 
+            Margin=&quot;10,10,0,0&quot; SnapsToDevicePixels=&quot;True&quot; Grid.ColumnSpan=&quot;2&quot;&gt;
+                &lt;Grid&gt;
+                    &lt;Grid.RowDefinitions&gt;
+                        &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                        &lt;RowDefinition Height=&quot;*&quot; /&gt;
+                    &lt;/Grid.RowDefinitions&gt;
+                    &lt;ContentPresenter ContentTemplate=&quot;{StaticResource 
+                    GroupBoxHeaderTemplate}&quot; Content=&quot;Statistics&quot; /&gt;
+                    &lt;Border Grid.Row=&quot;1&quot; Margin=&quot;10,10,10,20&quot; Background=&quot;#0BD0D9&quot;&gt;
+                        &lt;TextBlock Text=&quot;Country chart&quot; VerticalAlignment=&quot;Center&quot; 
+                        HorizontalAlignment=&quot;Center&quot; /&gt;
+                    &lt;/Border&gt;
+                &lt;/Grid&gt;
+            &lt;/Border&gt;
+
+          &lt;Grid Grid.Column=&quot;1&quot; Grid.Row=&quot;3&quot; Margin=&quot;10,0,0,0&quot; Grid.ColumnSpan=&quot;2&quot;&gt;
+                &lt;Grid.RowDefinitions&gt;
+                    &lt;RowDefinition Height=&quot;*&quot; /&gt;
+                    &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                &lt;/Grid.RowDefinitions&gt;
+                &lt;Border Background=&quot;{StaticResource GroupBoxBackground}&quot; 
+                CornerRadius=&quot;0,0,10,10&quot; SnapsToDevicePixels=&quot;True&quot;&gt;
+                    &lt;Grid&gt;
+                        &lt;Grid.RowDefinitions&gt;
+                            &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                            &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                            &lt;RowDefinition Height=&quot;*&quot; /&gt;
+                        &lt;/Grid.RowDefinitions&gt;
+
+                        &lt;StackPanel Orientation=&quot;Horizontal&quot;&gt;
+                            &lt;TextBlock Text=&quot;Total Sales&quot; Style=
+                            &quot;{StaticResource MainTitleStyle}&quot;  
+                            Margin=&quot;10,0,20,0&quot; Grid.RowSpan=&quot;2&quot; /&gt;
+                            &lt;TextBlock Text=&quot;From&quot; 
+                            Style=&quot;{StaticResource SecondaryTitleStyle}&quot; 
+                            VerticalAlignment=&quot;Bottom&quot; Grid.Column=&quot;1&quot; 
+                            Margin=&quot;0,0,0,2&quot; /&gt;
+                           &lt;TextBlock Style=&quot;{StaticResource SecondaryTitleStyle}&quot; 
+                           　VerticalAlignment=&quot;Bottom&quot; Grid.Column=&quot;2&quot; 
+                           　Margin=&quot;10,0,20,2&quot; /&gt;
+                            &lt;TextBlock Text=&quot;To&quot; Style=
+                            &quot;{StaticResource SecondaryTitleStyle}&quot; 
+                            VerticalAlignment=&quot;Bottom&quot; Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot;
+                             Margin=&quot;0,0,0,2&quot; /&gt;
+                            &lt;TextBlock Style=&quot;{StaticResource SecondaryTitleStyle}&quot; 
+                            VerticalAlignment=&quot;Bottom&quot; Grid.Row=&quot;1&quot; Grid.Column=&quot;2&quot; 
+                            Margin=&quot;10,0,10,2&quot; /&gt;
+                        &lt;/StackPanel&gt;
+
+                        &lt;Border Grid.Row=&quot;1&quot; Margin=&quot;10&quot; Height=&quot;40&quot; Background=
+                        &quot;#0B9B74&quot;&gt;
+                            &lt;TextBlock Text=&quot;Total Sales Display&quot; 
+                         VerticalAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Center&quot; /&gt;
+                        &lt;/Border&gt;
+
+                        &lt;Grid Grid.Row=&quot;2&quot; Margin=&quot;10&quot;&gt;
+                            &lt;Grid.RowDefinitions&gt;
+                                &lt;RowDefinition Height=&quot;Auto&quot; /&gt;
+                                &lt;RowDefinition Height=&quot;*&quot; /&gt;
+                            &lt;/Grid.RowDefinitions&gt;
+                            &lt;Grid.ColumnDefinitions&gt;
+                                &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+                                &lt;ColumnDefinition Width=&quot;*&quot; /&gt;
+                            &lt;/Grid.ColumnDefinitions&gt;
+                            &lt;TextBlock Text=&quot;Year on Year&quot; 
+                            Style=&quot;{StaticResource SecondaryTitleStyle}&quot; 
+                            HorizontalAlignment=&quot;Center&quot; /&gt;
+                            &lt;TextBlock Text=&quot;Budgeted&quot; 
+                            Style=&quot;{StaticResource SecondaryTitleStyle}&quot; 
+                            Grid.Column=&quot;1&quot; HorizontalAlignment=&quot;Center&quot; /&gt;
+                            &lt;Border Grid.Row=&quot;1&quot; Margin=&quot;0,0,5,0&quot; 
+                            Background=&quot;#7CCA62&quot;&gt;
+                                &lt;TextBlock Text=&quot;Radial Gauge&quot; 
+                                VerticalAlignment=&quot;Center&quot; 
+                                HorizontalAlignment=&quot;Center&quot; /&gt;
+                            &lt;/Border&gt;
+                            &lt;Border Grid.Row=&quot;1&quot; Grid.Column=&quot;1&quot; 
+                            Margin=&quot;5,0,0,0&quot; Background=&quot;#A5C249&quot;&gt;
+                                &lt;TextBlock Text=&quot;Radial Gauge&quot; 
+                                VerticalAlignment=&quot;Center&quot; 
+                                HorizontalAlignment=&quot;Center&quot; /&gt;
+                            &lt;/Border&gt;
+                        &lt;/Grid&gt;
+                    &lt;/Grid&gt;
+                &lt;/Border&gt;
+                &lt;Button Name=&quot;VisitWebsite&quot; Grid.Row=&quot;1&quot; 
+                Style=&quot;{StaticResource LinkButtonStyle}&quot; 
+                HorizontalAlignment=&quot;Left&quot; ToolTip=&quot;Visit the Mindscape website&quot;&gt;
+                    &lt;TextBlock Text=&quot;Built with Mindscape WPF&quot; FontSize=&quot;16&quot; 
+                    FontFamily=&quot;Segoe UI&quot; Foreground=&quot;DarkGray&quot; Height=&quot;21&quot; 
+                    Width=&quot;203&quot; /&gt;
+                &lt;/Button&gt;
+
+                &lt;TextBox Grid.Row=&quot;1&quot; Text=&quot;{Binding Path=txt本日}&quot; 
+                TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日2&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;226,4,6,0&quot; /&gt;
+            &lt;/Grid&gt;
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;
+</pre>
+			</div>
+			<br/>
+			<p>PropertyChangedBase.csはLivet用に変更しました。具体的には、8行目のusing Livet;の追加ﾄ19行目を、20行目にの変更しています。</p>
+			<br />
+			<b>PropertyChangedBase.cs</b>
+			<div id="source"><pre class="brush:csharp ; highlight:[8,19,20]" title="PropertyChangedBase.cs">using System;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+
+using Livet;
+//using Livet.Commands;
+//using Livet.Messaging;
+//CloseCommand
+//using Livet.Messaging.Windows;
+
+using LivetWPFApplicationChrome1.ViewModels;
+using LivetWPFApplicationChrome1.Views;
+
+namespace LivetWPFApplicationChrome1.ViewModels
+{
+  // public class PropertyChangedBase : INotifyPropertyChanged
+    public class PropertyChangedBase  : ViewModel
+    {
+        #region RaisePropertyChanged
+        internal void RaisePropertyChanged(string prop)
+        {
+            if (PropertyChanged != null) 
+            { 
+            	PropertyChanged(this, new PropertyChangedEventArgs(prop)); 
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion 
+    }
+}</pre>
+			</div>
+			<br />
+
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+　　　　　　　　　　　　<br />
+			<!-- End floatbox -->
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+				<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+				<a href="index.html">はじめに</a><br />
+				<a href="chrome01.html">DashboardSampleの移植</a><br />
+				<a href="chrome02.html">CustomChromeLibrary.dll</a><br />
+			</div> 	
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
+
