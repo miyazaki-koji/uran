@@ -1,0 +1,31 @@
+﻿#header20 {
+/*	height: 102px; */
+	height: 98px;
+/*	background: url("../images/header.gif") repeat-x 0 bottom; */
+	padding-top: 25px;
+	/* Add */
+	background-color	: #D7EEFF;
+}
+		#header20 ul li a {
+			color: #ffffff;
+			display: block;
+			/* 11を大きくするとhoverで大きくなってしまう   */
+			padding: 11px 12px;
+
+		}
+
+	#header20 .logo20 {
+		float: left;
+		padding-left: 15px;
+	}
+	#header20 .logo20 h1 {
+			font-size: 0;
+	}
+	#header20 .logo20 h1 a {
+			display: block;
+			outline: none;
+			text-indent: -9999px;
+			background: url("../images/LOGO-Bonjour-40.png") no-repeat 0 0;
+			width: 324px; 
+			height: 53px;
+	}
