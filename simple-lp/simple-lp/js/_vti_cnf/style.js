@@ -1,0 +1,12 @@
+vti_encoding:SR|utf8-nl
+vti_timelastmodified:TW|28 Jan 2023 05:36:31 -0000
+vti_author:SR|miyazaki\\uran
+vti_modifiedby:SR|miyazaki\\uran
+vti_nexttolasttimemodified:TW|28 Jan 2023 05:36:31 -0000
+vti_timecreated:TR|31 Dec 2023 14:09:47 -0000
+vti_cacheddtm:TX|31 Dec 2023 14:09:47 -0000
+vti_filesize:IR|1843
+vti_extenderversion:SR|12.0.0.0
+vti_backlinkinfo:VX|simple-lp/simple-lp/subpage.html simple-lp/simple-lp/index.html
+vti_syncofs_www.aa.cyberhome.ne.jp\:21/public_html:TW|28 Jan 2023 05:36:31 -0000
+vti_syncwith_www.aa.cyberhome.ne.jp\:21/public_html:TW|31 Dec 2023 14:09:47 -0000
