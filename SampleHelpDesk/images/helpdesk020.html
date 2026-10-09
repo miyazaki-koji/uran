@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Livetを使ったCSharpのWPF|トップページ～C#のWPFが開発できるようになるサイトです。</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="プログラミング,アカデミー,WindowChrome,プログラミング,アカデミー,uran,ウランのホームページ,トイプードル,C#,WPF,Livet,LIVET,入門,プログラミング," lang="ja" xml:lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" xml:lang="ja" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<!-- <script type="text/javascript" src="./smoothScroll.js"></script> -->
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+
+<script type='text/javascript'>
+
+	<!-- google analytics -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48887342-7', 'auto');
+	  ga('send', 'pageview');
+</script>
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">WindowChromeのSample HelpDesk</a></h1>
+			<span class="description">
+				WindowChromeのSampleとして作成したHelpDeskシステムをご照会します。シンプルなシステムなのでMVVMの作り方がよくわかります
+			</span>			
+		</div>		
+		<div id="main" >
+			<h3>操作説明</h3>
+			<h4>メニュー</h4>
+				<p>「ヘルプデスク」ボタンをクリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_01.png" rel="lightbox"><img src="images/helpdesk010_01.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+				
+			<br />
+			<p class="gad">スポンサードリンク</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+			<br />
+			<br />
+
+
+			<h4>一覧表</h4>
+				<p>「一覧表」画面が開きました。</p>
+				<p>新しくデータを登録してみましょう。<br />
+				「新規登録」ボタンをクリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_02.png" rel="lightbox"><img src="images/helpdesk010_02.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+				<br/>
+			<h4>新規登録</h4>
+				<p>「新規登録」画面が開きました。</p>
+				<p>新しくデータを登録してみましょう。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_03.png" rel="lightbox"><img src="images/helpdesk010_03.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+				<p>■「受付番号」を入力する為にダミーボタンをクリックします。「本日の西暦下2桁-月日-0000」が入力されます。</p>
+				<p>■「「受付年月日時」を入力する為に本日ボタンをクリックします。本日の「月日時間」が入力されます。</p>
+				<p>■「対応状況」を入力する為に右の下書ボタンをクリックします。ボタンのラベルが入力されます。</p>
+				<p>■「製品名」を入力する為に貼付ボタンをクリックします。<br />
+				     &nbsp;「Microsot C# WPF WindowChromeプログラミング」が入力されます。</p>
+				<p>■「タイトル」に手入力をします。</p>
+				<p>■当方の「問い合わせ内容」に手入力をします。</p>
+				<p>■質問の右の「貼付」ボタンをクリックします。<br />
+				&nbsp;社員マスターから入力者の会社名・社員名・メールアドレスが編集されます。</p>
+				<p>■「登録実行」をクリックします。</p>
+				<p>■閉じる」をクリックします。</p>
+
+			<br />
+			<h4>一覧表</h4>
+				<p>「下書」ボタンをクリックします。</p>
+				<p>今、一覧の中に登録した「WPFでListBoxの使い方」が表示されていますので、クリックして<br />
+				「詳細」をクリック、ます。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_04.png" rel="lightbox"><img src="images/helpdesk010_04.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			
+			
+			
+			<br/>
+			<h4>詳細</h4>
+				<p>「詳細」画面が開きました。</p>
+				<p>先ほど登録してものです。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_05.png" rel="lightbox"><img src="images/helpdesk010_05.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+				<p>■「閉じる」をクリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_04.png" rel="lightbox"><img src="images/helpdesk010_04.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<p>■「対応中」をクリックします。</p>
+			<p>一覧の一番上の「C#Windowフォームプログラミングの経験者がWindowChromeを習得するには?」を<br />
+			クリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_02.png" rel="lightbox"><img src="images/helpdesk010_02.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<p>■詳細をクリックします。</p>
+
+
+			<h4>詳細</h4>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_06.png" rel="lightbox"><img src="images/helpdesk010_06.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<h4>添付資料の照会</h4>
+				<p>左の「問い合わせ内容」のところの「File」は「問い合わせ内容」に添付資料があることを示しています。</p>
+				<p>左の「対応内容」のところの「File」は、「対応内容」に添付資料があることを示しています。</p>
+				<p>「問い合わせ内容」のところの「File」をクリックします。</p>
+
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_06.png" rel="lightbox"><img src="images/helpdesk010_06.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+
+			<br />
+				<p>ディレクトリを検索する画面が表示されます。<br />
+				「ファイル名で検索」をクリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_07.png" rel="lightbox"><img src="images/helpdesk010_07.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+
+			<br />
+				<p>このフォルダ内にあるファイル名が表示されます。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_08.png" rel="lightbox"><img src="images/helpdesk010_08.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+				<p>中身を見たいファイル名をクリックして、「ツールで開く」をクリックします。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_09.png" rel="lightbox"><img src="images/helpdesk010_09.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+				
+			<br />
+			<p class="gad">スポンサードリンク</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+			<br />
+			<br />
+				<p>ファイルが開きました。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_10.png" rel="lightbox"><img src="images/helpdesk010_10.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>
+				<p>ファイル名の拡張子で開くツールが決定します。</p>	
+			</div>
+				<p style="clear:left;"/>		
+			<br />
+				<p>「フォルダを開く」をクリックしますとフォルダが開きます。。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_11.png" rel="lightbox"><img src="images/helpdesk010_11.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>
+				<p>ファイル名の拡張子で開くツールが決定します。</p>	
+			</div>
+				<p style="clear:left;"/>		
+			<br />
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html">ホームへ戻る</a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="helpdesk010.html">データ定義</a><br /> 
+				<a href="helpdesk020.html">操作説明</a><br /> 
+		    	<a href="helpdesk030.html">LINK To XML</a><br />
+		    	<a href="helpdesk040.html">メニュー</a><br />
+		    	<a href="helpdesk050.html">一覧表</a><br />
+		    	<a href="helpdesk060.html">詳細</a><br />
+		    	<a href="helpdeskOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+<hr />
+<br />
+<p class="gad">スポンサードリンク</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:170px;height:600px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+
+				
+			<div class="sidetitle">開発で役立つツールのサイト</div>
+			<div class="side">
+				<a href="https://visualstudiogallery.msdn.microsoft.com/ee198b62-fa45-496c-9c1c-e8f63b43f677">Livetのダウンロードサイト</a>です<br />
+				<a href="http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/">ER図作成ツール</a>は便利です。<br />
+				<a href="http://inno-setup.sidefeed.com/archives/cat_2_inno_setup_.html">インストーラ作成ツール</a><br />
+				<a href="http://www.forest.impress.co.jp/library/software/kuronekosql/">黒猫 SQL Studio Next</a><br />
+			</div>
+			<div class="sidetitle">HTMLのお勉強のサイト</div>
+			<div class="side">
+				<a href="http://e-words.jp/p/r-htmlentity.html">HTMLの特殊文字</a>は重要です。<br />
+				<a href="http://algorhythnn.jp/blg/2014/04/11/expression_web_4-install/">Expression Web 4</a>を使って作成<br />
+				<a href="http://www.vector.co.jp/soft/dl/win95/art/se108932.html">JTrim</a>で綺麗にトリミング<br />
+				<a href="http://html-color-codes.info/japanese/">カラーコード</a>の入力で色表示<br />
+				<a href="http://www.netyasun.com/home/color.html">色を見てコード</a>を確認<br />
+				<a href="http://www.netyasun.com/syntaxhighlighter/">SyntaxHighlighter</a>でソース装飾<br />			
+				<a href="http://www.free-css.com/free-css-templates/page1">Free CSS</a>を使う<br />
+			</div>
+
+
+<hr />
+<br />
+<p class="gad">スポンサードリンク</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:170px;height:600px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったCSharpのWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

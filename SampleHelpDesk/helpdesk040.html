@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>WindowChromeのSample HelpDesk</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="プログラミング,アカデミー,WindowChrome,プログラミング,アカデミー,uran,ウランのホームページ,トイプードル,C#,WPF,Livet,LIVET,入門,プログラミング," lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../WindowsForm/WPFCSharpUsingLivet/syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- Google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">WindowChromeのSample HelpDesk</a></h1>
+			<span class="description">
+				WindowChromeのSampleとして作成したHelpDeskシステムをご照会します
+			</span>			
+		</div>
+     <div class="twitterlogo">
+     	<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+	 	<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+    </div> 
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+    	
+    	
+		
+		<div id="main" >
+		
+			<h3 class="title">4.メニュー画面</h3>
+			<br />
+			<h4>メニュー画面</h4>
+				<p>画面は下記の通りです。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_01.png" rel="lightbox"><img src="images/helpdesk010_01.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+
+		
+			
+			<p>背景色がグレーの部分がWindowChromeに関係するところです。</p>
+			<h4>View</h4>
+			<div id="source"><pre class="brush:html ; highlight:[1,5,6,17,18,19,20,21,22,23,24,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,120]" title="MainViewModel.cs">&lt;ccl:CustomChromeWindow 
+        x:Class=&quot;LivetWPFChromeHelpDesk1.Views.MainWindow&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;
+        xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+              
+        xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+        xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+        xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+        xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions&quot;      
+        xmlns:v=&quot;clr-namespace:LivetWPFChromeHelpDesk1.Views&quot;
+        xmlns:vm=&quot;clr-namespace:LivetWPFChromeHelpDesk1.ViewModels&quot;    
+        WindowStartupLocation=&quot;CenterScreen&quot;
+        Title=&quot;MainWindow&quot; Height=&quot;714&quot; Width=&quot;1035&quot;&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;vm:CaptionButtonRectToMarginConverter x:Key=&quot;CaptionButtonMarginConverter&quot;/&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:MainWindowViewModel/&gt;
+    &lt;/Window.DataContext&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます--&gt;
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey2&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window2}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey10&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window10}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+       　&lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;!-- Grid-1 --&gt;
+    &lt;Grid&gt;
+
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; Margin=&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+            &lt;!--Window Icon and Title--&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+                &lt;TextBlock Text=&quot; Help Desk&quot; FontFamily=&quot;Calibri&quot; FontWeight=&quot;Bold&quot; FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;!-- Grid-2 --&gt;
+        &lt;!--Content--&gt;
+        &lt;Grid Grid.Row=&quot;1&quot;&gt;
+
+            &lt;!-- ★★★ --&gt;
+            &lt;Grid&gt;
+                &lt;TextBox Text=&quot;{Binding Path=txt本日}&quot; TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;809,3,123,0&quot; /&gt;
+
+                &lt;Button Command=&quot;{Binding Path=GotoCommand10}&quot; 
+		            Content=&quot;ヘルプ　デスク&quot; FontSize=&quot;16&quot; Height=&quot;35&quot; Margin=&quot;45,0,706,561&quot;  
+                    Foreground=&quot;White&quot; Style=&quot;{StaticResource CommandTemplate}&quot; VerticalAlignment=&quot;Bottom&quot; /&gt;
+            &lt;/Grid&gt;
+            &lt;!-- ★★★ --&gt;
+
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;</pre>
+			</div>
+			<br />
+						<br/>
+			<b>コードビハインド</b>
+			<div id="source"><pre class="brush: csharp; highlight:[6];　"title="MainWindow.xaml.cs"  style="width: 666px">namespace LivetWPFChromeHelpDesk1.Views
+{
+    /// &lt;summary&gt;
+    /// MainWindow.xaml の相互作用ロジック
+    /// &lt;/summary&gt;
+    public partial class MainWindow : CustomChromeLibrary.CustomChromeWindow
+    {
+        public MainWindow()
+        {
+            
+            InitializeComponent();
+        }
+
+    }
+}</pre>
+			</div>
+			<br />
+			<br />
+			<h4>ViewModel</h4>
+			<div id="source"><pre class="brush:csharp ; highlight:[0]" title="Window10.xaml">using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//ICommand
+using System.Windows.Input;
+
+//MessageBox
+using System.Windows;
+
+using LivetWPFChromeHelpDesk1.Views;
+using LivetWPFChromeHelpDesk1.ViewModels;
+
+
+namespace LivetWPFChromeHelpDesk1.ViewModels
+{
+    public class MainWindowViewModel : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        public string txtMessage { get; set; }
+        public string txt本日 { get; set; }
+        public bool IsEnabled { get; set; }
+        //-----------------------------------------------
+        #endregion
+
+        Window win = null;
+        public MainWindowViewModel()
+        {
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+
+            //Initialize()では表示されない
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+            if (win != null) win.Owner.Hide();
+        }
+
+        #region GotoCommand
+        //---------------------------------------------------------------
+        public ViewModelCommand GotoCommand2
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto2); }
+        }
+        public void Goto2()
+        {
+            Messenger.Raise(new TransitionMessage(new ViewModel2() { NeedHideOwner = true }, &quot;MessageKey2&quot;));
+        }
+        //----------------------------------------------------------------
+        public ViewModelCommand GotoCommand8
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto8); }
+        }
+        public void Goto8()
+        {
+            Messenger.Raise(new TransitionMessage(new ViewModel8() { NeedHideOwner = true }, &quot;MessageKey8&quot;));
+        }
+        //----------------------------------------------------------------
+        public ViewModelCommand GotoCommand10
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto10); }
+        }
+        public void Goto10()
+        {
+            Messenger.Raise(new TransitionMessage(new ViewModel10() { NeedHideOwner = true }, &quot;MessageKey10&quot;));
+        }
+        //----------------------------------------------------------------
+
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+
+
+    }
+}</pre>
+			</div>
+			<br />
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="helpdesk010.html">データ定義</a><br /> 
+				<a href="helpdesk020.html">操作説明</a><br /> 
+		    	<a href="helpdesk030.html">LINQ To XML</a><br />
+		    	<a href="helpdesk040.html">メニュー画面</a><br />
+		    	<a href="helpdesk050.html">一覧表画面</a><br />
+		    	<a href="helpdesk060.html">詳細画面</a><br />
+		    	<a href="helpdeskOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+				
+	
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

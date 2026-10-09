@@ -1,0 +1,2379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>WindowChromeのSample HelpDesk</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="プログラミング,アカデミー,WindowChrome,プログラミング,アカデミー,uran,ウランのホームページ,トイプードル,C#,WPF,Livet,LIVET,入門,プログラミング," lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../WPFCSharpUsingLivet/syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- Google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">WindowChromeのSample HelpDesk</a></h1>
+			<span class="description">
+				WindowChromeのSampleとして作成したHelpDeskシステムをご照会します
+			</span>		
+		</div>
+     <div class="twitterlogo">
+     	<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+	 	<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+    </div> 
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+    	
+		
+		<div id="main" >
+		
+			<h3 class="title">6.詳細画面</h3>
+			<br />
+			<h4>詳細画面</h4>
+			<p>画面は下記の通りです。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_06.png" rel="lightbox"><img src="images/helpdesk010_06.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+			<br />
+			<p></p>
+			<p></p>
+				<p style="clear:left;"/>
+
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 765px; height: 400px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->
+			
+			
+			<h4>View</h4>
+			<div id="source"><pre class="brush:csharp ; highlight:[0]" title="DeleteData">&lt;ccl:CustomChromeWindow 
+        x:Class=&quot;LivetWPFChromeHelpDesk1.Views.Window20&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+        xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;
+        xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+        xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+        xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+        xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+        xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions&quot;      
+        xmlns:v=&quot;clr-namespace:LivetWPFChromeHelpDesk1.Views&quot;
+        xmlns:vm=&quot;clr-namespace:LivetWPFChromeHelpDesk1.ViewModels&quot;    
+        WindowStartupLocation=&quot;CenterScreen&quot;
+        Title=&quot;Window20&quot; Height=&quot;714&quot; Width=&quot;1035&quot;&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;vm:CaptionButtonRectToMarginConverter x:Key=&quot;CaptionButtonMarginConverter&quot;/&gt;
+
+            &lt;BooleanToVisibilityConverter x:Key=&quot;登録実行BoolToVisibility&quot;/&gt;
+            &lt;BooleanToVisibilityConverter x:Key=&quot;更新BoolToVisibility&quot;/&gt;
+            
+            &lt;BooleanToVisibilityConverter x:Key=&quot;BoolToVisibility&quot;/&gt;
+            
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+    
+    &lt;i:Interaction.Triggers&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKeyDSD1&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:DirectorySearchData}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKeyDSD2&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:DirectorySearchData}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName=&quot;ContentRendered&quot;&gt;
+            &lt;l:LivetCallMethodAction MethodTarget=&quot;{Binding}&quot; MethodName=&quot;Initialize&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;!-- Grid-1 --&gt;
+    &lt;Grid&gt;
+
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; Margin=&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+            &lt;!--Window Icon and Title--&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+                &lt;TextBlock Text=&quot; Help Desk&quot; FontFamily=&quot;Calibri&quot; FontWeight=&quot;Bold&quot; FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;!-- Grid-2 --&gt;
+        &lt;!--Content--&gt;
+        &lt;Grid Grid.Row=&quot;1&quot;&gt;
+           
+            &lt;!-- ★★★ --&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txt本日}&quot; TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;809,3,123,0&quot; /&gt;
+                    
+            &lt;TextBlock  Padding=&quot;0,4,0,0&quot; TextAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; 
+		        Margin=&quot;695,86,0,0&quot; Background=&quot;#CCFFFF&quot; Name=&quot;txtHyperlink&quot; Height=&quot;19&quot; Width=&quot;166&quot;&gt; 
+                &lt;Hyperlink Command=&quot;{Binding OpenWebsiteCommand2}&quot; 
+                      CommandParameter=&quot;http://www.aa.cyberhome.ne.jp/~bel/&quot;&gt;
+                  &lt;!--Label--&gt;
+                  c# Programing Academy
+                &lt;/Hyperlink&gt;
+            &lt;/TextBlock&gt;
+
+            &lt;Button Command=&quot;{Binding Path=ReInquiryCommand}&quot; BorderBrush=&quot;{x:Null}&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; Content=&quot;再問い合せ&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; Margin=&quot;802,114,0,0&quot; Name=&quot;button1&quot; Width=&quot;83&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;UIElement.IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                        &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;Green&quot; /&gt;
+                        &lt;Setter Property=&quot;Control.Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Control.Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+
+            &lt;Button  Command=&quot;{Binding Path=UpdateDataCommand}&quot; Content=&quot;更新&quot; Name=&quot;btnUpdate&quot;  Height=&quot;24&quot; Width=&quot;75&quot; Margin=&quot;891,113,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;Black&quot; 
+                     Visibility=&quot;{Binding Is更新Visible, Converter={StaticResource BoolToVisibility}}&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Visibility&quot; Value=&quot;Visible&quot;/&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;YellowGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtReceiptNumber}&quot;  Height=&quot;24&quot;  Width=&quot;105&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,54,0,0&quot; Name=&quot;txtReceiptNumber&quot; VerticalAlignment=&quot;Top&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=ログインユーザー名貼付Command}&quot; Content=&quot;貼付&quot; Name=&quot;btnログインユーザー名貼付&quot; Height=&quot;24&quot; Width=&quot;38&quot; Margin=&quot;639,54,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtInquiry}&quot; Width=&quot;854&quot; TextWrapping=&quot;Wrap&quot; VerticalScrollBarVisibility=&quot;Auto&quot; AcceptsReturn=&quot;True&quot;  TextAlignment=&quot;Left&quot; Name=&quot;txtInquiry&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; Margin=&quot;114,205,0,0&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot;  Height=&quot;138&quot; /&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=InsertDataCommand}&quot; Content=&quot;登録実行&quot; Name=&quot;btnInsert&quot;  Height=&quot;24&quot; Margin=&quot;891,54,0,0&quot; 
+                    Visibility=&quot;{Binding Is登録実行Visible, Converter={StaticResource BoolToVisibility}}&quot;
+                    HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;Black&quot; Width=&quot;75&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Visibility&quot; Value=&quot;Visible&quot;/&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;YellowGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Label   Content=&quot;受付番号&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;15,54,0,0&quot; Name=&quot;label1&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;63&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtReceiptDate}&quot; Name=&quot;txtReceiptDate&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,84,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;105&quot;  Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;受付年月日時&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;14,84,0,0&quot; Name=&quot;label2&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;93&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtState}&quot; Name=&quot;txtState&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,114,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;105&quot;  Foreground=&quot;Yellow&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;対応状況&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;15,114,0,0&quot; Name=&quot;label3&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;63&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtCustomer}&quot; Name=&quot;txtCustomer&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;545,54,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;88&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;質問&quot; Foreground=&quot;White&quot; Height=&quot;23&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;398,57,0,0&quot; Name=&quot;label4&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;38&quot;  /&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtProductName}&quot; Name=&quot;txtProductName&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,144,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;773&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;製品名&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;16,144,0,0&quot; Name=&quot;label5&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;63&quot; /&gt;
+
+            &lt;Label   Content=&quot;タイトル&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;16,174,0,0&quot; Name=&quot;label6&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;92&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtTitle2}&quot; Name=&quot;txtTitle2&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,174,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;773&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtCompletingDate}&quot; Name=&quot;txtCompletingDate&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;538,115,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;95&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;完了日&quot; Foreground=&quot;White&quot; Height=&quot;23&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;494,115,0,0&quot; Name=&quot;label7&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;48&quot; /&gt;
+            &lt;Label   Content=&quot;問い合わせ内容&quot; Foreground=&quot;White&quot; Height=&quot;43&quot;  HorizontalAlignment=&quot;Left&quot; Margin=&quot;16,205,0,0&quot; Name=&quot;label8&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;93&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtCorrespondence}&quot; Name=&quot;txtCorrespondence&quot; Height=&quot;287&quot;  Width=&quot;854&quot; TextWrapping=&quot;Wrap&quot; VerticalScrollBarVisibility=&quot;Auto&quot; AcceptsReturn=&quot;True&quot;   TextAlignment=&quot;Left&quot; Margin=&quot;114,356,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;対応内容&quot; Foreground=&quot;White&quot; Height=&quot;31&quot;  Margin=&quot;16,356,0,0&quot; Name=&quot;label9&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot;  Width=&quot;93&quot; /&gt;
+
+            &lt;Button Command=&quot;{Binding Path=InsertダミーCommand}&quot; Content=&quot;ダミー&quot; Name=&quot;btnダミー&quot; Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;225,54,0,0&quot; HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=Insert本日Command}&quot; Content=&quot;本日&quot; Name=&quot;btn本日&quot; Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;225,84,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=Insert対応中Command}&quot; Content=&quot;対応中&quot; Name=&quot;btn対応中&quot;  Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;281,114,0,0&quot;  HorizontalAlignment=&quot;Left&quot; VerticalAlignment=&quot;Top&quot;  BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=Insert検証中Command}&quot;  Content=&quot;検証中&quot; Name=&quot;btn検証中&quot;  Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;393,114,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=Insert完了済Command}&quot; Content=&quot;完了済&quot; Name=&quot;btn完了済&quot;  Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;337,114,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=Insert本日2Command}&quot; Content=&quot;本日&quot; Name=&quot;btn本日2&quot; Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;639,113,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=VisibilityボタンCommand}&quot; Content=&quot;Fileボタンを表示&quot; Name=&quot;btnFileVisible&quot; Height=&quot;24&quot; Width=&quot;91&quot; Margin=&quot;705,114,0,0&quot;   HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+
+            &lt;Label Content=&quot;回目&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;337,56,0,0&quot; Name=&quot;label11&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;38&quot; /&gt;
+            &lt;Label Content=&quot;日経過&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;337,84,0,0&quot; Name=&quot;label12&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;50&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtNumber}&quot; Name=&quot;txtNumber&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot;  HorizontalAlignment=&quot;Left&quot; Margin=&quot;281,53,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;50&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtProgressDay}&quot; Name=&quot;txtProgressDay&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot;  HorizontalAlignment=&quot;Left&quot; Margin=&quot;281,84,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;50&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+
+            &lt;Button Command=&quot;{Binding Path=txtMailAddressToClipboardCommand}&quot;  Content=&quot;←CB&quot;  Height=&quot;24&quot; Width=&quot;34&quot; Margin=&quot;851,54,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=txtTitle2ToClipboardCommand}&quot;  Content=&quot;←CB&quot;  Height=&quot;24&quot; Width=&quot;37&quot; Margin=&quot;891,174,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=txtInquiryToClipboardCommand}&quot;  Content=&quot;CB↓&quot; Name=&quot;btnCB3&quot; Height=&quot;24&quot; Width=&quot;35&quot; Margin=&quot;931,174,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+
+            &lt;Button Command=&quot;{Binding Path=txtProductName編集Command}&quot;  Content=&quot;貼付&quot; Name=&quot;btniBOP&quot; Height=&quot;24&quot; Width=&quot;35&quot; Margin=&quot;931,144,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=txtProductNameToClipboardCommand}&quot;  Content=&quot;←CB&quot;  Height=&quot;24&quot; Width=&quot;37&quot; Margin=&quot;891,144,0,0&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+            &lt;Button  Command=&quot;{Binding Path=Insert下書Command}&quot; Content=&quot;下書&quot; Name=&quot;btn下書&quot; Height=&quot;24&quot; Width=&quot;50&quot; Margin=&quot;225,114,0,0&quot;  HorizontalAlignment=&quot;Left&quot; VerticalAlignment=&quot;Top&quot;  BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=txtInquiryClearCommand}&quot; Content=&quot;Clear&quot; Name=&quot;btntxtInquiryClear&quot; Height=&quot;24&quot; Width=&quot;36&quot; Margin=&quot;974,319,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=GotoDSD1Command}&quot; Content=&quot;File&quot; Name=&quot;btntxtInquiryFile&quot; Height=&quot;24&quot; Width=&quot;36&quot; Margin=&quot;73,319,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;Black&quot; 
+                      Visibility=&quot;{Binding IsButtonVisible, Converter={StaticResource BoolToVisibility}}&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Visibility&quot; Value=&quot;Visible&quot;/&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;YellowGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtMailAddress}&quot; VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;683,54,0,0&quot; Name=&quot;txtMailAddress&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;166&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtCompany}&quot; VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;444,54,0,0&quot; Name=&quot;txtCompany&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;98&quot; /&gt;
+
+            &lt;Label Content=&quot;回答&quot; Foreground=&quot;White&quot; Height=&quot;23&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;398,85,0,0&quot; Name=&quot;label10&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;38&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtCorrespondingCompany}&quot; VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;444,84,0,0&quot; Name=&quot;txtCorrespondingCompany&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;189&quot; /&gt;
+
+&lt;!--        &lt;TextBlock  Text=&quot;{Binding Path=txtHyperlink}&quot; Padding=&quot;0,4,0,0&quot; TextAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; Margin=&quot;683,90,0,0&quot; Background=&quot;#FF1E90FF&quot; Name=&quot;txtHyperlink&quot; Height=&quot;17&quot; Width=&quot;166&quot;&gt;           
+    				&lt;Hyperlink NavigateUri=&quot;https://eservice.fujitsu.com/supportdesk/sdk/sdk?sv=0&quot; RequestNavigate=&quot;Hyperlink_RequestNavigate&quot;&gt;
+        				富士通サポートデスク
+    	    		&lt;/Hyperlink&gt;
+            &lt;/TextBlock&gt;
+--&gt;
+            &lt;!--
+            &lt;TextBlock&gt;
+                &lt;Hyperlink Command=&quot;{Binding OpenSupportWebsiteCommand}&quot; 
+                      CommandParameter=&quot;http://www.aa.cyberhome.ne.jp/~bel/&quot;&gt;
+                    &lt;Label Content=&quot;富士通サポートデスク&quot; Foreground=&quot;White&quot; Height=&quot;23&quot; Padding=&quot;0,4,0,0&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot; Margin=&quot;683,80,0,0&quot; Background=&quot;#FF1E90FF&quot; Name=&quot;txtHyperlink&quot;  Width=&quot;166&quot;/&gt;
+                &lt;/Hyperlink&gt;
+            &lt;/TextBlock&gt;
+            --&gt;
+
+            &lt;Button Command=&quot;{Binding Path=txtCorrespondenceClearCommand}&quot; BorderBrush=&quot;{x:Null}&quot; Content=&quot;Clear&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;974,619,0,0&quot; Name=&quot;btnCorrespondenceClear&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;36&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;UIElement.IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                        &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGreen&quot; /&gt;
+                        &lt;Setter Property=&quot;Control.Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Control.Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=GotoDSD2Command}&quot; Content=&quot;File&quot; Name=&quot;btnCorrespondenceFile&quot; Height=&quot;24&quot; Width=&quot;36&quot; Margin=&quot;71,619,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;Black&quot; 
+                        Visibility=&quot;{Binding IsButtonVisible, Converter={StaticResource BoolToVisibility}}&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Visibility&quot; Value=&quot;Visible&quot;/&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;YellowGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+            &lt;!-- ★★★ --&gt;
+
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;
+</pre>
+			</div>
+			<br />
+			<br/>
+			<h4>ViewModel</h4>
+			<div id="source"><pre class="brush:csharp ; highlight:[0]" title="DeleteData">using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//using Livet.Messaging.IO;
+//using Livet.EventListeners;
+
+using System.Data.OracleClient;
+
+//ArrayList
+using System.Collections;
+
+//XmlReader
+using System.Xml;
+
+//XDocument
+using System.Xml.Linq;
+
+//XPathDocument
+using System.Xml.XPath;
+
+//RequestNavigateEventArgs
+//Process.Start
+using System.Diagnostics;
+
+
+//SystemCommands
+using Microsoft.Windows.Shell;
+
+//ICommand
+using System.Windows.Input;
+
+//MessageBox
+using System.Windows;
+
+// ListCollectionView
+using System.Windows.Data;
+
+//Encoding
+using System.Text;
+
+using LivetWPFChromeHelpDesk1.Models;
+using LivetWPFChromeHelpDesk1.Views;
+using LivetWPFChromeHelpDesk1.ViewModels;
+
+namespace LivetWPFChromeHelpDesk1.ViewModels
+{
+    class ViewModel20 : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        public string txtMessage { get; set; }
+        public string txt本日 { get; set; }
+        public bool IsEnabled { get; set; }
+
+        public string txtCorrespondingCompany { get; set; }
+        //
+        private string _txtReceiptNumber;
+        public string txtReceiptNumber
+        {
+            get { return _txtReceiptNumber; }
+            set
+            {
+                if (_txtReceiptNumber != value)
+                {
+                    _txtReceiptNumber = value;
+                    RaisePropertyChanged(&amp;quot;txtReceiptNumber&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtNumber;
+        public string txtNumber
+        {
+            get { return _txtNumber; }
+            set
+            {
+                if (_txtNumber != value)
+                {
+                    _txtNumber = value;
+                    RaisePropertyChanged(&amp;quot;txtNumber&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtReceiptDate;
+        public string txtReceiptDate
+        {
+            get { return _txtReceiptDate; }
+            set
+            {
+                if (_txtReceiptDate != value)
+                {
+                    _txtReceiptDate = value;
+                    RaisePropertyChanged(&amp;quot;txtReceiptDate&amp;quot;);
+                }
+            }
+        }
+        //
+        //■
+        private string _txtCompletingDate;
+        public string txtCompletingDate
+        {
+            get { return _txtCompletingDate; }
+            set
+            {
+                if (_txtCompletingDate != value)
+                {
+                    _txtCompletingDate = value;
+                    RaisePropertyChanged(&amp;quot;txtCompletingDate&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtState;
+        public string txtState
+        {
+            get { return _txtState; }
+            set
+            {
+                if (_txtState != value)
+                {
+                    _txtState = value;
+                    RaisePropertyChanged(&amp;quot;txtState&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtCompany;
+        public string txtCompany
+        {
+            get { return _txtCompany; }
+            set
+            {
+                if (_txtCompany != value)
+                {
+                    _txtCompany = value;
+                    RaisePropertyChanged(&amp;quot;txtCompany&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtCustomer;
+        public string txtCustomer
+        {
+            get { return _txtCustomer; }
+            set
+            {
+                if (_txtCustomer != value)
+                {
+                    _txtCustomer = value;
+                    RaisePropertyChanged(&amp;quot;txtCustomer&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtMailAddress;
+        public string txtMailAddress
+        {
+            get { return _txtMailAddress; }
+            set
+            {
+                if (_txtMailAddress != value)
+                {
+                    _txtMailAddress = value;
+                    RaisePropertyChanged(&amp;quot;txtMailAddress&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtProductName;
+        public string txtProductName
+        {
+            get { return _txtProductName; }
+            set
+            {
+                if (_txtProductName != value)
+                {
+                    _txtProductName = value;
+                    RaisePropertyChanged(&amp;quot;txtProductName&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtTitle2;
+        public string txtTitle2
+        {
+            get { return _txtTitle2; }
+            set
+            {
+                if (_txtTitle2 != value)
+                {
+                    _txtTitle2 = value;
+                    RaisePropertyChanged(&amp;quot;txtTitle2&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtInquiry;
+        public string txtInquiry 
+        {
+            get { return _txtInquiry; }
+            set
+            {
+                if (_txtInquiry != value)
+                {
+                    _txtInquiry = value;
+                    RaisePropertyChanged(&amp;quot;txtInquiry&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtCorrespondence;
+        public string txtCorrespondence
+        {
+            get { return _txtCorrespondence; }
+            set
+            {
+                if (_txtCorrespondence != value)
+                {
+                    _txtCorrespondence = value;
+                    RaisePropertyChanged(&amp;quot;txtCorrespondence&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtSearchInquiry;
+        public string txtSearchInquiry
+        {
+            get { return _txtSearchInquiry; }
+            set
+            {
+                if (_txtSearchInquiry != value)
+                {
+                    _txtSearchInquiry = value;
+                    RaisePropertyChanged(&amp;quot;txtSearchInquiry&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtProgressDay;
+        public string txtProgressDay
+        {
+            get { return _txtProgressDay; }
+            set
+            {
+                if (_txtProgressDay != value)
+                {
+                    _txtProgressDay = value;
+                    RaisePropertyChanged(&amp;quot;txtProgressDay&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txt件数;
+        public string txt件数
+        {
+            get { return _txt件数; }
+            set
+            {
+                if (_txt件数 != value)
+                {
+                    _txt件数 = value;
+                    RaisePropertyChanged(&amp;quot;txt件数&amp;quot;);
+                }
+            }
+        }
+        //
+        private string _txtPath;
+        public string txtPath
+        {
+            get { return _txtPath; }
+            set
+            {
+                if (_txtPath != value)
+                {
+                    _txtPath = value;
+                    RaisePropertyChanged(&amp;quot;txtPath&amp;quot;);
+                }
+            }
+        }
+        //
+
+        #endregion
+
+        #region Argument変更通知プロパティ
+        private Argument _argument;
+        public Argument argument
+        {
+            get { return _argument; }
+            set
+            {
+                if (_argument == value)
+                    return;
+                _argument = value;
+                RaisePropertyChanged(&amp;quot;argument&amp;quot;);
+            }
+        }
+        #endregion
+        
+        string GstrReceiptnumber = &amp;quot;&amp;quot;;
+        string GstrNumber = &amp;quot;&amp;quot;;
+        string GstrTitle = &amp;quot;&amp;quot;;
+        string GstrAction = &amp;quot;&amp;quot;;
+        string GstrPath = &amp;quot;&amp;quot;;
+        //
+        string strヘルプデスク質問 = @&amp;quot;D:\ヘルプデスク質問\&amp;quot;;
+        string strヘルプデスク回答 = @&amp;quot;D:\ヘルプデスク回答\&amp;quot;;
+        static ArrayList Gfiles;
+
+        Window win = null;
+        public ViewModel20(Argument argument)
+        {
+            Loaded = new Livet.Commands.ListenerCommand&amp;lt;Window&amp;gt;((w) =&amp;gt;
+            {
+                if (NeedHideOwner &amp;amp;&amp;amp; w.Owner != null &amp;amp;&amp;amp; w.Owner.Visibility == Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+
+            Closing = new Livet.Commands.ListenerCommand&amp;lt;Window&amp;gt;((w) =&amp;gt;
+            {
+                if (NeedHideOwner &amp;amp;&amp;amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());
+            GstrReceiptnumber = argument.ReceiptNumber;
+            GstrNumber = argument.Number;
+            GstrTitle = argument.Title;
+            GstrAction = argument.Action;
+            GstrPath = argument.XMLPath;
+
+            if (GstrReceiptnumber != &amp;quot;&amp;quot;)
+            {
+                //照会
+                Is登録実行Visible = false;
+                Is更新Visible = true;
+                Read();
+            }
+            else
+            {
+                //新規登録
+                Is登録実行Visible = true;
+                Is更新Visible = false;
+
+            }
+            //Initialize()では表示されない
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());
+
+            if (txtState == &amp;quot;対応中&amp;quot; || txtState == &amp;quot;検証中&amp;quot;)
+            {
+                //経過日数
+                //FileButtonVisuble();
+                //DateTime値に変換する文字列
+                string s1 = txtReceiptDate + &amp;quot;:00&amp;quot;;
+                //文字列をDateTime値に変換する
+                DateTime oldDate = DateTime.Parse(s1);
+                //DateTime oldDate = new DateTime(2014, 3, 1);
+                DateTime newDate = DateTime.Now;
+                // Difference in days, hours, and minutes.
+                TimeSpan ts = newDate - oldDate;
+                // Difference in days.
+                int differenceInDays = ts.Days;
+                txtProgressDay = differenceInDays.ToString();
+            }
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+            if (win != null) win.Owner.Hide();
+
+            if (GstrAction == &amp;quot;更新&amp;quot;)
+            {
+                FileButtonVisuble();
+            }
+        }
+
+        #region OpenWebsiteCommand2
+        ListenerCommand&lt;string&gt; _OpenWebsiteCommand2;
+        public ListenerCommand&lt;string&gt; OpenWebsiteCommand2
+        {
+            get
+            {
+                if (_OpenWebsiteCommand2 == null)
+                {
+                    _OpenWebsiteCommand2 = new ListenerCommand&lt;string&gt;(OpenWebsite, () =&gt; true);
+                }
+                return _OpenWebsiteCommand2;
+            }
+        }
+        
+        void OpenWebsite(string str)
+        {
+            if (str == null)
+            {
+                Messenger.Raise(new InformationMessage(&quot;Cancel&quot;, &quot;Error&quot;, MessageBoxImage.Error, &quot;Info&quot;));
+                return;
+            }
+
+            if (str != null &amp;&amp; str.Length &gt; 0)
+        #region FileButtonVisuble
+        private void FileButtonVisuble()
+        {
+            string strファイル名で検索 = txtReceiptNumber.Trim() + &amp;quot;*.*&amp;quot;.Trim(); ;
+            string strFolder = &amp;quot;&amp;quot;;
+            string[] stFilePathes = { &amp;quot;&amp;quot; };
+            
+            strFolder = @strヘルプデスク質問;
+            strFolder = strFolder.Trim();
+            
+            try
+            {
+                stFilePathes = GetFilesMostDeep(strFolder, &amp;quot;*&amp;quot; + strファイル名で検索);
+                if (stFilePathes.Length != 0)
+                {
+                    IsButtonVisible = true;
+                }
+
+            }
+            catch
+            {
+            }
+            //-------------------------------------------------------------------------------------------
+            strFolder = strFolder = @strヘルプデスク回答;
+            strFolder = strFolder.Trim();
+
+            stFilePathes = null;
+
+            try
+            {
+                stFilePathes = GetFilesMostDeep(strFolder, &amp;quot;*&amp;quot; + strファイル名で検索);
+                if (stFilePathes.Length != 0)
+                {
+                    IsButtonVisible = true;
+                }
+
+            }
+            catch
+            {
+            }
+        }
+        #endregion
+
+        #region GetFilesMostDeep
+        public static string[] GetFilesMostDeep(string stRootPath, string stPattern)
+        {
+            System.Collections.Specialized.StringCollection hStringCollection = (
+                new System.Collections.Specialized.StringCollection()
+                );
+
+            // このディレクトリ内のすべてのファイルを検索する
+            foreach (string stFilePath in System.IO.Directory.GetFiles(stRootPath, stPattern))
+            {
+                hStringCollection.Add(stFilePath);
+            }
+
+            // このディレクトリ内のすべてのサブディレクトリを検索する (再帰)
+            foreach (string stDirPath in System.IO.Directory.GetDirectories(stRootPath))
+            {
+                string[] stFilePathes = GetFilesMostDeep(stDirPath, stPattern);
+
+                // 条件に合致したファイルがあった場合は、ArrayList に加える
+                if (stFilePathes != null)
+                {
+                    hStringCollection.AddRange(stFilePathes);
+                }
+            }
+
+            // StringCollection を 1 次元の String 配列にして返す
+            string[] stReturns = new string[hStringCollection.Count];
+            hStringCollection.CopyTo(stReturns, 0);
+
+            Gfiles = new ArrayList(hStringCollection);
+            return stReturns;
+        }
+        #endregion
+
+        private bool _IsButtonVisible;
+        public bool IsButtonVisible
+        {
+            get { return _IsButtonVisible; }
+            set
+            {
+                _IsButtonVisible = value;
+                RaisePropertyChanged(&amp;quot;IsButtonVisible&amp;quot;);
+            }
+        }
+        #region VisibilityボタンCommand
+        private ViewModelCommand _VisibilityボタンCommand;
+        public ViewModelCommand VisibilityボタンCommand
+        {
+            get
+            {
+                if (_VisibilityボタンCommand == null)
+                {
+                    _VisibilityボタンCommand = new ViewModelCommand(VisibilityButton);
+                }
+                return _VisibilityボタンCommand;
+            }
+        }
+        public void VisibilityButton()
+        {
+            //----------------------
+            //IsButtonVisible = true;
+            IsButtonVisible = !IsButtonVisible;
+            //----------------------
+        }
+
+        //-------------------------------------------------
+        private bool _Is登録実行Visible;
+        public bool Is登録実行Visible
+        {
+            get { return _Is登録実行Visible; }
+            set
+            {
+                _Is登録実行Visible = value;
+                RaisePropertyChanged(&amp;quot;Is登録実行Visible&amp;quot;);
+            }
+        }
+
+        //-------------------------------------------------
+        private bool _Is更新Visible;
+        public bool Is更新Visible
+        {
+            get { return _Is更新Visible; }
+            set
+            {
+                _Is更新Visible = value;
+                RaisePropertyChanged(&amp;quot;Is更新Visible&amp;quot;);
+            }
+        }
+        /*
+         登録実行ボタンと更新ボタンの可視は、他のボタンのClickコマンドで決めるのではないのて
+         VisibilityボタンCommandのようなCommandは不要
+        */
+        #endregion
+
+        /*
+        // https://social.msdn.microsoft.com/Forums/vstudio/en-US/b64387a6-ff0f-4048-b9af-65e801d1f1ea/command-hyperlink?forum=wpf
+        public ICommand OpenSupportWebsiteCommand
+        {
+            get
+            {
+                if (mOpenSupportWebsiteCommand == null)
+                {
+                    mOpenSupportWebsiteCommand = new RelayCommand&amp;lt;object&amp;gt;(OpenSupportWebsite);
+                }
+
+                return mOpenSupportWebsiteCommand;
+            }
+        }
+
+
+        private RelayCommand&amp;lt;object&amp;gt; mOpenSupportWebsiteCommand;
+
+        private void OpenSupportWebsite(object url)
+        {
+            System.Diagnostics.Process.Start(url as string);
+        }
+        */
+
+
+        #region Read
+        private void Read()
+        {
+            XDocument xmlDoc = XDocument.Load(GstrPath);
+            try
+            {
+                var tweets = (from entry in xmlDoc.Descendants(&amp;quot;helpdesk&amp;quot;)
+                             .Where(node =&amp;gt; (string)node.Attribute(&amp;quot;receiptnumber&amp;quot;) == GstrReceiptnumber)
+                             .Where(node =&amp;gt; (string)node.Attribute(&amp;quot;number&amp;quot;) == GstrNumber)
+                             .Where(node =&amp;gt; (string)node.Element(&amp;quot;title&amp;quot;) == GstrTitle)
+                              select new
+                              {
+                                  CorrespondingCompany = entry.Attribute(&amp;quot;correspondingcompany&amp;quot;).Value,
+                                  ReceiptNumber = entry.Attribute(&amp;quot;receiptnumber&amp;quot;).Value,
+                                  Number = entry.Attribute(&amp;quot;number&amp;quot;).Value,
+                                  ReceiptDate = entry.Attribute(&amp;quot;receiptdate&amp;quot;).Value,
+                                  Completingdate = entry.Attribute(&amp;quot;completingdate&amp;quot;).Value,
+                                  State = entry.Attribute(&amp;quot;state&amp;quot;).Value,
+                                  Company = entry.Element(&amp;quot;company&amp;quot;).Value,
+                                  Customer = entry.Element(&amp;quot;customer&amp;quot;).Value,
+                                  MailAddress = entry.Element(&amp;quot;mailaddress&amp;quot;).Value,
+                                  ProductName = entry.Element(&amp;quot;productname&amp;quot;).Value,
+                                  Title = entry.Element(&amp;quot;title&amp;quot;).Value,
+                                  Inquiry = entry.Element(&amp;quot;inquiry&amp;quot;).Value,
+                                  Correspondence = entry.Element(&amp;quot;correspondence&amp;quot;).Value,
+                              }
+                             );
+
+                //string str = &amp;quot;&amp;quot;;
+
+                //listBox1.Items.Clear();
+
+                foreach (var k in tweets)
+                {
+                    txtCorrespondingCompany = k.CorrespondingCompany;
+                    txtReceiptNumber = k.ReceiptNumber;
+                    txtNumber = k.Number;
+                    txtReceiptDate = k.ReceiptDate;
+                    txtCompletingDate = k.Completingdate;
+                    txtState = k.State;
+                    txtCompany = k.Company;
+                    txtCustomer = k.Customer;
+                    txtMailAddress = k.MailAddress;
+                    txtProductName = k.ProductName;
+                    txtTitle2 = k.Title;
+
+                    txtInquiry = k.Inquiry;
+                    txtInquiry = txtInquiry.Replace(&amp;quot;\n&amp;quot;, &amp;quot;\r\n&amp;quot;);
+
+                    txtCorrespondence = k.Correspondence;
+                    txtCorrespondence = txtCorrespondence.Replace(&amp;quot;\n&amp;quot;, &amp;quot;\r\n&amp;quot;);
+                    break;
+                }
+                //return;
+                //-----------------------------------
+                tweets = null;
+                xmlDoc = null;
+                //GC.Collect();
+                //
+                //GC.WaitForPendingFinalizers();
+                //-----------------------------------
+            }
+            catch
+            {
+            }
+
+
+        }
+        #endregion
+
+        #region InsertダミーCommand
+        private ViewModelCommand _InsertダミーCommand;
+        public ViewModelCommand InsertダミーCommand
+        {
+            get
+            {
+                if (_InsertダミーCommand == null)
+                {
+                    _InsertダミーCommand = new ViewModelCommand(Insertダミー);
+                }
+                return _InsertダミーCommand;
+            }
+        }
+        public void Insertダミー()
+        {
+            if ((txtReceiptNumber != null) &amp;amp;&amp;amp; (txtReceiptNumber.Length != 0))
+            {
+                System.Windows.Forms.MessageBox.Show(&amp;quot;受付番号が未入力でないので、貼付は出来ません。&amp;quot;);
+            }
+            else
+            {
+                string str = DateTime.Today.ToString(&amp;quot;d&amp;quot;);
+                str = str.Substring(1, 3) + &amp;quot;-&amp;quot; + str.Substring(5, 2) + str.Substring(8, 2) + &amp;quot;-0000&amp;quot;;
+                txtReceiptNumber = str;
+            }
+        }
+        #endregion
+
+        #region Insert本日Command
+        private ViewModelCommand _Insert本日Command;
+        public ViewModelCommand Insert本日Command
+        {
+            get
+            {
+                if (_Insert本日Command == null)
+                {
+                    _Insert本日Command = new ViewModelCommand(Insert本日);
+                }
+                return _Insert本日Command;
+            }
+        }
+        public void Insert本日()
+        {
+            //txtReceiptDate = Convert.ToString(DateTime.Today.ToString(&amp;quot;d&amp;quot;));
+            txtReceiptDate = Convert.ToString(DateTime.Now.ToString(&amp;quot;g&amp;quot;));
+        }
+        #endregion
+
+        #region Insert下書Command
+        private ViewModelCommand _Insert下書Command;
+        public ViewModelCommand Insert下書Command
+        {
+            get
+            {
+                if (_Insert下書Command == null)
+                {
+                    _Insert下書Command = new ViewModelCommand(Insert下書);
+                }
+                return _Insert下書Command;
+            }
+        }
+        public void Insert下書()
+        {
+            txtState = &amp;quot;下書&amp;quot;;
+        }
+        #endregion
+
+        #region Insert対応中Command
+        private ViewModelCommand _Insert対応中Command;
+        public ViewModelCommand Insert対応中Command
+        {
+            get
+            {
+                if (_Insert対応中Command == null)
+                {
+                    _Insert対応中Command = new ViewModelCommand(Insert対応中);
+                }
+                return _Insert対応中Command;
+            }
+        }
+        public void Insert対応中()
+        {
+            txtState = &amp;quot;対応中&amp;quot;;
+        }
+        #endregion
+
+        #region Insert検証中Command
+        private ViewModelCommand _Insert検証中Command;
+        public ViewModelCommand Insert検証中Command
+        {
+            get
+            {
+                if (_Insert検証中Command == null)
+                {
+                    _Insert検証中Command = new ViewModelCommand(Insert検証中);
+                }
+                return _Insert検証中Command;
+            }
+        }
+        public void Insert検証中()
+        {
+            txtState = &amp;quot;検証中&amp;quot;;
+        }
+        #endregion
+
+        #region Insert完了済Command
+        private ViewModelCommand _Insert完了済Command;
+        public ViewModelCommand Insert完了済Command
+        {
+            get
+            {
+                if (_Insert完了済Command == null)
+                {
+                    _Insert完了済Command = new ViewModelCommand(Insert完了済);
+                }
+                return _Insert完了済Command;
+            }
+        }
+        public void Insert完了済()
+        {
+            txtState = &amp;quot;完了済&amp;quot;;
+        }
+        #endregion
+
+        #region ログインユーザー名貼付Command
+        private ViewModelCommand _ログインユーザー名貼付Command;
+        public ViewModelCommand ログインユーザー名貼付Command
+        {
+            get
+            {
+                if (_ログインユーザー名貼付Command == null)
+                {
+                    _ログインユーザー名貼付Command = new ViewModelCommand(ログインユーザー名貼付);
+                }
+                return _ログインユーザー名貼付Command;
+            }
+        }
+        private void ログインユーザー名貼付()
+        {
+            txtCompany = &amp;quot;豊洲システム開発&amp;quot;;
+            txtCorrespondingCompany = &amp;quot;C# Programing Academy&amp;quot;;
+
+            if (txtNumber == &amp;quot;&amp;quot;)
+            {
+                txtNumber = &amp;quot;1&amp;quot;;
+            }
+            string[] array = new string[3];
+            array = ログインユーザー名獲得();
+            txtCompany = array[0];            //名前
+            txtCustomer = array[1];            //姓名
+            txtMailAddress = array[2];         //メールアドレス
+        }
+       
+        private string[] ログインユーザー名獲得()
+        {
+            using (OracleConnection con = new OracleConnection())
+            {
+                // ユーザー名(ログイン名)の取得
+                string uName = Environment.UserName;
+                uName = uName.ToUpper();
+                // 社員マスターと照合
+                string[] array = new string[3];
+                //
+                try
+                {
+                    con.ConnectionString = &amp;quot;User Id=beluran; Password=beluran; Data Source=beluran;Pooling=false;&amp;quot;;
+                    con.Open();
+                    //
+                    string CmdString = &amp;quot;SELECT K.会社名 ,S.社員名,S.社員姓名, S.メールアドレス FROM 社員マスター S &amp;quot; +
+                                        &amp;quot; LEFT JOIN 会社マスター K &amp;quot; +
+                                        &amp;quot; ON S.会社コード = K.会社コード &amp;quot; +
+                                        &amp;quot; WHERE S.SYS_DEL_FLG  = &amp;apos;0&amp;apos; AND S.ログインコード = &amp;apos;&amp;quot; + uName + &amp;quot;&amp;apos;&amp;quot;;
+
+                    //
+                    OracleCommand oracmd = new OracleCommand(CmdString, con);
+                    OracleDataReader reader = oracmd.ExecuteReader();
+
+                    while (reader.Read() == true)
+                    {
+                        array[0] = reader[&amp;quot;会社名&amp;quot;].ToString();
+                        array[1] = reader[&amp;quot;社員姓名&amp;quot;].ToString();
+                        array[2] = reader[&amp;quot;メールアドレス&amp;quot;].ToString();
+                    }
+                }
+                catch
+                {
+                }
+                finally
+                {
+
+                }
+                return array;
+            }
+        }
+
+        //***********************************************
+        private string[] ログインユーザー名獲得2()
+		{
+			
+					 // ユーザー名(ログイン名)の取得
+                			string uName = Environment.UserName;
+                			uName = uName.ToUpper();
+                			// 社員マスターと照合
+                			string[] array = new string[3];
+
+					int iERR = 0;
+					string cmdstr = &amp;quot;&amp;quot;;
+					using (OracleConnection con = new OracleConnection())
+					{
+						con.ConnectionString = &amp;quot;User Id=beluran; Password=beluran; Data Source=beluran;Pooling=false;&amp;quot;;
+						con.Open();
+
+                        //using (OracleTransaction tx = con.BeginTransaction(IsolationLevel.Serializable)) 
+                        //{
+							try 
+							{
+	
+
+	                    					string CmdString = &amp;quot;SELECT K.会社名 ,S.社員名,S.社員姓名, S.メールアドレス FROM 社員マスター S &amp;quot; +
+                                        			&amp;quot; LEFT JOIN 会社マスター K &amp;quot; +
+                                        			&amp;quot; ON S.会社コード = K.会社コード &amp;quot; +
+                                        			&amp;quot; WHERE S.SYS_DEL_FLG  = &amp;apos;0&amp;apos; AND S.ログインコード = &amp;apos;&amp;quot; + uName + &amp;quot;&amp;apos;&amp;quot;;
+				
+                    						OracleCommand oracmd = new OracleCommand(CmdString, con);
+                    						OracleDataReader reader = oracmd.ExecuteReader();
+
+                    						while (reader.Read() == true)
+                    						{
+                        						array[0] = reader[&amp;quot;会社名&amp;quot;].ToString();
+                        						array[1] = reader[&amp;quot;社員姓名&amp;quot;].ToString();
+                        						array[2] = reader[&amp;quot;メールアドレス&amp;quot;].ToString();
+                    						}
+
+								//*** Tran ***
+								//tx.Commit();
+
+							}		
+							catch (OracleException ex)
+							{
+								iERR = 1;
+							}
+
+							finally
+							{
+							}
+						}	//OracleTransaction tx
+
+                    //}	//OracleTransaction tx
+                    return array;
+		}
+        #endregion
+
+        #region Insert本日2Command
+        private ViewModelCommand _Insert本日2Command;
+        public ViewModelCommand Insert本日2Command
+        {
+            get
+            {
+                if (_Insert本日2Command == null)
+                {
+                    _Insert本日2Command = new ViewModelCommand(Insert本日2);
+                }
+                return _Insert本日2Command;
+            }
+        }
+        public void Insert本日2()
+        {
+            txtCompletingDate = Convert.ToString(DateTime.Today.ToString(&amp;quot;d&amp;quot;));
+        }
+        #endregion
+
+        #region txtProductName編集Command
+        private ViewModelCommand _txtProductName編集Command;
+        public ViewModelCommand txtProductName編集Command
+        {
+            get
+            {
+                if (_txtProductName編集Command == null)
+                {
+                    _txtProductName編集Command = new ViewModelCommand(txtProductName編集);
+                }
+                return _txtProductName編集Command;
+            }
+        }
+        public void txtProductName編集()
+        {
+            txtProductName = &amp;quot;Microsot C# WPF WindowChromeプログラミング&amp;quot;;
+        }
+        #endregion
+
+
+        #region ReInquiryCommand
+        private ViewModelCommand _ReInquiryCommand;
+        public ViewModelCommand ReInquiryCommand
+        {
+            get
+            {
+                if (_ReInquiryCommand == null)
+                {
+                    _ReInquiryCommand = new ViewModelCommand(ReInquiry2);
+                }
+                return _ReInquiryCommand;
+            }
+        }
+        public void ReInquiry2()
+        {
+            //DialogResult.Yesでエラー
+            //if (System.Windows.Forms.MessageBox.Show(&amp;quot;再問い合せは現在の内容で回数を1つアップさせて新しいデータを作成して一覧画面へ戻ります。再問い合せをしないで終了しますか?&amp;quot;, &amp;quot;再問い合せの確認&amp;quot;, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            //{
+            //    this.Owner.Show();
+            //    this.Close();
+            //}
+            //★System.Windows.MessageBox
+            MessageBoxResult result = System.Windows.MessageBox.Show(&amp;quot;再問い合せは現在の内容で回数を1つアップさせて新しいデータを作成して一覧画面へ戻ります。再問い合せをしますか?&amp;quot;, &amp;quot;再問い合せの確認&amp;quot;, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+            {
+                return;
+            }
+
+            //---
+            if (GstrAction == &amp;quot;新規登録&amp;quot;)
+            {
+                //System.Windows.Forms.MessageBox.Show(&amp;quot;「新規登録」作業の途中です。入力が完了していたら、「登録実行」をクリックして下さい。&amp;quot;);
+                //return;
+            }
+            else
+            {
+                //----------------------------------------
+                if (txtReceiptDate == &amp;quot;&amp;quot;)
+                {
+                    System.Windows.Forms.MessageBox.Show(&amp;quot;受付番号がブランクです。&amp;quot;);
+                    return;
+                }
+                //----------------------------------------
+                if (Util.IsNumber(txtNumber))
+                {
+                    txtNumber = Convert.ToString(Convert.ToInt32(txtNumber) + 1);
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show(&amp;quot;回数が数値ではありません。&amp;quot;);
+                    return;
+                }
+                //----------------------------------------
+                str再問い合せ = &amp;quot;再&amp;quot;;
+                //txtState = &amp;quot;対応中&amp;quot;;
+                txtReceiptDate = DateTime.Now.ToString(&amp;quot;g&amp;quot;);
+                txtCompletingDate = &amp;quot;&amp;quot;;
+
+                //----------------------------------
+                //Copy &amp;amp; Pasteを反映させる為に入れる
+                //----------------------------------
+                //System.Windows.Forms.Application.DoEvents();
+
+
+   //             InsertSupportDesk();
+                CheckInsertData();
+
+                if (win != null) win.Owner.Show();
+                win.Close();
+                
+            }
+        }
+        #endregion
+
+        #region InsertDataCommand
+        private ViewModelCommand _InsertDataCommand;
+        public ViewModelCommand InsertDataCommand
+        {
+            get
+            {
+                if (_InsertDataCommand == null)
+                {
+                    _InsertDataCommand = new ViewModelCommand(CheckInsertData);
+                }
+                return _InsertDataCommand;
+            }
+        }
+        public void CheckInsertData()
+        {
+            if ((txtReceiptNumber != null) &amp;amp;&amp;amp; (txtReceiptNumber.Length != 0))
+            {
+                if (txtReceiptNumber.Length != 13)
+                {
+                    System.Windows.Forms.MessageBox.Show(&amp;quot;「受付番号の桁数が違います。&amp;quot;);
+                    return;
+                }
+            }
+            else{
+                System.Windows.Forms.MessageBox.Show(&amp;quot;受付番号は必須です。決まっていなかったりダミーをクリックして下さい。&amp;quot;);
+                return;
+            }
+
+            //-----------------------------------------
+            if ((txtCompany != null) &amp;amp;&amp;amp; (txtCompany.Length != 0))
+            {
+            }
+            else
+            {
+                txtCompany = &amp;quot;豊洲システム開発&amp;quot;;
+            }
+            if ((txtCorrespondingCompany != null) &amp;amp;&amp;amp; (txtCorrespondingCompany.Length != 0))
+            {
+            }
+            else
+            {
+                txtCorrespondingCompany = &amp;quot;C# Programing Academy&amp;quot;;
+            }
+            if ((txtNumber != null) &amp;amp;&amp;amp; (txtNumber.Length != 0))
+            {
+            }
+            else
+            {
+                txtNumber = &amp;quot;1&amp;quot;;
+            }
+            if ((txtState != null) &amp;amp;&amp;amp; (txtState.Length != 0))
+            {
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show(&amp;quot;対応状況は必須入力です。&amp;quot;);
+                return;
+            }
+            if ((txtTitle2 != null) &amp;amp;&amp;amp; (txtTitle2.Length != 0))
+            {
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show(&amp;quot;タイトルは必須入力です。&amp;quot;);
+                return;
+            }
+            InsertData();
+        }
+
+        string str再問い合せ = &amp;quot;&amp;quot;;
+
+
+
+
+
+
+        public void InsertData()
+        {
+            //-----------------------------------------
+            //Util.バックアップサポートデスク質問と回答();
+            //-----------------------------------------
+            string strTitle = &amp;quot;&amp;quot;;
+            if (str再問い合せ == &amp;quot;再&amp;quot;)
+            {
+                if (txtTitle2.IndexOf(&amp;quot;■&amp;quot;) == -1)
+                {
+                    strTitle = txtTitle2 + &amp;quot; ■■&amp;quot;;
+                }
+                else
+                {
+                    strTitle = txtTitle2;
+                }
+            }
+            else
+            {
+                strTitle = txtTitle2;
+            }
+            if ((txtCompletingDate != null) &amp;amp;&amp;amp; (txtCompletingDate.Length != 0))
+            {
+            }
+            else
+            {
+                txtCompletingDate = &amp;quot;&amp;quot;;
+            }
+
+            var xelm = XElement.Load(GstrPath);
+            var p = new XElement(&amp;quot;helpdesk&amp;quot;,
+                      new XAttribute(&amp;quot;correspondingcompany&amp;quot;, txtCorrespondingCompany),
+                        new XAttribute(&amp;quot;receiptnumber&amp;quot;, txtReceiptNumber),
+                        new XAttribute(&amp;quot;number&amp;quot;, txtNumber),
+                        new XAttribute(&amp;quot;receiptdate&amp;quot;, txtReceiptDate),
+                        new XAttribute(&amp;quot;completingdate&amp;quot;,txtCompletingDate),
+                        new XAttribute(&amp;quot;state&amp;quot;, txtState),
+                        new XElement(&amp;quot;company&amp;quot;, txtCompany),
+                        new XElement(&amp;quot;customer&amp;quot;, txtCustomer),
+                        new XElement(&amp;quot;mailaddress&amp;quot;, txtMailAddress),
+                        new XElement(&amp;quot;productname&amp;quot;, txtProductName),
+                        new XElement(&amp;quot;title&amp;quot;, strTitle),
+                        new XElement(&amp;quot;inquiry&amp;quot;, txtInquiry),
+                        new XElement(&amp;quot;correspondence&amp;quot;, txtCorrespondence)
+                        );
+            xelm.Add(p);
+            xelm.Save(GstrPath);
+/*
+            XDocument xdoc2 = XDocument.Load(GstrPath);
+            XElement e2 = new XElement(&amp;quot;helpdesk&amp;quot;,
+            xdoc2.Root.Add(e2);
+            xdoc2.Save(GstrPath);
+*/
+
+            str再問い合せ = &amp;quot;&amp;quot;;
+        }
+        #endregion
+
+        #region UpdateDataCommand
+        private ViewModelCommand _UpdateDataCommand;
+        public ViewModelCommand UpdateDataCommand
+        {
+            get
+            {
+                if (_UpdateDataCommand == null)
+                {
+                    _UpdateDataCommand = new ViewModelCommand(CheckUpdateData);
+                }
+                return _UpdateDataCommand;
+            }
+        }
+        public void CheckUpdateData()
+        {
+            if (txtReceiptNumber.Length != 13)
+            {
+                System.Windows.Forms.MessageBox.Show(&amp;quot;「受付番号の桁数が違います。&amp;quot;);
+                 return;
+            }
+            //-----------------------------------------
+            if ((txtCompany != null) &amp;amp;&amp;amp; (txtCompany.Length != 0))
+            {
+                
+            }
+            else
+            {
+                txtCompany = &amp;quot;豊洲システム開発&amp;quot;;
+            }
+            if ((txtCorrespondingCompany != null) &amp;amp;&amp;amp; (txtCorrespondingCompany.Length != 0))
+            {
+            }
+            else
+            {
+                txtCorrespondingCompany = &amp;quot;C# Programing Academy&amp;quot;;
+            }
+            if ((txtNumber != null) &amp;amp;&amp;amp; (txtNumber.Length != 0))
+            {
+            }
+            else
+            {
+                txtNumber = &amp;quot;1&amp;quot;;
+            }
+            //-----------------------------------------
+            //Util.バックアップサポートデスク質問と回答();
+            //-----------------------------------------
+            UpdateData();
+        }
+
+        public void UpdateData()
+        {
+            //XDocument xmlDoc = XDocument.Load(@&amp;quot;HelpDesk.xml&amp;quot;);
+            //XDocument xmlDoc = XDocument.Load(path);
+
+            var xelm = XElement.Load(GstrPath);
+
+            var tweets = from entry in xelm.Descendants(&amp;quot;helpdesk&amp;quot;)
+                             //where entry.Attribute(&amp;quot;receiptnumber&amp;quot;).Value == GstrReceiptnumber
+                             //where entry.Attribute(&amp;quot;number&amp;quot;).Value == GstrNumber
+
+               //照会したキーで再度検索する
+               .Where(node =&amp;gt; (string)node.Attribute(&amp;quot;receiptnumber&amp;quot;) == GstrReceiptnumber)
+               .Where(node =&amp;gt; (string)node.Attribute(&amp;quot;number&amp;quot;) == GstrNumber)
+               .Where(node =&amp;gt; (string)node.Element(&amp;quot;title&amp;quot;) == GstrTitle)
+
+                         //.Where(node =&amp;gt; (string)node.Attribute(&amp;quot;receiptnumber&amp;quot;) == txtReceiptNumber)
+                         //.Where(node =&amp;gt; (string)node.Attribute(&amp;quot;number&amp;quot;) == txtNumber)
+                         //.Where(node =&amp;gt; (string)node.Element(&amp;quot;title&amp;quot;) == txtTitle2)
+                select entry;
+
+            foreach (var help in tweets)
+            {
+                help.Attribute(&amp;quot;correspondingcompany&amp;quot;).Value = txtCorrespondingCompany;
+                help.Attribute(&amp;quot;receiptnumber&amp;quot;).Value = txtReceiptNumber;
+                help.Attribute(&amp;quot;number&amp;quot;).Value = txtNumber;
+                help.Attribute(&amp;quot;receiptdate&amp;quot;).Value = txtReceiptDate;
+                help.Attribute(&amp;quot;completingdate&amp;quot;).Value = txtCompletingDate;
+                help.Attribute(&amp;quot;state&amp;quot;).Value = txtState;
+                help.Element(&amp;quot;company&amp;quot;).Value = txtCompany;
+           help.Element(&amp;quot;customer&amp;quot;).Value = txtCustomer;
+                help.Element(&amp;quot;mailaddress&amp;quot;).Value = txtMailAddress;
+                help.Element(&amp;quot;productname&amp;quot;).Value = txtProductName;
+                help.Element(&amp;quot;title&amp;quot;).Value = txtTitle2;
+                help.Element(&amp;quot;inquiry&amp;quot;).Value = txtInquiry;
+                help.Element(&amp;quot;correspondence&amp;quot;).Value = txtCorrespondence;
+                xelm.Save(GstrPath);
+                //
+                GstrReceiptnumber = txtReceiptNumber;
+                GstrNumber = txtNumber;
+                GstrTitle = txtTitle2;
+            }
+
+        }
+        #endregion
+
+        #region txtMailAddressToClipboardCommand
+        private ViewModelCommand _txtMailAddressToClipboardCommand;
+        public ViewModelCommand txtMailAddressToClipboardCommand
+        {
+            get
+            {
+                if (_txtMailAddressToClipboardCommand == null)
+                {
+                    _txtMailAddressToClipboardCommand = new ViewModelCommand(txtMailAddressToClipboard);
+                }
+                return _txtMailAddressToClipboardCommand;
+            }
+        }
+        public void txtMailAddressToClipboard()
+        {
+            System.Windows.Forms.Clipboard.SetText(txtMailAddress);
+        }
+        #endregion
+
+        #region txtProductNameToClipboardCommand
+        private ViewModelCommand _txtProductNameToClipboardCommand;
+        public ViewModelCommand txtProductNameToClipboardCommand
+        {
+            get
+            {
+                if (_txtProductNameToClipboardCommand == null)
+                {
+                    _txtProductNameToClipboardCommand = new ViewModelCommand(txtProductNameToClipboard);
+                }
+                return _txtProductNameToClipboardCommand;
+            }
+        }
+        public void txtProductNameToClipboard()
+        {
+            System.Windows.Forms.Clipboard.SetText(txtProductName);
+        }
+        #endregion
+
+        #region txtTitle2ToClipboardCommand
+        private ViewModelCommand _txtTitle2ToClipboardCommand;
+        public ViewModelCommand txtTitle2ToClipboardCommand
+        {
+            get
+            {
+                if (_txtTitle2ToClipboardCommand == null)
+                {
+                    _txtTitle2ToClipboardCommand = new ViewModelCommand(txtTitle2ToClipboard);
+                }
+                return _txtTitle2ToClipboardCommand;
+            }
+        }
+        public void txtTitle2ToClipboard()
+        {
+            System.Windows.Forms.Clipboard.SetText(txtTitle2);
+        }
+        #endregion
+
+        #region txtInquiryToClipboardCommand
+        private ViewModelCommand _txtInquiryToClipboardCommand;
+        public ViewModelCommand txtInquiryToClipboardCommand
+        {
+            get
+            {
+                if (_txtInquiryToClipboardCommand == null)
+                {
+                    _txtInquiryToClipboardCommand = new ViewModelCommand(txtInquiryToClipboard);
+                }
+                return _txtInquiryToClipboardCommand;
+            }
+        }
+        public void txtInquiryToClipboard()
+        {
+            System.Windows.Forms.Clipboard.SetText(txtInquiry);
+        }
+        #endregion
+
+        #region txtInquiryClearCommand
+        private ViewModelCommand _txtInquiryClearCommand;
+        public ViewModelCommand txtInquiryClearCommand
+        {
+            get
+            {
+                if (_txtInquiryClearCommand == null)
+                {
+                    _txtInquiryClearCommand = new ViewModelCommand(txtInquiryClear);
+                }
+                return _txtInquiryClearCommand;
+            }
+        }
+        public void txtInquiryClear()
+        {
+            txtInquiry = &amp;quot;&amp;quot;;
+        }
+        #endregion
+
+        #region txtCorrespondenceClearCommand
+        private ViewModelCommand _txtCorrespondenceClearCommand;
+        public ViewModelCommand txtCorrespondenceClearCommand
+        {
+            get
+            {
+                if (_txtCorrespondenceClearCommand == null)
+                {
+                    _txtCorrespondenceClearCommand = new ViewModelCommand(txtCorrespondenceClear);
+                }
+                return _txtCorrespondenceClearCommand;
+            }
+        }
+        public void txtCorrespondenceClear()
+        {
+            txtCorrespondence = &amp;quot;&amp;quot;;
+        }
+        #endregion
+
+        #region GotoCommandDSD
+        //----------------------------------------------------------------
+        public ViewModelCommand GotoDSD1Command
+        {
+            get { return new Livet.Commands.ViewModelCommand(GotoDSD1); }
+        }
+        public void GotoDSD1()
+        {
+            Argument argument = new Argument();
+            argument.ReceiptNumber = txtReceiptNumber;
+            argument.Number = txtNumber;
+            argument.Title = txtTitle2;
+            argument.Action = &amp;quot;&amp;quot;;
+            argument.InquiryCorrespondence = &amp;quot;Inquiry&amp;quot;;
+            argument.XMLPath = GstrPath;
+
+            Messenger.Raise(new TransitionMessage(new DirectorySearchViewModel(argument) { NeedHideOwner = true }, &amp;quot;MessageKeyDSD1&amp;quot;));
+        }
+        //----------------------------------------------------------------
+        public ViewModelCommand GotoDSD2Command
+        {
+            get { return new Livet.Commands.ViewModelCommand(GotoDSD2); }
+        }
+        public void GotoDSD2()
+        {
+            Argument argument = new Argument();
+            argument.ReceiptNumber = txtReceiptNumber;
+            argument.Number = txtNumber;
+            argument.Title = txtTitle2;
+            argument.Action = &amp;quot;&amp;quot;;
+            argument.InquiryCorrespondence = &amp;quot;Correspondence&amp;quot;;
+            argument.XMLPath = GstrPath;
+
+            Messenger.Raise(new TransitionMessage(new DirectorySearchViewModel(argument) { NeedHideOwner = true }, &amp;quot;MessageKeyDSD2&amp;quot;));
+        }
+        //----------------------------------------------------------------
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&amp;lt;Window&amp;gt;().SingleOrDefault((w) =&amp;gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+    }
+}
+</pre>
+			</div>
+			<br />
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="helpdesk010.html">データ定義</a><br /> 
+				<a href="helpdesk020.html">操作説明</a><br /> 
+		    	<a href="helpdesk030.html">LINQ To XML</a><br />
+		    	<a href="helpdesk040.html">メニュー画面</a><br />
+		    	<a href="helpdesk050.html">一覧表画面</a><br />
+		    	<a href="helpdesk060.html">詳細画面</a><br />
+		    	<a href="helpdeskOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+				
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

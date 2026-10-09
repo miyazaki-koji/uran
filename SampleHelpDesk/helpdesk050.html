@@ -1,0 +1,1581 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>WindowChromeのSample HelpDesk</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="プログラミング,アカデミー,WindowChrome,プログラミング,アカデミー,uran,ウランのホームページ,トイプードル,C#,WPF,Livet,LIVET,入門,プログラミング," lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../WPFCSharpUsingLivet/syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- Google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">WindowChromeのSample HelpDesk</a></h1>
+			<span class="description">
+				WindowChromeのSampleとして作成したHelpDeskシステムをご照会します
+			</span>			
+		</div>
+     <div class="twitterlogo">
+     	<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+	 	<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+    </div> 
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->    
+    	
+    	
+    	    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+		
+			<h3 class="title">5.一覧表画面</h3>
+			<br />
+			<h4>一覧表画面</h4>
+				<p>画面は下記の通りです。</p>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_05.png" rel="lightbox"><img src="images/helpdesk010_05.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 765px; height: 400px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->
+
+
+			<p>61～63行目で、Activatedを宣言しています。263～278行目がListBoxの宣言ですが、273行目が、	行を<br />
+			Wクリックした時のコマンドです。</p>
+			<br/>
+			<h4>View</h4>
+			<div id="source"><pre class="brush:csharp ; highlight:[61,62,63,263,273,278]" title="Window10.xaml">&lt;ccl:CustomChromeWindow 
+  　　x:Class=&quot;LivetWPFChromeHelpDesk1.Views.Window10&quot;
+  　　xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+  　　xmlns:x=&quot;<a href="http://schemas.microsoft.com/winfx/2006/xaml">http://schemas.microsoft.com/winfx/2006/xaml</a>&quot;
+　　　xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;
+  　 　xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+              
+    xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+    xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+    xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+    xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions&quot;              xmlns:v=&quot;clr-namespace:LivetWPFChromeSupportDesk1.Views&quot;
+    xmlns:vm=&quot;clr-namespace:LivetWPFChromeHelpDesk1.ViewModels&quot;    
+    WindowStartupLocation=&quot;CenterScreen&quot;
+    Title=&quot;Window10&quot; Height=&quot;714&quot; Width=&quot;1035&quot;&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+    &lt;Window.Resources&gt;
+     &lt;ResourceDictionary&gt;
+       &lt;vm:CaptionButtonRectToMarginConverter x:Key=&quot;CaptionButtonMarginConverter&quot;/&gt;
+       &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/StylesBG.xaml&quot;/&gt;
+       &lt;/ResourceDictionary.MergedDictionaries&gt;
+     &lt;/ResourceDictionary&gt;   
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey20&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window20}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey21&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window20}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitialize
+        　　　　　　　メソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName=&quot;ContentRendered&quot;&gt;
+            &lt;l:LivetCallMethodAction MethodTarget=&quot;{Binding}&quot; MethodName=
+            &quot;Initialize&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+ 
+       &lt;i:EventTrigger EventName="Activated" &quot;
+            &lt;i:InvokeCommandAction Command="{Binding ActivatedCommand}" /&quot;
+        &lt;/i:EventTrigger&quot;
+
+        &lt;/i:EventTrigger&gt;
+        &lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+                                   CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;!-- Grid-1 --&gt;
+    &lt;Grid&gt;
+
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; Margin=&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+            &lt;!--Window Icon and Title--&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+                &lt;TextBlock Text=&quot; Help Desk&quot; FontFamily=&quot;Calibri&quot; FontWeight=&quot;Bold&quot; FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;!-- Grid-2 --&gt;
+        &lt;!--Content--&gt;
+        &lt;Grid Grid.Row=&quot;1&quot;&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txt本日}&quot; TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;809,3,123,0&quot; /&gt;
+            
+            &lt;!-- ★★★ --&gt;
+            &lt;Button Command=&quot;{Binding Path=Goto21Command}&quot; BorderBrush=&quot;{x:Null}&quot; Content=&quot;詳細&quot; Foreground=&quot;Black&quot;  Height=&quot;24&quot; 
+                    HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; HorizontalContentAlignment=&quot;Left&quot; Margin=&quot;891,113,0,0&quot;  Name=&quot;btn詳細&quot;  Width=&quot;75&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;UIElement.IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                        &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;YellowGreen&quot; /&gt;
+                        &lt;Setter Property=&quot;Control.Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Control.Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=Goto20Command}&quot; BorderBrush=&quot;{x:Null}&quot; Content=&quot;新規登録&quot; Foreground=&quot;Black&quot; Height=&quot;24&quot;  HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; HorizontalContentAlignment=&quot;Left&quot; Margin=&quot;891,54,0,0&quot; Name=&quot;新規登録&quot; Width=&quot;75&quot;&gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;UIElement.IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                        &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;YellowGreen&quot; /&gt;
+                        &lt;Setter Property=&quot;Control.Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Control.Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=データバックアップCommand}&quot; BorderBrush=&quot;{x:Null}&quot; Content=&quot;バックアップ&quot; Foreground=&quot;White&quot; Height=&quot;25&quot; Width=&quot;77&quot;  HorizontalAlignment=&quot;Left&quot;  VerticalAlignment=&quot;Top&quot;  HorizontalContentAlignment=&quot;Left&quot; Margin=&quot;15,498,0,0&quot; Name=&quot;btnデータバックアップ&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;UIElement.IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                        &lt;Setter Property=&quot;Control.Background&quot; Value=&quot;Green&quot; /&gt;
+                        &lt;Setter Property=&quot;Control.Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Control.Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot; /&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=SearchInquiryClearCommand}&quot;  Content=&quot;Clear&quot; Name=&quot;btnSearchInquiryClear&quot; Height=&quot;24&quot; Width=&quot;36&quot; Margin=&quot;744,54,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button  Command=&quot;{Binding Path=ReRoadCommand}&quot; Content=&quot;再表示&quot; Name=&quot;btnReRead&quot; Height=&quot;24&quot; Width=&quot;75&quot; Margin=&quot;786,54,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;White&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;Button Command=&quot;{Binding Path=DeleteDataCommand}&quot; Content=&quot;削除&quot; Name=&quot;btnDelete&quot;  Height=&quot;25&quot; Width=&quot;77&quot;  Margin=&quot;15,577,0,0&quot;   HorizontalAlignment=&quot;Left&quot;   VerticalAlignment=&quot;Top&quot; BorderBrush=&quot;{x:Null}&quot; Foreground=&quot;Black&quot; &gt;
+                &lt;Button.Style&gt;
+                    &lt;Style TargetType=&quot;{x:Type Button}&quot;&gt;
+                        &lt;Setter Property=&quot;Background&quot; Value=&quot;YellowGreen&quot;/&gt;
+                        &lt;Setter Property=&quot;Template&quot;&gt;
+                            &lt;Setter.Value&gt;
+                                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; VerticalAlignment=&quot;Center&quot;/&gt;
+                                    &lt;/Border&gt;
+                                &lt;/ControlTemplate&gt;
+                            &lt;/Setter.Value&gt;
+                        &lt;/Setter&gt;
+                        &lt;Style.Triggers&gt;
+                            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot;/&gt;
+                            &lt;/Trigger&gt;
+                        &lt;/Style.Triggers&gt;
+                    &lt;/Style&gt;
+                &lt;/Button.Style&gt;
+            &lt;/Button&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtReceiptNumber, Mode=TwoWay}&quot; Name=&quot;txtReceiptNumber&quot; Height=&quot;24&quot;  Width=&quot;105&quot;  VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,54,0,0&quot; VerticalAlignment=&quot;Top&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+            &lt;Label Content=&quot;回目&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;313,53,0,0&quot; Name=&quot;label11&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;40&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtNumber, Mode=TwoWay}&quot; Name=&quot;txtNumber&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;281,53,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;31&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+            &lt;Label   Content=&quot;件数&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;16,83,0,0&quot; Name=&quot;label2&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;62&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txt件数, Mode=TwoWay}&quot; Name=&quot;txt件数&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,84,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;105&quot;  Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+            &lt;Label   Content=&quot;対応状況&quot; Foreground=&quot;White&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;15,113,0,531&quot; Name=&quot;label3&quot; Width=&quot;63&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtState, Mode=TwoWay}&quot; Name=&quot;txtState&quot; VerticalContentAlignment=&quot;Center&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,114,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;105&quot;  Foreground=&quot;Yellow&quot;  Background=&quot;Black&quot;  /&gt;
+
+            &lt;Label   Content=&quot;タイトル&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;16,173,0,0&quot; Name=&quot;label6&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;92&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtTitle2, Mode=TwoWay}&quot;  Name=&quot;txtTitle20&quot; Height=&quot;24&quot; VerticalContentAlignment=&quot;Center&quot; 
+                         HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,174,0,0&quot; VerticalAlignment=&quot;Top&quot; 
+                         Width=&quot;852&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;
+
+            &lt;ListBox  x:Name=&quot;listBox1&quot;
+                    ItemsSource=&quot;{Binding QuestionListView}&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;  
+                    HorizontalContentAlignment=&quot;Stretch&quot; Margin=&quot;114,204,0,0&quot; 
+                    HorizontalAlignment=&quot;Left&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;854&quot;  Height=&quot;420&quot;&gt;
+                &lt;ListBox.ItemTemplate&gt;
+                    &lt;DataTemplate&gt;
+                        &lt;TextBlock Text=&quot;{Binding}&quot;&gt;
+                        &lt;TextBlock.InputBindings&gt;
+                            &lt;MouseBinding Gesture=&quot;LeftDoubleClick&quot;                                           
+                                  Command=&quot;{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}}, Path=DataContext.Goto21Command}&quot;/&gt;
+                        &lt;/TextBlock.InputBindings&gt;
+                        &lt;/TextBlock&gt;
+                    &lt;/DataTemplate&gt;
+                &lt;/ListBox.ItemTemplate&gt;
+            &lt;/ListBox&gt;
+            
+            &lt;Label Content=&quot;受付番号&quot;  Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;15,52,0,0&quot; Name=&quot;label1&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;63&quot; /&gt;
+            &lt;Label Content=&quot;質問部分検索&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; 
+                   InputMethod.PreferredImeState=&quot;Off&quot;  
+                   HorizontalAlignment=&quot;Left&quot; Margin=&quot;357,54,0,0&quot; Name=&quot;label99&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; /&gt;
+            &lt;TextBox 
+                Text=&quot;{Binding Path=txtSearchInquiry, Mode=TwoWay}&quot; 
+                    Name=&quot;txtSearchInquiry&quot;  VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;444,54,0,0&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;294&quot; /&gt;
+
+            &lt;Label   Content=&quot;XMLデータパス&quot; Foreground=&quot;White&quot; Height=&quot;31&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;15,631,0,0&quot; Name=&quot;lblPath&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;92&quot; /&gt;
+            &lt;TextBox Text=&quot;{Binding Path=txtPath, Mode=TwoWay}&quot; Name=&quot;txtPath&quot; VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,631,0,0&quot;  VerticalAlignment=&quot;Top&quot; Width=&quot;643&quot; /&gt;
+
+            &lt;TextBox Text=&quot;{Binding Path=txtMessage, Mode=TwoWay}&quot;  VerticalContentAlignment=&quot;Center&quot; Background=&quot;Black&quot; Foreground=&quot;White&quot; Height=&quot;24&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;763,631,0,0&quot;  VerticalAlignment=&quot;Top&quot; Width=&quot;205&quot; /&gt;
+
+            &lt;GroupBox Height=&quot;50&quot; Width=&quot;391&quot; Margin=&quot;281,93,0,0&quot; HorizontalAlignment=&quot;Left&quot; VerticalAlignment=&quot;Top&quot;&gt;
+                &lt;GroupBox.Header&gt;
+                    &lt;TextBlock FontSize=&quot;14&quot; Foreground=&quot;#FF1E90FF&quot; FontWeight=&quot;Bold&quot; FontFamily=&quot;Times New Roman&quot;&gt;対応状況&lt;/TextBlock&gt;
+                &lt;/GroupBox.Header&gt;
+                &lt;Grid Height=&quot;24&quot; Width=&quot;351&quot; Background=&quot;Black&quot;&gt;
+                    &lt;Grid.RowDefinitions&gt;
+                        &lt;RowDefinition Height=&quot;17*&quot; /&gt;
+                        &lt;RowDefinition Height=&quot;13*&quot; /&gt;
+                    &lt;/Grid.RowDefinitions&gt;
+                    &lt;RadioButton IsChecked=&quot;{Binding Path=Button下書IsChecked, Mode=TwoWay}&quot; Name=&quot;rbtn下書&quot; Content=&quot;下書&quot;  Foreground=&quot;White&quot; Grid.RowSpan=&quot;2&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;10,6,0,3&quot; Width=&quot;48&quot; /&gt;
+                    &lt;RadioButton IsChecked=&quot;{Binding Path=Button対応中IsChecked, Mode=TwoWay}&quot; Name=&quot;rbtn対応中&quot; Content=&quot;対応中&quot;  Foreground=&quot;White&quot; Margin=&quot;72,6,0,3&quot; Width=&quot;58&quot; HorizontalAlignment=&quot;Left&quot; Grid.RowSpan=&quot;2&quot; /&gt;
+                    &lt;RadioButton IsChecked=&quot;{Binding Path=Button完了済IsChecked, Mode=TwoWay}&quot; Name=&quot;rbtn完了済&quot; Content=&quot;完了済&quot;  Foreground=&quot;White&quot; Margin=&quot;0,6,69,6&quot; Width=&quot;62&quot; HorizontalAlignment=&quot;Right&quot; Grid.RowSpan=&quot;2&quot; /&gt;
+                    &lt;RadioButton IsChecked=&quot;{Binding Path=Button検証中IsChecked, Mode=TwoWay}&quot; Name=&quot;rbtn検証中&quot; Content=&quot;検証中&quot;  Foreground=&quot;White&quot; Grid.RowSpan=&quot;2&quot; HorizontalAlignment=&quot;Left&quot; Margin=&quot;154,6,0,6&quot; Width=&quot;60&quot; /&gt;
+                    &lt;RadioButton IsChecked=&quot;{Binding Path=Button全てIsChecked, Mode=TwoWay}&quot; Name=&quot;rbtn全て&quot; Content=&quot;全て&quot;  Foreground=&quot;White&quot; Height=&quot;22&quot; Margin=&quot;293,6,6,2&quot; Grid.RowSpan=&quot;2&quot; /&gt;
+                &lt;/Grid&gt;
+            &lt;/GroupBox&gt;
+
+            &lt;!-- ★★★ --&gt;
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;
+</pre>
+			</div>
+			<br />
+			<p>224～238行目で、Activatedの処理を記述しています。これによって、詳細で変更があっても、<br />
+			この一覧画面に戻ったきた時はActivatedが効いて、再度読み込みが起こり、変更が反映されます。</p>
+			<p>RadioButtonのIsCheckedプロパティの変化は、ボタンがONとOFFになった時に発生しますので、1回だけ処理する再読み込みはvalueがtrueの時だけ実行させます。</p>
+			<br/>
+			<h4>ViewModel</h4>
+			<div id="source"><pre class="brush:csharp ; highlight:[224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,251,306,307,315,328,329,336,349,350,357,370,371,378,391,392,399]" title="ViewModel10.cs">using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//MessageBox
+using System.Windows;
+
+//using Livet.Messaging.IO;
+//using Livet.EventListeners;
+
+//ICommand
+using System.Windows.Input;
+
+// ListCollectionView
+using System.Windows.Data;
+
+//ArrayList
+using System.Collections;
+
+//XmlReader
+using System.Xml;
+
+//XDocument
+using System.Xml.Linq;
+
+//XPathDocument
+using System.Xml.XPath;
+
+using LivetWPFChromeHelpDesk1.Models;
+using LivetWPFChromeHelpDesk1.Views;
+using LivetWPFChromeHelpDesk1.ViewModels;
+
+namespace LivetWPFChromeHelpDesk1.ViewModels
+{
+    class ViewModel10 : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        //public string txtMessage { get; set; }
+        private string _txtMessage;
+        public string txtMessage
+        {
+            get { return _txtMessage; }
+            set
+            {
+                if (_txtMessage != value)
+                {
+                    _txtMessage = value;
+                    RaisePropertyChanged(&quot;txtMessage&quot;);
+                }
+            }
+        }
+        public string txt本日 { get; set; }
+        public bool IsEnabled { get; set; }
+
+    //    public string txtTitle2 { get; set; }
+        private string _txtTitle2;
+        public string txtTitle2
+        {
+            get { return _txtTitle2; }
+            set
+            {
+                if (_txtTitle2 != value)
+                {
+                    _txtTitle2 = value;
+                    RaisePropertyChanged(&quot;txtTitle2&quot;);
+                }
+            }
+        }
+        //
+        //public string txtState { get; set; }
+        private string _txtState;
+        public string txtState
+        {
+            get { return _txtState; }
+            set
+            {
+                if (_txtState != value)
+                {
+                    _txtState = value;
+                    RaisePropertyChanged(&quot;txtState&quot;);
+                }
+            }
+        }       
+        //
+        private string _txtSearchInquiry;
+        public string txtSearchInquiry
+        {
+            get { return _txtSearchInquiry; }
+            set
+            {
+                if (_txtSearchInquiry != value)
+                {
+                    _txtSearchInquiry = value;
+                    RaisePropertyChanged(&quot;txtSearchInquiry&quot;);
+                }
+            }
+        }
+        //
+        private string _txt件数;
+        public string txt件数
+        {
+            get { return _txt件数; }
+            set
+            {
+                if (_txt件数 != value)
+                {
+                    _txt件数 = value;
+                    RaisePropertyChanged(&quot;txt件数&quot;);
+                }
+            }
+        }
+        //
+        private string _txtPath;
+        public string txtPath
+        {
+            get { return _txtPath; }
+            set
+            {
+                if (_txtPath != value)
+                {
+                    _txtPath = value;
+                    RaisePropertyChanged(&quot;txtPath&quot;);
+                }
+            }
+        }      
+       //
+        private string _txtReceiptNumber;
+        public string txtReceiptNumber 
+        {
+            get { return _txtReceiptNumber; }
+            set
+            {
+                if (_txtReceiptNumber != value)
+                {
+                    _txtReceiptNumber = value;
+                    RaisePropertyChanged(&quot;txtReceiptNumber&quot;);
+                }
+            }
+        }
+        //
+        private string _txtNumber;
+        public string txtNumber
+        {
+            get { return _txtNumber; }
+            set
+            {
+                if (_txtNumber != value)
+                {
+                    _txtNumber = value;
+                    RaisePropertyChanged(&quot;txtNumber&quot;);
+                }
+            }
+        }
+        //-----------------------------------------------
+        #endregion
+
+        #region Argument変更通知プロパティ
+        private Argument _argument;
+        public Argument argument
+        {
+            get { return _argument; }
+            set
+            {
+                if (_argument == value)
+                    return;
+                _argument = value;
+                RaisePropertyChanged(&quot;argument&quot;);
+            }
+        }
+        #endregion
+
+        #region IsButtonVisible変更通知プロパティ
+        private bool _IsButtonVisible;
+        public bool IsButtonVisible
+        {
+            get { return _IsButtonVisible; }
+            set
+            {
+                _IsButtonVisible = value;
+                RaisePropertyChanged(&quot;IsButtonVisible&quot;);
+            }
+        }
+        #endregion
+
+        Window win = null;
+        public ViewModel10()
+        {
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+            
+            Activated = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (win != null) win.Owner.Hide();
+
+                //★ListCollectionView 5-2
+                this.QuestionList = new List&lt;string&gt;();
+                SetPath();
+                Read();
+
+                //★ListCollectionView 5-4
+                this.QuestionListView = new ListCollectionView(this.QuestionList);
+                this.QuestionListView.CurrentChanged += QuestionListView_CurrentChanged;
+                //下記のRefreshでListBoxへバインドを実行させます
+                this.QuestionListView.Refresh();
+            });
+ 
+            //Initialize()では表示されない
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());
+            txtState = &quot;対応中&quot;;
+            Button対応中IsChecked = true;
+            txtSearchInquiry = &quot;&quot;;
+            txtReceiptNumber = &quot;&quot;;
+            txtNumber = &quot;&quot;;
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+        public ICommand Activated { get; private set; }
+
+        #region QuestionListView 質問一覧(ListBox)
+        //★ListCollectionView 5-1
+        private List&lt;string&gt; QuestionList;
+
+        private ListCollectionView _QuestionListView;
+        // 質問一覧(ListBox)
+        public ListCollectionView QuestionListView
+        {
+            get
+            { return _QuestionListView; }
+            set
+            {
+                if (_QuestionListView == value)
+                    return;
+                _QuestionListView = value;
+                RaisePropertyChanged(&quot;QuestionListView&quot;);
+            }
+        }
+
+        // リストの位置が変わった
+        void QuestionListView_CurrentChanged(object sender, EventArgs e)
+        {
+            this.QuestionListView.Refresh();
+            //
+            var lv = sender as ICollectionView;
+            if (lv.CurrentPosition &lt; 0)
+            {
+                System.Diagnostics.Trace.WriteLine(&quot;選択無し&quot;);
+                return;
+            }
+            var item = lv.CurrentItem as string;
+            txtTitle2 = item;
+            //
+            int iCNT = item.IndexOf(&quot;:&quot;);
+            txtReceiptNumber = item.Substring(0, iCNT);
+            txtNumber = item.Substring(iCNT + 1, 1);
+            int iCNT2 = item.IndexOf(&quot;:&quot;, iCNT + 3);
+            txtTitle2 = &quot;&quot;;
+            txtTitle2 = item.Substring(iCNT + 3, iCNT2 - (iCNT + 3));
+        }
+        #endregion
+
+        #region ButtonIsChecked
+        int iGClick = 0;
+
+       private bool _Button下書IsChecked;
+        public bool Button下書IsChecked
+        {
+            get { return _Button下書IsChecked; }
+            set
+            {
+                _Button下書IsChecked = value;
+
+                if (value == true)
+                {
+                    txtState = &quot;下書&quot;;
+                    
+                    if (iGClick &gt; 0)
+                    {
+                        Read();
+                    }
+                    iGClick++;
+                }
+                RaisePropertyChanged(&quot;Button下書IsChecked&quot;);
+            }
+        }
+        //
+        private bool _Button対応中IsChecked;
+        public bool Button対応中IsChecked
+        {
+            get { return _Button対応中IsChecked; }
+            set
+            {
+                _Button対応中IsChecked = value;
+
+                if (value == true)
+                {
+                    txtState = &quot;対応中&quot;;
+                    if (iGClick &gt; 0)
+                    {
+                        Read();
+                    }
+                    iGClick++;
+                }
+                RaisePropertyChanged(&quot;Button対応中IsChecked&quot;);
+            }
+        }
+        //
+        private bool _Button完了済IsChecked;
+        public bool Button完了済IsChecked
+        {
+            get { return _Button完了済IsChecked; }
+            set
+            {
+                _Button完了済IsChecked = value;
+
+                if (value == true)
+                {
+                    txtState = &quot;完了済&quot;;
+                    if (iGClick &gt; 0)
+                    {
+                        Read();
+                    }
+                    iGClick++;
+                }
+                RaisePropertyChanged(&quot;Button完了済IsChecked&quot;);
+            }
+        }
+        //
+        private bool _Button検証中IsChecked;
+        public bool Button検証中IsChecked
+        {
+            get { return _Button検証中IsChecked; }
+            set
+            {
+                _Button検証中IsChecked = value;
+
+                if (value == true)
+                {
+                    txtState = &quot;検証中&quot;;
+                    if (iGClick &gt; 0)
+                    {
+                        Read();
+                    }
+                    iGClick++;
+                }
+                RaisePropertyChanged(&quot;Button検証中IsChecked&quot;);
+            }
+        }
+        //
+        private bool _Button全てIsChecked;
+        public bool Button全てIsChecked
+        {
+            get { return _Button全てIsChecked; }
+            set
+            {
+                _Button全てIsChecked = value;
+
+                if (value == true)
+                {
+                    txtState = &quot;全て&quot;;
+                    if (iGClick &gt; 0)
+                    {
+                        Read();
+                    }
+                    iGClick++;
+                }
+                RaisePropertyChanged(&quot;Button全てIsChecked&quot;);
+            }
+
+        }
+        #endregion
+        
+        #region SetPath
+        string strPath = &quot;&quot;;
+
+        private void SetPath()
+        {
+            strPath = System.Windows.Forms.Application.StartupPath;
+            strPath += @&quot;\HelpDesk.xml&quot;;
+            txtPath = strPath;
+        }
+        #endregion
+
+        #region SearchInquiryClearCommand
+        private ViewModelCommand _SearchInquiryClearCommand;
+        public ViewModelCommand SearchInquiryClearCommand
+        {
+            get
+            {
+                if (_SearchInquiryClearCommand == null)
+                {
+                    _SearchInquiryClearCommand = new ViewModelCommand(SearchInquiryClear);
+                }
+                return _SearchInquiryClearCommand;
+            }
+        }
+        public void SearchInquiryClear()
+        {
+            txtSearchInquiry = &quot;&quot;;
+        }
+        #endregion
+
+        #region Read
+        private void Read()
+        {      
+            XDocument xmlDoc = XDocument.Load(strPath);
+            string str = &quot;&quot;;
+
+            try
+            {
+                //★ListCollectionView 5-3
+                ListCollectionViewData.Remove(this.QuestionListView);
+            }
+            catch
+            {
+            }
+            //
+            try
+            {
+                if (txtState.Trim().Substring(0, 2) == &quot;下書&quot;)
+                {
+                    if (txtSearchInquiry == &quot;&quot;)
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      //.Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;下書&quot;)
+                                      where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;下書&quot;)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-3
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    else
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      //.Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;下書&quot;)
+                                      where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;下書&quot;)
+                                      where entry.Element(&quot;inquiry&quot;).Value.Contains(txtSearchInquiry)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-3
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    //★ListCollectionView 5-4
+                    txt件数 = this.QuestionList.Count().ToString();
+                    if (this.QuestionListView.Count &gt; 0)
+                    {
+                        this.QuestionListView.MoveCurrentToPosition(0);
+                    }
+                }
+                else if (txtState.Trim().Substring(0, 2) == &quot;対応&quot;)
+                {
+
+                    if (txtSearchInquiry == &quot;&quot;)
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      .Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;対応中&quot;)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    else
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      //.Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;対応中&quot;)
+                                      where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;対応中&quot;)
+                                      where entry.Element(&quot;inquiry&quot;).Value.Contains(txtSearchInquiry)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                        }
+                    }
+                    txt件数 = this.QuestionList.Count().ToString();
+                    if (this.QuestionListView.Count &gt; 0)
+                    {
+                        this.QuestionListView.MoveCurrentToPosition(0);
+                    }
+                    //★ListCollectionView 5-5
+                }
+                else if (txtState.Trim().Substring(0, 2) == &quot;完了&quot;)
+                {
+                    if (txtSearchInquiry == &quot;&quot;)
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      .Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;完了済&quot;)
+                                      //where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;完了&quot;)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    else
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      //.Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;完了済&quot;)
+                                      where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;完了済&quot;)
+                                      where entry.Element(&quot;inquiry&quot;).Value.Contains(txtSearchInquiry)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    txt件数 = this.QuestionList.Count().ToString();
+                    if (this.QuestionListView.Count &gt; 0)
+                    {
+                        this.QuestionListView.MoveCurrentToPosition(0);
+                    }
+                }
+                else if (txtState.Trim().Substring(0, 2) == &quot;検証&quot;)
+                {
+                    if (txtSearchInquiry == &quot;&quot;)
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      .Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;検証中&quot;)
+                                      //where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;検証中&quot;)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    else
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      //.Where(node =&gt; (string)node.Attribute(&quot;state&quot;) == &quot;検証中&quot;)
+                                      where entry.Attribute(&quot;state&quot;).Value.StartsWith(&quot;検証中&quot;)
+                                      where entry.Element(&quot;inquiry&quot;).Value.Contains(txtSearchInquiry)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    txt件数 = this.QuestionList.Count().ToString();
+                    this.QuestionListView.Refresh();
+                    if (this.QuestionListView.Count &gt; 0)
+                    {
+                        this.QuestionListView.MoveCurrentToPosition(0);
+                    }
+                }
+                else
+                {
+                    if (txtSearchInquiry == &quot;&quot;)
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      // .Where(node =&gt; (string)node.Attribute(&quot;number&quot;) == &quot;1&quot;)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    else
+                    {
+                        var tweets = (from entry in xmlDoc.Descendants(&quot;helpdesk&quot;)
+                                      // .Where(node =&gt; (string)node.Attribute(&quot;number&quot;) == &quot;1&quot;)
+                                      where entry.Element(&quot;inquiry&quot;).Value.Contains(txtSearchInquiry)
+                                      orderby
+                                        (string)entry.Attribute(&quot;receiptnumber&quot;)
+                                      select new
+                                      {
+                                          ReceiptNumber = entry.Attribute(&quot;receiptnumber&quot;).Value,
+                                          Number = entry.Attribute(&quot;number&quot;).Value,
+                                          ReceiptDate = entry.Attribute(&quot;receiptdate&quot;).Value,
+                                          Completingdate = entry.Attribute(&quot;completingdate&quot;).Value,
+                                          State = entry.Attribute(&quot;state&quot;).Value,
+                                          ProductName = entry.Element(&quot;productname&quot;).Value,
+                                          Title = entry.Element(&quot;title&quot;).Value,
+                                          Inquiry = entry.Element(&quot;inquiry&quot;).Value,
+                                          Correspondence = entry.Element(&quot;correspondence&quot;).Value,
+                                      }
+                                    );
+                        foreach (var k in tweets)
+                        {
+                            str = k.ReceiptNumber + &quot;:&quot; + k.Number + &quot;:&quot; + k.Title + &quot;:&quot; + k.State;
+                            //★ListCollectionView 5-4
+                            this.QuestionList.Add(str);
+                        }
+                    }
+                    txt件数 = this.QuestionList.Count().ToString();
+                    if (this.QuestionListView.Count &gt; 0)
+                    {
+                        this.QuestionListView.MoveCurrentToPosition(0);
+                    }
+
+                }
+            }
+            catch
+            {
+            }
+
+        }
+        #endregion
+
+        #region DeleteDataCommand
+        private ViewModelCommand _DeleteDataCommand;
+        public ViewModelCommand DeleteDataCommand
+        {
+            get
+            {
+                if (_DeleteDataCommand == null)
+                {
+                    _DeleteDataCommand = new ViewModelCommand(CheckDeleteData);
+                }
+                return _DeleteDataCommand;
+            }
+        }
+        public void CheckDeleteData()
+        {
+            MessageBoxResult result = System.Windows.MessageBox.Show(&quot;本当に削除しますか?&quot;, &quot;削除の確認&quot;, MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.No)
+            {
+                // Do something for No
+            }
+            else if (result == MessageBoxResult.Yes)
+            {
+                DeleteData();
+                Read(); 
+            }
+        }
+        public void DeleteData()
+        {
+            var xelm = XElement.Load(strPath);
+            var tweets = from entry in xelm.Descendants(&quot;helpdesk&quot;)
+                         //where entry.Attribute(&quot;receiptnumber&quot;).Value == txtReceiptNumber
+                         //where entry.Attribute(&quot;number&quot;).Value == txtNumber
+                         .Where(node =&gt; (string)node.Attribute(&quot;receiptnumber&quot;) == txtReceiptNumber)
+                         .Where(node =&gt; (string)node.Attribute(&quot;number&quot;) == txtNumber)
+                         select entry;
+
+            tweets.Remove();
+            xelm.Save(strPath);
+            //
+            txtNumber = &quot;&quot;;
+        }
+        #endregion
+
+        #region ReRoadCommand
+        private ViewModelCommand _ReRoadCommand;
+        public ViewModelCommand ReRoadCommand
+        {
+            get
+            {
+                if (_ReRoadCommand == null)
+                {
+                    _ReRoadCommand = new ViewModelCommand(ReRoad);
+                }
+                return _ReRoadCommand;
+            }
+        }
+        public void ReRoad()
+        {
+            Read();
+            this.QuestionListView.Refresh();
+            if (this.QuestionListView.Count &gt; 0)
+            {
+                this.QuestionListView.MoveCurrentToPosition(0);
+            } 
+        }
+        #endregion
+
+        #region CopyCommand1
+        //--------------------------------------
+        /// &lt;summary&gt;
+        /// Copy処理のコマンドを定義します。
+        /// &lt;/summary&gt;
+        private ViewModelCommand _copyCommand1;
+        public ViewModelCommand CopyCommand1
+        {
+            get
+            {
+                if (this._copyCommand1 == null)
+                {
+                    this._copyCommand1 = new ViewModelCommand(CopyExecute, CanCopyExecute);
+                }
+                return this._copyCommand1;
+            }
+        }
+        /// &lt;summary&gt;
+        /// Copy処理のコマンドの実行を行います。
+        /// &lt;/summary&gt;
+        private void CopyExecute()
+        {
+            txtState = &quot;対応中&quot;;
+
+           // System.Windows.Forms.MessageBox.Show(&quot;対応中&quot;);
+        }
+        /// &lt;summary&gt;
+        /// Copy処理が実行可能かどうかの判定を行います。
+        /// &lt;/summary&gt;
+        private bool CanCopyExecute()
+        {
+            return true;
+        }
+        //---------------------------------------------
+        #endregion
+
+        #region GotoCommand20
+        public ViewModelCommand Goto20Command
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto20); }
+        }
+        public void Goto20()
+        {
+            Argument argument = new Argument();
+            argument.ReceiptNumber = &quot;&quot;;
+            argument.Number = &quot;&quot;;
+            argument.Title = &quot;&quot;;
+            argument.Action = &quot;新規登録&quot;;
+            argument.XMLPath = strPath;
+
+            Messenger.Raise(new TransitionMessage(new ViewModel20(argument) { NeedHideOwner = true }, &quot;MessageKey20&quot;));
+        }
+        //----------------------------------------------------------------
+        public ViewModelCommand Goto21Command
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto21); }
+        }
+        public void Goto21()
+        {
+            if (txt件数 == &quot;0&quot;) return;
+
+            Argument argument = new Argument();
+            argument.ReceiptNumber = txtReceiptNumber;
+            argument.Number = txtNumber;
+            argument.Title = txtTitle2;
+            argument.Action = &quot;更新&quot;;
+            argument.XMLPath = strPath;
+
+            Messenger.Raise(new TransitionMessage(new ViewModel20(argument) { NeedHideOwner = true }, &quot;MessageKey21&quot;));
+        }
+        //----------------------------------------------------------------
+        #endregion
+
+        #region データバックアップCommand
+        private ViewModelCommand _データバックアップCommand;
+        public ViewModelCommand データバックアップCommand
+        {
+            get
+            {
+                if (_データバックアップCommand == null)
+                {
+                    _データバックアップCommand = new ViewModelCommand(データバックアップ);
+                }
+                return _データバックアップCommand;
+            }
+        }
+        public void データバックアップ()
+        {
+            System.IO.File.Copy(@strPath, @&quot;D:\ヘルプデスクBK\HelpDesk.xml&quot;,true);
+        }
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = System.Windows.Application.Current.Windows.OfType&lt;Window&gt;().SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+
+    }
+}</pre>
+			</div>
+			<br />
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="helpdesk010.html">データ定義</a><br /> 
+				<a href="helpdesk020.html">操作説明</a><br /> 
+		    	<a href="helpdesk030.html">LINQ To XML</a><br />
+		    	<a href="helpdesk040.html">メニュー画面</a><br />
+		    	<a href="helpdesk050.html">一覧表画面</a><br />
+		    	<a href="helpdesk060.html">詳細画面</a><br />
+		    	<a href="helpdeskOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+				
+	
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

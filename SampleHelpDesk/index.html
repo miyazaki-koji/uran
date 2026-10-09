@@ -1,0 +1,411 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>WindowChromeのSample HelpDesk</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="プログラミング,アカデミー,WindowChrome,プログラミング,アカデミー,uran,ウランのホームページ,トイプードル,C#,WPF,Livet,LIVET,入門,プログラミング," lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="../WPFCSharpUsingLivet/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../WPFCSharpUsingLivet/syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+ 	
+<!-- Google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">WindowChromeのSample HelpDesk</a></h1>
+			<span class="description">
+				Windowsフォームプログラミング、WPFプログラミングﾞのTipsを紹介します。極力、実務に役立つように作成しました
+			</span>			
+		</div>
+     <div class="twitterlogo">
+     	<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+	 	<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+    </div> 
+
+<!--
+		<div id="title2">
+    		<ul>
+      			<li class="f"><a href="../index.html">ホーム</a></li>
+      			<li><a href="../about.html">メール・掲示板</a></li>
+      			<li><a href="../WPFCSharpUsingLivet/index.html">C#のWPFプログラミング</a></li>
+      			<li><a href="../WindowChrome/index.html">WindowChromeプログラミング</a></li>
+      			<li><a href="../SampleHelpDesk/index.html">WindowChromeサンプル</a></li>
+      			<li><a href="../Tips/index.html">C# WPF Tips</a></li>
+      			<li><a href="../uran/index.html">ウラン</a></li>
+    		</ul>
+    	</div>
+-->
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->   
+   	
+    	
+    	    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+    	
+		
+		<div id="main" >
+
+			<h3 class="title">はじめに</h3>
+			<br />
+			<h4>このコーナーについて</h4>
+			このコーナーでは、Livetを使ったWPFのWindowChromeで作成したシステム「HelpDesk」を解説します。
+			<p>このHelpDeskは、ソフトハウスがメーカーへの質問とその回答を管理するシステムとして作成されました。<br />
+			又、その時に使われた添付資料も管理します。<br /></p>
+			<p>実際に業務で使用しているシステムを理解することでWindowChromeでの開発を理解出ると思います。</p>
+			<p>尚、WindowChromeLibralyの移植については
+			<a href="../WPFCSharpUsingLivet/chrome01.html" accesskey="1"><span class="red">WindowChromeプログラミング</span></a>
+			を、ご参照ください。
+			</p>
+			<br />
+			<h4>詳細画面</h4>
+			<div class="gazo-floatbox">
+				<a href="images/helpdesk010_06.png" rel="lightbox"><img src="images/helpdesk010_06.png" alt="" width="440" height="300" /></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				<p></p>
+				<p>クリックすると拡大します</p>	
+			</div>
+				<p style="clear:left;"/>
+				
+			
+			
+			<h4>データについて</h4>
+			<p>このシステムで使用しているデータは、XMLファイルに作成していきます。そして、このXMLの操作は、SQLと同じような書式のLINQ To XMLを使用しています。</p>			
+			<p>LINQ To XMLでは、</p>
+			 　①Insert<br />
+			 　②Update<br />
+			 <p>を使います。これらについては、「3.LINQ To XML表」のところで説明します。</p>
+			<br/>	
+			<p>※各ページから、このトップページへ戻るには、表題の<b>「WindowChromeのSample HelpDesk」</b>をクリックして下さい。又は右のサイドメニューの<b>「はじめに」</b>をクリックして下さい。</p>
+			<p>※<span class="red">フッターにも移動のリンク</span>を付けています。ご利用ください。</p>
+			<p><a href="../index.html"><b>ホームへ戻る</b></a></p>
+			<br/>
+			<div id="tab">
+				<table width="100%" class="system">
+					<caption>WindowChromeのSample HelpDesk</caption>
+					<tr align="center" bgcolor="#D7EEFF"　> 
+						<th style="width: 2%"><font COLOR=#000>章</font></th>
+						<th style="width: 32%"><font COLOR=#000>タイトル</font></th>
+						<th><font COLOR=#000>内容</font></th>
+					</tr>
+					<tr>
+						<th style="width: 2%"><a href="helpdesk010.html">1</a></th>
+						<td style="width: 32%"><a href="helpdesk010.html">データ定義</a></td>
+						<td>HelpDeskで使用するデータの定義。</td>
+					</tr>
+
+					<tr>
+						<th style="width: 2%"><a href="helpdesk020.html">2</a></th>
+						<td style="width: 32%"><a href="helpdesk020.html">操作説明</a></td>
+						<td>操作方法を説明</td>
+					</tr>
+					<tr>
+						<th style="width: 2%"><a href="helpdesk030.html">3</a></th>
+						<td style="width: 32%"><a href="helpdesk030.html">LINQ To XML</a></td>
+						<td>挿入、更新、削除</td>
+					</tr>
+					
+					<tr>
+						<th style="width: 2%"><a href="helpdesk040.html">4</a></th>
+						<td style="width: 32%"><a href="helpdesk040.html">メニュー画面</a></td>
+						<td>ボタンを配置したメニュー画面</td>
+					</tr>
+
+					<tr>
+						<th style="width: 2%; height: 25px;"><a href="helpdesk050.html">5</a></th>
+						<td style="width: 32%; height: 25px;"><a href="helpdesk050.html">一覧表画面</a></td>
+						<td style="height: 25px">
+						ListBoxのデータはListCollectionViewを使用</td>
+					</tr>
+					
+					<tr>
+						<th style="height: 17px; width: 2%;"><a href="helpdesk060.html">6</a></th>
+						<td style="height: 17px; width: 32%;">
+						<a href="helpdesk060.html">詳細画面</a></td>
+						<td style="height: 17px">詳細画面</td>
+					</tr>
+
+					<tr>
+						<th style="width: 2%"><a href="helpdeskOPL.html">7</a></th>
+						<td style="width: 32%"><a href="helpdeskOPL.html">One Point Lesson 一覧表</a></td>
+						<td>ワンポイント解説</td>
+					</tr>
+				　</table>
+				<b>&lt;サンプルDL&gt;:サンプルのダウンロード</b>
+			</div>
+			
+			<br/>
+			<h4>Visual Studio C# 2010（Express）とLivet1.1.0.0をインストール</h4>
+				<p>このサンプルは、Visual Studio C# 2010（Express）とLivet1.1.0.0をインスールして作成しました。Livetは右の「開発で役立つツールのサイト」の中にリンクがありますので、そこから<b>ダウンロード</b>して下さい。<br />
+					LivetはNET Framework 4 Client Profile以上で動作し、zlib/libpngライセンス(*1)になっています。</p>
+				<p>(*1)ライブラリとしての利用に留めるのであれば再配布時にも著作権表示などの義務はありません。しかし、Livetのソースコードを改変しての再配布にはその旨の明示が義務付けられます。</p>
+
+			
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>	
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->
+
+<!--			
+<p style="font-size: 16px;">明細データの表示 16px</p>
+<p style="font-size: 12pt;">明細データの表示 12px</p>
+<p style="font-size: 10pt;">明細データの表示 10px</p>
+<p style="font-size: 9pt;">明細データの表示 9px</p>
+<p style="font-size: 8pt;">明細データの表示 8px</p>
+
+<p style="font-size: medium;">明細データの表示 medium</p>
+<p style="font-size: 100%;">明細データの表示 100%</p>
+<p style="font-size: 1em;">明細データの表示 1em</p>
+<p>明細データの表示</p>
+<p>
+Primary  school
+Elementary school
+Junior
+High
+University
+</p>
+-->
+
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="helpdesk010.html">データ定義</a><br /> 
+				<a href="helpdesk020.html">操作説明</a><br /> 
+		    	<a href="helpdesk030.html">LINQ To XML</a><br />
+		    	<a href="helpdesk040.html">メニュー画面</a><br />
+		    	<a href="helpdesk050.html">一覧表画面</a><br />
+		    	<a href="helpdesk060.html">詳細画面</a><br />
+		    	<a href="helpdeskOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">
+			<!-- <a name="footer" href="#top" >先頭へ</a> -->
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+    		<br />			
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br/>
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
