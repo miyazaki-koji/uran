@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="../WindowChrome/css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|1.WindowChromeとは～WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="C#,WindowChrome,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" xml:lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" xml:lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/dropmenustyle.css" />
+
+
+<link rel="stylesheet" 		type="text/css"		href="../WPFCSharpUsingLivet/style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="../WPFCSharpUsingLivet/style_files/img/favicon.ico" />
+
+<script type="text/javascript" src="../WPFCSharpUsingLivet/scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="../WindowChrome/syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="../WindowChrome/syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="../WindowChrome/syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="../WindowChrome/syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="../WindowChrome/syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="../WindowChrome/syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		.auto-style1 {
+		margin-bottom: 0;
+	}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWindowChromeプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイトです
+			</span>			
+		</div>
+		
+
+	<!-- Start Menu -->   
+<!-- <div class="break2"></div>   --> 
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="index.html">ホーム</a></li>
+      				<li><a href="about.html">メール・掲示板</a></li>
+      				<li><a href="toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+    				<li><a href="WindowsForm/index.html">Windowsﾌﾟﾛｸﾞﾗﾐﾝｸﾞ <span class="red">(作成中)</span></a></li>
+      				<li><a href="WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="WindowChrome/index.html">Chromeプログラミング</a></li>
+    			</ul>
+  			</li>
+   			<li><a href="#wrapper">サンプル <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="WindowsForm/index.html">Windowsフォーム <span class="red">(作成中)</span></a></li>
+      				<li><a href="SampleHelpDesk/index.html">Chromeサンプル</a></li>
+    			</ul>
+  			</li>
+    			<li><a href="#wrapper">Tips <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="TipsWindowsForm/index.html">Windowsﾌｫｰﾑ Tips <span class="red">(作成中)</span></a></li>
+      				<li><a href="Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+  			<li><a href="Oldies/index.html">YouTube Oldies 60's</a></li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->  
+
+		
+		
+		   
+    			 <div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+
+	
+		
+		<div id="main" >
+		
+
+		
+			<h3 class="title">はじめに</h3>	
+			<h4>WindowChromeとは</h4>
+				<p>通常のWindowの画面では最上部には、タイトルバーや閉じるボタンが配置されているプログラマーが触れない領域である非クライアント領域と、
+					その下側のクライアント領域があります。<br />
+					画面にコントロールを配置する時は、このクライアント領域に配置します。<br />
+					上部の非クライアント領域にContentの記述を拡張するための仕組みがWindowChromeです。<br />
+					このがWindowChromeを使うことによって、画面全体を自由にデザインすることが可能となります。</p>
+			<br />	
+			<div id="tab">
+				<table width="100%" class="system">
+					<caption>応用 WindowChromeサンプル</caption>
+					<tr align="center" bgcolor="#D7EEFF"　> 
+						<th style="width: 2%"><font COLOR=#000>章</font></th>
+						<th style="width: 31%"><font COLOR=#000>タイトル</font></th>
+						<th><font COLOR=#000>内容</font></th>
+					</tr>
+					<tr>
+						<th style="width: 2%"><a href="../WindowChrome/chrome01.html">1</a></th>
+						<td style="width: 31%"><a href="../WindowChrome/chrome01.html">DashboardSampleの移植</a></td>
+						<td>サイトで見つけたDashboardSampleのViewを移植</td>
+					</tr>
+
+					<tr>
+						<th style="width: 2%"><a href="../WindowChrome/chrome02.html">2</a></th>
+						<td style="width: 31%"><a href="../WindowChrome/chrome02.html">CustomChromeLibrary.dll</a></td>
+						<td>WindowChrome作成で必要なdllを直接使ったプログラミング</td>
+					</tr>
+					
+				</table>
+		   </div>
+
+
+			<br />
+			<h4>参考にしたサイト</h4>
+				<p>ここでの解説は、下記のCODE PROJECTのサイトより「WpfCustomChromeLibrary」をダウンロードして使用しています。<br /></p>
+				<p><a href="http://www.java2s.com/Open-Source/CSharp_Free_Code/Windows_Presentation_Foundation/Download_WpfCustomChromeLibrary.htm">「C# Free Code - Download WpfCustomChromeLibrary - Java2s」</a></p>
+				<p>サイトの下の方の「Download」の下の<b>wpfcustomchromelib.zip</b>をクリックするとダウンロード出来ます。
+					解凍すると、<span class="red"><b>wpfcustomchromelib</b></span>というフォルダが出来上がります。この中には、<br />
+					BuildProcessTemplates<br />
+					Libraries<br />
+					SampleApps<br />
+					ThirdParty<br />
+					というフォルダがあります。<br />
+					wpfcustomchromelibごと、Dドライブ直下にコピー(又は移動)します。<br />
+					Visual Studioを起動して、「プロジェクトを開く...」で、<br />
+					D:\WpfCustomChromeLib\SampleApps\CustomChromeSample\CustomChromeSample.sln<br />
+					を選択します。画面は下記のようになります。
+					<br />
+				</p>
+			<br />
+			<p>※下記のurlからは簡単にプロジェクトのダウンロードができます。</p>
+			<p><a href="http://www.codeproject.com/Articles/131515/WPF-Custom-Chrome-Library">WPF Custom Chrome Library - CodeProject</a>
+			</p>
+
+			<br />
+			<b>WpfCustomChromeLib (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_1.png" rel="lightbox"><img src="../WindowChrome/images/chrome01_1.png" alt=""  width="440" height="300" border="1"/></a>
+			</div>
+			<br />
+			
+
+
+
+			<p>このプロジェクトは使いません。単に参考に表示しただけで、使用するのは、解凍した<br />
+			wpfcustomchromelibの中のLibrariesフォルダの中の<span class="red"><b>CustomChromeLibraryフォルダ</b></span>と<br />
+			ThirdPartyフォルダの中の<span class="red"><b>WPF Shell Integration Library v2フォルダ</b></span>です。</p>
+
+			
+			<h4>新しくLivetプロジェクトの作成</h4>
+				<p>とりあえず、Ｄ：ドライブ直下にLivetWPFApplicationChrome1という名前でプロジェクト（ソリューション
+				を作成します。</p>
+			<br />
+
+			<h4><b>Chrome関連フォルダのコピー</b></h4>
+				<p>次に、作ったプロジェクトをエックスプローラーで開いて、この中に、<b>CustomChromeLibraryフォルダ</b>と<b>WPF Shell Integration Library v2フォルダ</b>をコピーします。<br />
+				</p>
+			<br />
+			<b>エックスプローラー (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_2.png" rel="lightbox"><img src="../WindowChrome/images/chrome01_2.png" alt=""  width="440" height="300" border="1"/></a>
+			</div>
+			<br />
+			<h4>新しく作ったプロジェクトにプロジェクト（フォルダ）を追加</h4>
+				<p>先ほど作ったプロジェクトを開いて、ソリューションエックスプローラーのソリューション名を選択して下記のようにショートカットメニューで2つのプロジェクトを取り込みます。<br />
+				</p>
+			<br/>
+			<b>Visual Stusio ソリューションエックスプローラー (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_3.png" rel="lightbox"><img class="border" src="../WindowChrome/images/chrome01_3.png" alt=""   border="1"/></a>
+			</div>
+
+			<br />			<h4>Chrome関連フォルダを追加したLivetプロジェクト</h4>
+				<p>次に追加したプロジェクトを「参照設定」します。<br /></p>
+
+			<b>Visual Stusio ソリューションエックスプローラー  (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_4.png" rel="lightbox"><img class="border" src="../WindowChrome/images/chrome01_4.png" alt=""   border="1"/></a>
+				<br />
+				<br />
+				<p>「参照の追加」をクリックしますと下記の画面が表示されます。</p>
+				<br />
+				<a href="../WindowChrome/images/chrome01_5.png" rel="lightbox"><img src="../WindowChrome/images/chrome01_5.png" alt=""   border="1"/></a>
+				<p>2つのプロジェクトを選択して、OKをクリックします。</p>
+			</div>
+			<br />
+			<h4>クラスの作成</h4>
+				<p>CaptionButtonRectToMarginConverter.csとう名前で、LivetWPFApplicationChrome1の直下にクラスを作成します。<br /></p>
+			<b>Visual Stusio ソリューションエックスプローラー  (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_6.png" rel="lightbox">
+				<img class="border" src="../WindowChrome/images/chrome01_6.png" alt=""  height="183" width="554"/></a>
+			</div>
+			<br />
+			<b>ViewModel</b>
+			<div id="source"><pre class="brush:csharp ; highlight:[0]" title="CaptionButtonRectToMarginConverter.cs">using System;
+using System;
+using System.Windows;
+using System.Windows.Data;
+
+using LivetWPFApplicationChrome1.ViewModels;
+using LivetWPFApplicationChrome1.Views;
+
+namespace LivetWPFApplicationChrome1
+{
+  public class CaptionButtonRectToMarginConverter : IValueConverter
+  {
+     public object Convert(object value, Type targetType, object parameter, 
+         				System.Globalization.CultureInfo culture)
+     {
+        var captionLocation = (Rect)value;
+        return new Thickness(0, captionLocation.Top + 6, -captionLocation.Right, 0);
+     }
+     public object ConvertBack(object value, Type targetType, object parameter, 
+         			System.Globalization.CultureInfo culture)
+     {
+        throw new NotSupportedException();
+     }
+ 　}
+}
+
+</pre>
+			</div>
+			<br />
+			<h4>MainWindow.xamlの書き換え</h4>
+				<p>WindowChromeに書き換えます。その時、クラスがWondowからccl:CustomChromeWindowに変更しています。</p>
+				<p>ZAMLは下記の通りです。<br />
+			<b>ClosingとCloseの処理は全て、CustomChromeLibraryがおこなうので、ここでのEventTriggerは不要なのでコメントにしています。</b>
+			</p>
+			<b>View</b>
+			<div id="source"><pre class="brush: html; highlight:[1,63,64,65,66,67,68,69,70,71,126]　"title="MainWindow.xaml"  style="width: 666px">
+&lt;ccl:CustomChromeWindow 
+        x:Class=&quot;LivetWPFApplicationChrome1.Views.MainWindow&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+      xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;
+        xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+	    xmlns:local=&quot;clr-namespace:LivetWPFApplicationChrome1&quot;               
+        xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+        xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+        xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+        xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.
+        	Core;assembly=Microsoft.Expression.Interactions&quot;      
+        xmlns:v=&quot;clr-namespace:LivetWPFApplicationChrome1.Views&quot;
+        xmlns:vm=&quot;clr-namespace:LivetWPFApplicationChrome1.ViewModels&quot;    
+        WindowStartupLocation=&quot;CenterScreen&quot;
+        Title=&quot;MainWindow&quot; Height=&quot;714&quot; Width=&quot;1035&quot;&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;local:CaptionButtonRectToMarginConverter 
+            		x:Key=&quot;CaptionButtonMarginConverter&quot;/&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:MainWindowViewModel/&gt;
+    &lt;/Window.DataContext&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelの
+        	Initializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName=&quot;ContentRendered&quot;&gt;
+            &lt;l:LivetCallMethodAction MethodTarget=&quot;{Binding}&quot; 
+			MethodName=&quot;Initialize&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger 
+            MessageKey=&quot;MessageKey2&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType=&quot;{x:Type v:Window2}&quot; Mode=&quot;Modal&quot;/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+               CommandParameter=&quot;{Binding Mode=OneTime,
+               RelativeSource={RelativeSource Mode=FindAncestor,
+               AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+&lt;!--
+        &lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+                CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; 
+                                        Messenger=&quot;{Binding Messenger}&quot;&gt;
+                 &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+--&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;!-- Grid-1 --&gt;
+    &lt;Grid&gt;
+
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; 
+        		Margin=&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+            &lt;!--Window Icon and Title--&gt;
+            &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+                &lt;TextBlock Text=&quot;WindowChrome&quot; FontFamily=&quot;Calibri&quot; 
+                	FontWeight=&quot;Bold&quot; FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;!-- Grid-2 --&gt;
+        &lt;!--Content--&gt;
+        &lt;Grid Grid.Row=&quot;1&quot;&gt;
+
+            &lt;!-- ★★★ --&gt;
+            &lt;Grid&gt;
+                &lt;TextBox Text=&quot;{Binding Path=txt本日}&quot; TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;809,3,123,0&quot; /&gt;
+                &lt;Button Command=&quot;{Binding Path=GotoCommand2}&quot; 
+		            Content=&quot;2.メニュー&quot; FontSize=&quot;16&quot; Height=&quot;35&quot; 
+		            	Margin=&quot;39,0,712,569&quot;  
+                    Foreground=&quot;White&quot; Style=&quot;{StaticResource CommandTemplate}&quot; 
+                    	VerticalAlignment=&quot;Bottom&quot; /&gt;
+
+            &lt;/Grid&gt;
+            &lt;!-- ★★★ --&gt;
+
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;</pre>
+			</div>
+			<br />
+			<h4>MainWindow.xamlのコードビハインドファイルの継承の変更</h4>
+				<p>MainWindow.xamlのクラスをWondowからccl:CustomChromeWindowに変更したので、MainWindow.xamlのコード・ビハインドの継承をWondowからCustomChromeLibrary.CustomChromeWindowに変更します。</p>
+			<br />
+			<b>コードビハインドファイル</b>
+			<div id="source"><pre class="brush: html; highlight:[20]"title="MainWindow.zaml.cs"  style="width: 666px">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+using Livet;
+using Livet.EventListeners.WeakEvents;
+
+namespace LivetWPFApplicationChrome1.Views
+{
+    public partial class MainWindow : CustomChromeLibrary.CustomChromeWindow
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+    }
+}
+</pre>
+			</div>			
+			<br />
+			<h4>リソースフォルダの作成</h4>
+				<p>名前は、Resources。LivetWPFApplicationChrome1を選択して下記のようにします。<br /></p>
+			<b>Visual Stusio ソリューションエックスプローラー  (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_7.png" rel="lightbox">
+				<img class="border" src="../WindowChrome/images/chrome01_7.png" alt=""   height="183" width="554"/></a>
+			</div>
+			<br />
+			<h4>リソースディクショナリの作成</h4>
+				<p>名前は、Styles2.xamlで、Resourcesフォルダを選択して下記のようにします。<br /></p>
+			<b>Visual Stusio ソリューションエックスプローラー  (クリックすると拡大)</b>
+			<div id="top">
+				<a href="../WindowChrome/images/chrome01_9.png" rel="lightbox">
+				<img class="border" src="../WindowChrome/images/chrome01_9.png" alt="" height="183" width="554"/></a>
+			</div>
+			<br />
+			
+			
+				<p>リソースディクショナリのZAMLは下記の通りです。</p>
+			<b>View</b>
+			<div id="source"><pre class="brush: html; 　"title="Styles2.xaml"  style="width: 666px">
+&lt;ResourceDictionary 
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;&gt;
+
+    &lt;Style  x:Key=&quot;CommandTemplate&quot; TargetType=&quot;{x:Type Button}&quot;&gt;
+        &lt;Setter Property=&quot;Background&quot; Value=&quot;Green&quot; /&gt;
+        &lt;Setter Property=&quot;Template&quot;&gt;
+            &lt;Setter.Value&gt;
+                &lt;ControlTemplate TargetType=&quot;{x:Type Button}&quot;&gt;
+                    &lt;Border Background=&quot;{TemplateBinding Background}&quot;&gt;
+                        &lt;ContentPresenter HorizontalAlignment=&quot;Center&quot; 
+                        VerticalAlignment=&quot;Center&quot; /&gt;
+                    &lt;/Border&gt;
+                &lt;/ControlTemplate&gt;
+            &lt;/Setter.Value&gt;
+        &lt;/Setter&gt;
+        &lt;Style.Triggers&gt;
+            &lt;Trigger Property=&quot;IsMouseOver&quot; Value=&quot;True&quot;&gt;
+                &lt;Setter Property=&quot;Background&quot; Value=&quot;DarkGoldenrod&quot; /&gt;
+            &lt;/Trigger&gt;
+        &lt;/Style.Triggers&gt;
+    &lt;/Style&gt;
+&lt;/ResourceDictionary&gt;
+</pre>
+			</div>
+			<br />
+
+
+			<p>ViewModelは下記の通りです。14,15,17,18,19,20行は自動作成に追加しています。<br />
+			<b>Closingの処理は全て、CustomChromeLibraryがおこなうので、ここでの記述は不要なので、コメントにしています。</b></p>
+			<b>ViewModel</b>
+			<div id="source">
+				<pre class="brush: csharp;  highlight:[14,15,17,18,19,20,47,48,49,50,51,52,53,60];　　　"title="MainWindowViewModel.cs"  style="width: 666px">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+using Livet.Messaging.IO;
+using Livet.EventListeners;
+using Livet.Messaging.Windows;
+
+//ICommand
+using System.Windows.Input;
+
+//Application
+//Window
+//MessageBox
+using System.Windows;
+
+using LivetWPFApplicationChrome1.Models;
+
+namespace LivetWPFApplicationChrome1.ViewModels
+{
+    public class MainWindowViewModel : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        public string txt本日 { get; set; }
+        public bool IsEnabled { get; set; }
+        //-----------------------------------------------
+        #endregion
+        Window win = null;
+        public MainWindowViewModel()
+        {            
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == 
+                		Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+/*
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+*/
+            //Initialize()では表示されない
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+     // public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+        	if (win != null) win.Owner.Hide();
+        }
+
+        #region GotoCommand2
+        //--------------------------------------------------------------
+        public ViewModelCommand GotoCommand2
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto2); }
+        }
+        public void Goto2()
+        {
+       //     Messenger.Raise(new TransitionMessage(new ViewModel2() 
+       //		{ NeedHideOwner = true }, &quot;MessageKey2&quot;));
+        }
+        //--------------------------------------------------------------
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().
+            			SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+    }
+}
+</pre>
+			</div>
+
+			<br />
+			<h4>Close処理</h4>
+				<p>CustomChromeLibraryの下記のクラスでClose処理をしています。</p>
+
+			<p><b>CloseButton.cs</b></p>
+			<div class="gazo-floatbox">
+				<a href="../WindowChrome/images/chrome01_11.png" rel="lightbox">
+				<img src="../WindowChrome/images/chrome01_11.png" alt="" class="auto-style1" width="440" height="300"/></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<h4>実行</h4>
+			<p>LivetWPFApplicationChrome1プロジェクトをビルドして、ソリューションをビルドして実行します。<br /></p>
+		<b>LivetWPFApplicationChrome1  (クリックすると拡大)</b>
+		<div id="top">
+				<a href="../WindowChrome/images/chrome01_10.png" rel="lightbox">
+				<img src="../WindowChrome/images/chrome01_10.png" alt=""   border="1" width="440" height="300"  /></a>
+		</div>
+		<br />
+			<p>2つ目の画面を下記の通り作ります。MainWindow.xamlのコード・ビハインドと同様に継承も修正します。</p>				
+		<b>View</b>
+		<div id="source"><pre class="brush: html;  highlight:[0];　　"title="Window2.xaml"  style="width: 666px">
+
+&lt;ccl:CustomChromeWindow 
+        x:Class=&quot;LivetWPFApplicationChrome1.Views.Window2&quot;
+        xmlns=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation&quot;
+        xmlns:x=&quot;http://schemas.microsoft.com/winfx/2006/xaml&quot;
+      xmlns:shell=&quot;http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell&quot;
+        xmlns:ccl=&quot;clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary&quot;                        
+	    xmlns:local=&quot;clr-namespace:LivetWPFApplicationChrome1&quot;               
+        xmlns:i=&quot;http://schemas.microsoft.com/expression/2010/interactivity&quot;
+        xmlns:ei=&quot;http://schemas.microsoft.com/expression/2010/interactions&quot;
+        xmlns:l=&quot;http://schemas.livet-mvvm.net/2011/wpf&quot;
+        xmlns:core=&quot;clr-namespace:Microsoft.Expression.Interactivity.
+        		Core;assembly=Microsoft.Expression.Interactions&quot;      
+        xmlns:v=&quot;clr-namespace:LivetWPFApplicationChrome1.Views&quot;
+        xmlns:vm=&quot;clr-namespace:LivetWPFApplicationChrome1.ViewModels&quot;
+     
+        WindowStartupLocation=&quot;CenterScreen&quot;
+        Title=&quot;Window2&quot; 
+        Height=&quot;714&quot; Width=&quot;1035&quot;&gt;
+
+    &lt;shell:WindowChrome.WindowChrome&gt;
+        &lt;shell:WindowChrome
+            ResizeBorderThickness=&quot;6&quot;
+            CaptionHeight=&quot;43&quot;
+            CornerRadius=&quot;0,0,0,0&quot;
+            GlassFrameThickness=&quot;0&quot;&gt;
+        &lt;/shell:WindowChrome&gt;
+    &lt;/shell:WindowChrome.WindowChrome&gt;
+
+
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;local:CaptionButtonRectToMarginConverter x:Key=
+            		&quot;CaptionButtonMarginConverter&quot;/&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source=&quot;/Resources/Styles2.xaml&quot;/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelの
+        		Initializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName=&quot;ContentRendered&quot;&gt;
+        &lt;l:LivetCallMethodAction MethodTarget=&quot;{Binding}&quot; MethodName=&quot;Initialize&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;!-- 下記がないと、タスクバーが1つにならない --&gt;
+        &lt;i:EventTrigger EventName=&quot;Loaded&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Loaded}&quot; 
+               CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource=
+               {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+&lt;!--
+        &lt;i:EventTrigger EventName=&quot;Closing&quot;&gt;
+            &lt;i:InvokeCommandAction Command=&quot;{Binding Path=Closing}&quot;
+               CommandParameter=&quot;{Binding Mode=OneTime,RelativeSource=
+               {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}&quot;/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey=&quot;Close&quot; Messenger=
+        	&quot;{Binding Messenger}&quot;&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+--&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:ViewModel2/&gt;
+    &lt;/Window.DataContext&gt;
+
+    &lt;!-- Grid-1 --&gt;
+    &lt;Grid&gt;
+        &lt;!-- WindowChrome Start  --&gt;
+        &lt;Border  Grid.RowSpan=&quot;2&quot; BorderThickness=&quot;3&quot; BorderBrush=&quot;Black&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+        &lt;/Border&gt;
+
+        &lt;!--title bar--&gt;
+        &lt;Border  BorderThickness=&quot;3,3,3,1&quot; BorderBrush=&quot;Black&quot; Margin=
+        	&quot;{Binding Path=CaptionButtonMargin}&quot;&gt;
+            &lt;Border.Background&gt;
+                &lt;LinearGradientBrush StartPoint=&quot;0.5,0&quot; EndPoint=&quot;0.5,1&quot;&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;0&quot; /&gt;
+                    &lt;GradientStop Color=&quot;Black&quot; Offset=&quot;1&quot; /&gt;
+                &lt;/LinearGradientBrush&gt;
+            &lt;/Border.Background&gt;
+           &lt;StackPanel Orientation=&quot;Horizontal&quot; Margin=&quot;0&quot; VerticalAlignment=&quot;Top&quot;&gt;
+             &lt;TextBlock Text=&quot;WindowChrome&quot; FontFamily=&quot;Calibri&quot; FontWeight=
+             	&quot;Bold&quot; FontSize=&quot;26&quot; Foreground=&quot;Blue&quot; /&gt;
+            &lt;/StackPanel&gt;
+        &lt;/Border&gt;
+        &lt;ccl:CaptionButtons /&gt;
+        &lt;!-- WindowChrome End  --&gt;
+
+        &lt;!-- Grid-2 --&gt;
+        &lt;!--Content--&gt;
+        &lt;Grid Grid.Row=&quot;1&quot;&gt;
+
+            &lt;!-- ★★★ --&gt;
+            &lt;Grid&gt;
+                &lt;TextBox Text=&quot;{Binding Path=txt本日}&quot; TextAlignment=&quot;Center&quot; 
+                    Foreground=&quot;White&quot; Background=&quot;Black&quot;
+                    Height=&quot;17&quot; HorizontalAlignment=&quot;Center&quot;  Name=&quot;txt本日&quot; 
+                    VerticalAlignment=&quot;Top&quot; Width=&quot;81&quot; Margin=&quot;809,3,123,0&quot; /&gt;
+            &lt;/Grid&gt;
+            &lt;!-- ★★★ --&gt;
+
+        &lt;/Grid&gt;
+    &lt;/Grid&gt;
+&lt;/ccl:CustomChromeWindow&gt;</pre>
+			</div>
+			
+			<br />
+				<p>画面は下記のようになります。</p>
+
+			<p><b>Window2.zaml</b></p>
+			<div class="gazo-floatbox">
+				<a href="../WindowChrome/images/chrome01_12.png" rel="lightbox">
+				<img src="../WindowChrome/images/chrome01_12.png" alt="" class="auto-style1" width="440" height="300"/></a>			
+			</div>
+			<div class="gazo-floatbox">	
+				クリックすると拡大します
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			
+			<p>ViewModelは下記の通りです。</p>
+			<br />
+			<b>ViewModel</b>
+			<div id="source">
+				<pre class="brush: csharp;  highlight:[0];　"title="ViewModel2.cs"  style="width: 666px">
+using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//ICommand
+using System.Windows.Input;
+
+//MessageBox
+using System.Windows;
+
+
+namespace LivetWPFApplicationChrome1.ViewModels
+{
+    public class ViewModel2 : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        public string txtMessage { get; set; }
+        public string txt本日 { get; set; }
+        public bool IsEnabled { get; set; }
+        //-----------------------------------------------
+        #endregion
+
+        Window win = null;
+        public ViewModel2()
+        {            
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+/*
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                   w.Owner.Show();
+                }
+            });
+*/
+            //Initialize()では表示されない
+            txt本日 = Convert.ToString(DateTime.Today.ToShortDateString());  
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+    //  public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+            if (win != null) win.Owner.Hide();
+        }
+
+        #region GotoCommand
+        //---------------------------------------------------------------
+        public ViewModelCommand GotoCommand3
+        {
+            get { return new Livet.Commands.ViewModelCommand(Goto3); }
+        }
+        public void Goto3()
+        {
+            Messenger.Raise(new TransitionMessage(new ViewModel3() { NeedHideOwner = true }, &quot;MessageKey3&quot;));
+        }
+        //----------------------------------------------------------------
+        #endregion
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+
+
+    }
+}
+</pre>
+			</div>
+
+
+
+
+
+			<!-- Start floatbox  yoko long -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="3126707799"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+			</div>
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->
+はじめに
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+				<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+				<a href="index.html"></a>はじめに<br />
+				<a href="../WindowChrome/chrome01.html">DashboardSampleの移植</a><br />
+				<a href="../WindowChrome/chrome02.html">CustomChromeLibrary.dll</a><br />
+			</div> 	
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+			
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a  href="#top">|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
+
