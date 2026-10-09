@@ -1,0 +1,691 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+
+<title>Livetを使ったC#のWPFプログラミングー|ﾄｯﾌﾟ～,もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない、WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象、WindowChromのSampleもあります</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="keywords" content="ベルウランズワールド,C#,WPF,Livet,LIVET,入門,プログラミング" lang="ja" xml:lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象。WindowChromのSampleもあります" lang="ja" xml:lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<link rel="stylesheet" type="text/css" href="style_files/style.css" />
+<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="ie.css" /><![endif]-->
+
+<link rel="stylesheet" type="text/css"	href="style_files/dropmenustyle.css" />
+
+
+<link rel="stylesheet" type="text/css" href="resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="resource/lightbox_plus.js"></script>
+
+<style type="text/css">
+img.border { border: 1px #555555 solid; 
+}
+a img { border: none; 
+}
+
+</style>
+
+<!-- リンクノ下線消去  -->
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS"/>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+ <style type="text/css">
+ <!--
+         a   { text-decoration:none;}
+ .auto-style1 {
+	 margin-bottom: 7;
+ }
+ -->
+ </style>
+ 
+ 
+  <!-- BEGIN Slide Show -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script> 
+<script src="slideshow/jquery.bxslider.min.js" type="text/javascript"></script> 
+<link href="slideshow/jquery.bxslider.css" rel="stylesheet" /> 
+
+<script type="text/javascript">
+         $(document).ready(function(){
+             $('.bxslider').bxSlider({
+                 auto: true,
+             });
+         });
+</script> 
+<!-- END Slide Show -->
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+
+<body>
+<!-- Start スマートホーン専用ページ向け ページ単位の広告　-->
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-1302894290654620",
+    enable_page_level_ads: true
+  });
+</script>
+<!-- End スマートホーン専用ページ向け ページ単位の広告　-->
+
+
+<!-- BEGIN wrapper -->
+<div id="wrapper">
+  <!-- BEGIN header -->
+  <div id="header1" class="auto-style1">
+    <div class="logo2" style="height: 62px; width: 578px;" >
+    	<h1 style="height: 52px; ">
+		<a name="top" href="index10.html" style="width: 589px">uran's world</a></h1>
+    </div>
+	<div class="twitterlogo">
+	    <a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>	
+     	<a href="http://twitter.com/BelBeluran">    		
+     		<img src="images/twitter.png" alt="Twitterアイコン" />
+	 	</a>
+		<a href="https://www.facebook.com/beluran3">
+			<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 	</a>
+	</div> 
+      
+
+
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="index10.html">ホーム</a></li>
+      				<li><a href="about.html">メール・掲示板</a></li>
+      				<li><a href="toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="SampleHelpDesk/index.html">Chromeサンプル</a></li>
+					<li><a href="Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   			<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="OracleExpress/index.html">Oracle Express</a></li>
+					<li><a href="FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="Documentary/index.html">感動のドキメンタリー</a></li>
+
+					<li><a href="Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->   
+
+    
+  </div>
+  <!-- END header -->
+  
+  
+  <!-- フィンランドの写真　Start　--> 
+
+
+  <div id="headerSlideShow">
+
+     <ul class="bxslider">			
+		<li><img title="" alt="" src="images/IMG_0246_R.jpg" width="1000" height="400" /></li>		
+     </ul> 
+
+  </div>
+
+ 
+  <!-- フィンランドの写真　End　-->
+
+
+
+  <!-- BEGIN body -->
+  <div id="body"> 
+    <!-- BEGIN content -->
+    <div id="content">
+    
+      <h2 class="title">Livetを使ったC#のWPF 【システム基本構成サンプル】</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="WPFCSharpUsingLivet/index.html" >
+        	<img class="border" src="WPFCSharpUsingLivet/images/livet000_2.png" alt="" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="WPFCSharpUsingLivet/index.html" accesskey="1">WPFプログラミング</a></font></h3>
+			<p>WPFで検索すれば、小さなサンプルにはヒットしますが、それらをいくつ集めてもWPFのシステム開発は出来ません。
+			理由は、システムとして基本構成を理解して、それを使う必要があるからです。ここで解説する「システム基本構成サンプル」は、全体としてシステム化されており、これをを理解すれば、C#でMVVMを使ったWPFのシステムを作れるようになります。</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+     <h2 class="title">Livetを使ったC#のWindowChrome</h2>   
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb" style="height: 95px">
+			<a href="WindowChrome/index.html">
+ 				<img class="border"
+
+					 height="85"
+					 width="110"
+					 alt="WindowChrome"
+					 title="WindowChrome Picture"
+					 src="WindowChrome/images/chrome01_1.png"
+				/>
+			</a>
+		</div>
+        <h3><font color="#000000">
+		<a href="WindowChrome/index.html" accesskey="1">WindowChromeプログラミング</a></font></h3>
+        <p>画面上部の非クライアント領域にもContentの記述を拡張するための仕組みがWindowChromeで、これを
+		使うことによって、画面全体を自由にデザインすることが可能となります。
+		<br />   
+		ここでは、CustomChromeLibraryを使って、WPFをWindowChrome化する方法から説明します。    
+        </p>
+      </div>
+      <!-- end post -->
+      
+      
+      <div class="post f">
+        <div class="thumb" style="height: 95px">
+        	<a href="SampleHelpDesk/index.html" >
+			<img src="SampleHelpDesk/images/helpdesk010_06.png" alt="" /></a>
+		</div>
+        <h3><font color="#000000">
+		<a href="SampleHelpDesk/index.html" accesskey="1">WindowChromeサンプル HelpDesk</a></font></h3>
+        <p>Livetを使ったWPFのWindowChromeで作成したシステム「HelpDesk」を解説します。
+        このサンプルは、一覧表では<b>Activated</b>を使用して、詳細画面での変更が戻った一覧表で反映するようにしています。実際に業務で使用できるレベルのものに仕上げています。これを参考に独自のサンプルをどんどん作ってみて下さい。      
+        </p>
+      </div>
+      <!-- end post -->
+      
+      <h2 class="title">使用頻度が高く厳選された C# WPF Tips</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Tips/index.html" >
+        	<img class="border" src="Tips/images/tips520_01.png" alt="" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Tips/index.html" accesskey="1">C# WPF Tips</a></font></h3>
+			<p>c#を使って、WPFﾌﾟﾛｸﾞﾗﾐﾝｸﾞをするに当たって、使用頻度の高いTipsを紹介していきます。サイトで検索するといろいろと出てきますが、あまりにもコードが少なく、実際に使おうとすると、より調べる必要が出てきます。ここでは、フルコードで紹介しています。未だ登録は少ないですが、実際のWPFプログラミングに役立つようなTipsを作成しました。ご利用下さい。
+	<!--		<a href="Oldies/index.html">...</a>  -->
+
+			<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+      
+      
+      
+       <h2 class="title">データベースサイズ11GBで学習用としては充分なOracle Express Edition</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+			<a href="OracleExpress\index.html">
+ 				<img class="border"
+					 height="85"
+					 width="110"
+					 alt="OracleExpress"
+					 title="OracleExpress Picture"
+					 src="OracleExpress\images\xe001.png"
+				/>
+			</a>       </div>
+        <h3><font color="#000000">
+		<a href="OracleExpress\index.html" accesskey="1">Oracle　Express</a></font></h3>
+			<p>Oracle社が無償で提供しているデータベースでデータベースサイズが11GBで学習用としては充分なOracle Express Edition。対応OS：Windows 32bit, Linux 64bit。
+			ダウンロードの方法、インストールの方法について解説します。
+			また、データーベースを操作するSQLのツールとして、黒猫 SQL Studio Nextについても、ダウンロードの方法、インストールの方法について解説します<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+      
+      
+      
+      <h2 class="title">使えるフリー・ソフト</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="FreeSoft\index.html" >
+        	<img class="border" src="images/aviUtl.png" alt="" height="80" width="423" />
+
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="FreeSoft\index.html" accesskey="1">動画編集ソフト AviUtl</a></font></h3>
+			<p>
+			高機能で使いやすい動画編集ソフトです。<br />
+			但し、原版は、avi形式の動画しか読み書きが出来ません。<br />
+			これに色々のプラグインを追加しますと多種類の形式の動画に対応します。<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+
+
+      
+      
+     <h2 class="title">YouTube オールディーズ 60's &amp; 70's</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Oldies/index.html" >
+        	<img class="border" src="images/carpenters.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Oldies/index.html" accesskey="1">YouTube Oldies 60's</a></font></h3>
+			<p>1960～70年代の世界中でヒットした名曲を照会します。</p>
+		  <p>シンガーはシルビー・バルタン、カーペンターズ、コニー・フランシス等々。曲は、アイドルを探せ、イエスタディ・ワンスモア、ボーイハント等々。
+			数多くの人がカバーした曲も多くあります。
+			<br />
+			今聞いても古さを感じさせないなんて何と素晴らしいことでしょう。英語の勉強にも役立つかも。
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+      
+      
+ 
+     <h2 class="title">懐かしの映画・映画音楽</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="DearFilmMusic/index.html" >
+        	<img class="border" src="images/TheSoundOfMusic.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="DearFilmMusic/index.html" accesskey="1">映画音楽</a></font></h3>
+			<p>懐かしの映画・映画音楽で世界中でヒットした名曲を照会します。 
+			<br />
+			今見ても聞いても古さを感じさせません。あの時の感動が蘇ります。<br />
+			これからもずっと忘れられずにいることでしょう。
+			<br />
+			<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+      
+      
+      
+            
+      <h2 class="title">「団塊の世代」の心に残るドラマ</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Dorama/index.html" >
+        	<img class="border" src="images/Dorama-3-01-01.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Dorama/index.html" accesskey="1">心に残るドラマ</a></font></h3>
+			<p>昭和から平成の始まりの頃に放送された心に残るドラマを照会します。</p>
+		  	<p>ひとつ屋根の下、君の手がささやいている、家なき子、ロングバケーション、ビューティフルライフ。
+				出演は、江口洋介､ 福山雅治、酒井法子、いしだ壱成、大路恵美、山本耕史、 菅野美穂、武田真治、安達祐実、愛犬リュウ、木村拓哉、山口智子、常盤貴子。
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+      
+
+      <h2 class="title">２０世紀を動く映像として記録したドキュメンタリー</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Documentary/index.html" >
+        	<img class="border" src="images/king.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Documentary/index.html" accesskey="1">感動のドキュメンタリー</a></font></h3>
+			<p>「アポロ13号の奇跡の生還。大平洋戦争。何故、人々は独裁者を迎え入れたのか。米国の自働車王ヘンリー・フォードは反ユダヤを唱えた。」
+			フランスの生んだファッション界の女王ココ・シャネルは、ドイツ軍の協力者となって諜報活動を行った。<br />
+			２０世紀を動く映像として記録したドキュメンタリーです。
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+      
+      
+        <h2 class="title">YouTubeで見つけた映画</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Movie/index.html" >
+        	<img class="border" src="images/patorik.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Movie/index.html" accesskey="1">YouTubeで見つけた映画</a></font></h3>
+			<p>
+			YouTube・DailyMotionで面白い映画やドラマを見つけましたので収録(リンク)しました。一覧表に、特に面白かったものには◎を付けました。
+			<br />
+			<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+
+
+        <h2 class="title">宇宙・銀河・地球～ 誕生と進化</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="Earth/index.html" >
+        	<img class="border" src="images/earth.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="Earth/index.html" accesskey="1">宇宙・銀河・地球～ 誕生と進化</a></font></h3>
+			<p>
+			140億年前のビッグバンが宇宙の始まり。地球は天の川銀河の中にあります。全ての銀河ごとににもブラックホールがありますが、天の川銀河のブラックホールは地球から2万6千光年離れています。
+			<br />
+			<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+        <h2 class="title">動画サイトで学ぶ歴史・ドラマ</h2>
+      <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="History/index.html" >
+        	<img class="border" src="images/history2.png" alt="" height="80" width="423" />
+        	</a>
+       </div>
+        <h3><font color="#000000">
+		<a href="History/index.html" accesskey="1">動画サイトで学ぶ歴史・ドラマ</a></font></h3>
+			<p>
+			YouTubeで歴史についてのドキュメンタリーやドラマで面白いものを見つけましたので収録(リンク)しました。中国作成の三国志もあります。
+			<br />
+			<br />
+			</p>
+ 			<!--  <p class="details"><a href="#">Read More &raquo;</a> | <a href="#">12 Comments</a></p> -->
+      </div>
+      <!-- end post -->
+
+
+
+      	
+   	　<h2 class="title">マイタウン豊洲</h2>  
+            <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">   
+        	<a href="toyosu.html">
+			<img src="imagesToyosu/toyosu1.jpg" alt=""  /></a>
+		</div>
+        <h3><font color="#000000">
+		<a href="toyosu.html" accesskey="1">2001年の豊洲は倉庫だらけ。今はマンション・オフィース街</a></font></h3>
+        <p style="height: 70px">有楽町線やゆりかもめの駅がある豊洲は、日本発のコンビニエンスストアや当時珍しかったフィットネスクラブがある街です。又、IHI発祥の地でもあります。
+		IHIが経営不振から所有地を手放し始めてから、この土地に多くのビルが建ち始めマンション街・オフィース街へと豊洲は大きく変化。 		
+
+<!--		<a href="test/index.html">...</a>	
+		<a href="compo01.html">...</a>
+	
+		<a href="toyosu2.html">...</a>
+-->	
+
+		
+
+		</p>		
+      </div>
+      <!-- end post -->
+      
+      
+     <h2 class="title">ウランのホームページ</h2>  
+            <!-- begin post -->
+      <div class="post f">
+        <div class="thumb">
+        	<a href="uran/index.html">
+			<img class="border"  src="uran/images/image8_2.gif" alt=""  /></a>
+		</div>
+        <h3><font color="#000000">
+	<a href="uran/index.html" accesskey="1">男の子です</a></font></h3>
+        <p style="height: 70px">我が家の家族の一員であるウランです。2001年9月20日生まれの男の子です。犬種はトイ・プードルで、色は茶色(レッド)　。家では「ウラン」とか「ピー」とも呼ばれています。
+		男の子なのにウランと名前をつけたのは、トイプードルでアトムはかわいくない感じがしたからです。 	
+		<br />
+
+		<a href="Dorama/index.html">...</a>
+
+<!--
+		<a href="toyosu3.html">...</a>
+		<a href="dropmenutest/index.html">...</a>
+		
+		<a href="https://twitter.com/mailmarkelab” target=”_blank">Twitterでフォローする<img src="images/twitter.png" alt="Twitterアイコン" /></a>
+
+
+		<a href="http://twitter.com/BelBeluran">    		Twitterでフォローする<img src="images/twitter.png" alt="Twitterアイコン" />
+		</a>
+-->
+		
+        </p>      
+        <!-- end post -->
+        
+        
+        
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+		<p></p>
+
+
+
+      </div>
+      <!-- end post -->
+      
+      <h2 class="title">サイト リンク</h2>  
+      <!-- begin post -->     
+      <div class="post f">
+        <h2>開発で役立つツールのサイト</h2>
+        <ul>
+			<li><a href="https://visualstudiogallery.msdn.microsoft.com/ee198b62-fa45-496c-9c1c-e8f63b43f677">Livetのダウンロードサイトです</a></li>
+			<li><a href="http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/">ER図作成ツールは便利です。</a></li>
+			<li><a href="http://inno-setup.sidefeed.com/archives/cat_2_inno_setup_.html">インストーラ作成ツール</a></li>
+			<li><a href="http://www.forest.impress.co.jp/library/software/kuronekosql/">黒猫 SQL Studio Next</a></li>
+		</ul> 
+		<h2>HTMLのお勉強のサイト</h2>
+        <ul>
+			<li><a href="http://e-words.jp/p/r-htmlentity.html">HTMLの特殊文字は重要です</a></li>
+			<li><a href="http://algorhythnn.jp/blg/2014/04/11/expression_web_4-install/">Expression Web 4を使って作成</a></li>
+			<li><a href="http://www.w-frontier.com/"  title="高機能HTML/XHTML/スタイルシート対応エディタ(Web Frontier)">ez-HTML</a></li>
+			<li><a href="http://www.vector.co.jp/soft/dl/win95/art/se108932.html">JTrimで綺麗にトリミング</a></li>
+			<li><a href="http://html-color-codes.info/japanese/">カラーコードの入力で色表示</a></li>
+			<li><a href="http://www.netyasun.com/home/color.html">色を見てコードを確認</a></li>
+			<li><a href="http://www.netyasun.com/syntaxhighlighter/">SyntaxHighlighterでソースを装飾します</a></li>
+			<li><a href="http://www.free-css.com/free-css-templates/page1">Free CSSを使う</a></li>
+		</ul>
+		<h2>ロゴのサイト</h2>
+        <ul>
+			<li><a href="http://ja.cooltext.com/">無料ロゴ作成サイト　Fun Logo デザイン</a></li>
+		</ul>		
+		
+      </div>
+      <!-- end post -->
+
+      
+      
+      
+
+    </div>
+    <!-- END content -->
+    <!-- BEGIN sidebar -->
+    <div id="sidebar">
+      <!-- begin search -->
+      <form action="#" style="height: 30px">
+      <table border="0" cellspacing="0" cellpadding="0" align="right" style="width: 103px; height: 22px;">
+	<tr>
+		<td align="center">
+		<a href="http://www.rays-counter.com/">
+		<img src="http://www.rays-counter.com/d329_f6_010/56794ea4c9ec6/" alt="アクセスカウンター" border="0" height="13"/>
+		</a>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+		<img src="http://www.rays-counter.com/images/counter_01.gif" alt=""/>
+		<img src="http://www.rays-counter.com/images/counter_02.gif" alt=""/>
+		<img src="http://www.rays-counter.com/images/counter_03.gif" alt=""/>
+		<img src="http://www.rays-counter.com/images/counter_04.gif" alt=""/>
+		<img src="http://www.rays-counter.com/images/counter_05.gif" alt=""/>
+		</td>
+	</tr>
+</table>
+
+      </form>
+      <!-- end search -->
+      
+
+      <div class="lr">
+      
+        <br />
+        <h2>YouTube</h2>
+        <ul>
+			<li><a href="https://www.youtube.com/watch?v=AjKpqc6_W1k">当サイトの動画解説</a></li>
+			<li><a href="https://www.youtube.com/watch?v=2jdtE_HAORA&feature=youtu.be">風景写真　フィンランド</a></li>
+
+			<li><a href="https://www.youtube.com/watch?v=4uqbZc36UYw&feature=youtu.be">風景写真　豊洲公園</a></li>
+			<li><a href="https://www.youtube.com/watch?v=b1ES5Sbo7bk">風景写真　豊洲三丁目公園</a></li>
+			<li><a href="https://www.youtube.com/watch?v=p4kndvjH6Bc">風景写真　豊洲駅から芝浦工業大学</a></li>
+
+			<li><a href="https://www.youtube.com/watch?v=cvzKZyr0Ijw">ストリートビュー　豊洲駅から芝浦工業大学</a></li>
+			<li><a href="https://www.youtube.com/watch?v=fuDALuHDGBk">ストリートビュー　丸メンチの銀座さとう </a></li>
+			
+			<li><a href="https://www.youtube.com/watch?v=x8J8NXAynPQ">宇宙遺産2  </a></li>						
+		</ul> 
+        
+        <h2><font color="#000000">このサイトを読んで欲しい方</font></h2>
+        このサイトは、大きく分けると3つの内容で構成されています。<br />
+		１つ目は、C#のプログラミングです。<br />
+		２つ目は、団塊の世代の思い出の曲・映画・ドラマです。<br />
+		３つ目は、我が家の愛犬のホームページです。<br />
+		C#のプログラミングのコーナーは<span class="red">Visual Studio</span>を使って、C#のWindowsフォームアプリケーションのプログラミングが少々書ける人で、「もっと自由に画面を表現したいのでWPFを使ってみたいが、サンプルが余りにも少なくてよくわからない。また、WPFはメモリーリークが発生しやすいので、防止の為にMVVMで作る必要があるらしいが、これも全然わからない」という人を対象としています。
+      </div>
+
+      <!-- begin flickr photos -->
+      <h2>手ポインタの写真をクリックすると拡大します</h2>
+      <div class="photos"> 
+		<a href="images/emi_paint.bmp" rel="lightbox"><img src="images/emi_paint.bmp" alt="" /></a>
+		<a href="uran/images/MyFriend20020212.bmp" rel="lightbox"><img src="uran/images/MyFriend20020212.bmp" alt="" /></a>
+		<img src="uran/images/a001bcg.gif" alt="" />
+		<a href="uran/images/MyBed20020213.bmp" rel="lightbox"><img src="uran/images/MyBed20020213.bmp" alt="" /></a>
+		<img src="uran/images/a002ani.gif" alt="" />
+		<a href="uran/images/DVC000191.jpg" rel="lightbox"><img src="uran/images/DVC000191.jpg" alt="" /></a>
+      </div>
+      <!-- end flickr photos -->      
+      <!-- begin featured video -->
+      
+      <!-- BEGIN left -->
+      
+      
+        <!-- BEGIN left and right -->
+      <div class="lr">
+         <h2>コーナー</h2>
+        <ul>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a></li>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">WindowChromeサンプル HelpDesk</a></li>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a></li>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a></li>
+			<li><a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a></li>
+		</ul>        
+      </div>
+
+
+
+
+      <!-- end categories -->
+      <!-- END left  and right -->
+      
+      
+    </div>
+    <!-- END sidebar -->
+    <div class="break"></div>              
+  </div>
+  
+<!--タグはここから-->
+<!-- http://www.rays-counter.com/ -->
+
+   <!-- END body --> 
+   
+   
+   <!-- END body -->
+      
+			<br />		
+			<br />				
+  
+  
+<div id="header3">
+<hr />
+
+</div>  
+   
+   
+   
+   
+   
+  <!-- BEGIN footer -->
+  <div id="footer" class="copyright">
+  <!-- Copyright &copy; 2009 - <a href="#">Website Name</a> &middot; All Rights Reserved | Template by: <a href="http://www.wpthemedesigner.com/">WordPress Designer</a> | Get More <a href="#">Free CSS Templates</a> -->
+  Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br /> 
+  当サイトへのリンクはご自由にどうぞ。<br/>
+&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPFプログラミング &lt;/a&gt;<br/>
+ </div>
+  <!-- END footer -->
+  
+  
+</div>
+<!-- END wrapper -->
+
+</body>
+</html>
