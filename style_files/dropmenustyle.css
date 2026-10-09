@@ -1,0 +1,149 @@
+﻿#dropmenu {
+  list-style-type: none;
+  
+/*  width: 960px; */
+  width: 1000px;  
+  
+  margin: 30px auto 500px; 
+  padding: 0;
+}
+#dropmenu li {
+  position: relative;
+  width: 20%;
+  float: left;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#dropmenu li a {
+  display: block;
+  margin: 0;
+  
+/*  padding: 16px 0; */
+/* 行の高さ */
+/*  padding: 8px 0; */
+  padding: 11px 0; 
+  
+
+/*  
+  background: #8a9b0f; */
+/*　background: url("../img/header.gif") repeat-x 0 bottom;　*/
+  background: #777777;
+  
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1; 
+
+  text-decoration: none;
+}
+#dropmenu li ul {
+  list-style: none;
+  position: absolute;
+  z-index: 100;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+#dropmenu li ul li {
+  overflow: hidden;
+  width: 100%;
+  height: 0;
+  color: #fff;
+  transition: .2s;
+}
+#dropmenu li ul li a {
+  padding: 13px 15px; 
+
+/* background: #7c8c0e; */
+  background: #666666;
+  
+  text-align: left;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+/* #dropmenu > li:hover > a {  background: #7c8c0e } */
+#dropmenu > li:hover > a {  background: #666666 }
+
+/* #dropmenu > li:hover li:hover > a {  background: #6e7c0c } */
+#dropmenu > li:hover li:hover > a {  background: #555555;   color: #FFFF00;}
+
+#dropmenu li:hover > ul > li {
+  overflow: visible;
+  height: 38px; 
+/*   height: 35px; */
+color: #FFFF00;
+}
+#dropmenu li ul li ul {
+  top: 0;
+  left: 100%;
+}
+#dropmenu li:last-child ul li ul {
+  left: -100%;
+  width: 100%;
+}
+
+/* #dropmenu li ul li ul li a {  background: #616d0b } */
+#dropmenu li ul li ul li a {  background: #477777 }
+
+/* #dropmenu li:hover ul li ul li:hover > a {  background: #535d09 } */
+#dropmenu li:hover ul li ul li:hover > a {  background: #111111  }
+
+
+#dropmenu li ul li ul:before {
+  position: absolute;
+  content: "";
+  top: 13px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+/* border-left-color: #454e08; */
+  border-left-color: #222222;  
+}
+#dropmenu li:last-child ul li ul:before {
+  position: absolute;
+  content: "";
+  top: 13px;
+  left: 200%;
+  margin-left: -20px;
+  border: 5px solid transparent;
+/* border-right-color: #454e08; */
+  border-right-color: #222222;
+}
+/* *********************************************** */
+#dropmenutitle2 {
+	/*	height: 35px; */
+		height: 38px;
+}
+	#dropmenutitle2 ul {
+		list-style-type: none;
+		height: 38px;
+	/*	height: 35px; */
+
+	/*	margin-top: 3px; */
+		margin-top: 0px;
+
+	}
+		#dropmenutitle2 ul li {
+		}
+		#dropmenutitle2 ul li.f {
+		}
+		#dropmenutitle2 ul li a {
+		}
+
+		#dropmenutitle2 ul li a:hover {
+color: #ffff00;
+		}
+/* ************************************************** */
+.break2 {
+/*	font-size: 0;
+	width: 0; 
+	height: 0;
+*/
+	clear: both;  
+}
+/* ************************************************** */
