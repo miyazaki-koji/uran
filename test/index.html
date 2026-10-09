@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="import" href="example.html">
+    
+    <script>
+window.onload = function(){
+    var link = document.querySelector('link[rel=import]');
+    var contentH = link.import.querySelector('#h');
+    var contentF = link.import.querySelector('#f');
+    document.querySelector('#wrapper').appendChild(contentH);
+    document.querySelector("#wrapper").appendChild(contentF);
+}
+</script>
+
+</head>
+
+ 
+<body>
+	<div id="wrapper">
+    	<p>これは、index.htmlに書かれたテキストです。</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<script type="text/javascript">
+<!--
+function MenuOn(x){
+    obj=document.getElementById("submenu"+x).style.display="block";
+}
+
+function MenuOff(x){
+    obj=document.getElementById("submenu"+x).style.display="none";
+}
+//-->
+</script>
+
+
+
+<title>無題 7</title>
+
+
+
+<style type="text/css">
+#menu {
+position:relative;
+    
+    background-color:#9999ff; /* バーに背景色。端まで塗るため幅はulに指定。 */
+}
+#menu ul#mainmenu {
+    width:750px; /* liが横に並ぶ幅を確保 */
+    height:22px; /* バーの高さを確保 */
+    margin-left:9px; /* 左余白 */
+    border-left:1px solid #ffffff; /* 左しきり線 */
+}
+#menu ul.submenu {   
+    display:none; /* 初期状態は非表示 */
+}
+#menu li {
+    width:150px;
+    float:left; /* liを左寄せ */
+    list-style-type:none;
+}
+#menu a {
+    border:1px solid #9999ff;
+    border-right-color:#ffffff;
+    padding:2px;
+    display:block;
+    line-height:16px;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:bold;
+    color:#ffffff;
+    background-color:#9999ff;
+}
+#menu a:hover {
+    color:#9999ff;
+    background-color:#ffffff;
+}
+#menu ul.submenu a {
+    border:1px solid #bbbbff;
+    text-indent:10px; /* インデント */
+    background-color:#bbbbff;
+}
+#menu ul.submenu a:hover {
+    color:#9999ff;
+    background-color:#ffffff;
+}
+</style>
+</head>
+
+<body>
+<div id="menu">
+<ul id="mainmenu">
+<li><a href="../new.htm" class="link0">ニュース</a></li>
+<li onMouseOver="MenuOn(1)" onMouseOut="MenuOff(1)"><a href="../ningen.htm" class="link1">人間科学部</a>
+  <ul class="submenu" id="submenu1">
+    <li><a href="../sinri.htm">心理教育学科</a></li>
+    <li><a href="../gendai.htm">現代社会学科</a></li>
+    <li><a href="../commu.htm">コミュニケーション学科</a></li>
+  </ul>
+</li>
+<li onMouseOver="MenuOn(2)" onMouseOut="MenuOff(2)"><a href="../kokusai.htm" class="link2">国際学部</a>
+  <ul class="submenu" id="submenu2">
+    <li><a href="../kankei.htm">国際関係学科</a></li>
+    <li><a href="../eibei.htm">英米語学科</a></li>
+  </ul>
+</li>
+<li onMouseOver="MenuOn(3)" onMouseOut="MenuOff(3)"><a href="../komisin.htm" class="link3">コミュニティ振興学部</a>
+  <ul class="submenu" id="submenu3">
+    <li><a href="../bunka.htm">コミュニティ文化学科</a></li>
+    <li><a href="../chiki.htm">地域政策学科</a></li>
+    <li><a href="../human.htm">ヒューマンサービス学科</a></li>
+  </ul>
+</li>
+<li><a href="../sitemap.htm" class="link0">サイトマップ</a></li>
+</ul>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,833 @@
+﻿<!DOCTYPE html>
+<html
+  lang="ja"
+data-avail-langs="ja en"
+
+data-page="entry"
+data-static-domain="https://blog.st-hatena.com"
+data-blog="posaune.hatenablog.com"
+data-blog-name="亀岡的プログラマ日記"
+data-blogs-uri-base="http://posaune.hatenablog.com"
+data-globalheader-color="b"
+data-author="posaunehm"
+data-version="cf1abe069c516f924b57b76f65e05e71"
+data-blog-comments-top-is-new=""
+data-plus-available=""
+
+
+
+data-admin-domain="http://blog.hatena.ne.jp"
+
+data-brand="hatenablog"
+
+data-has-touch-view="1"
+
+
+itemscope
+itemtype="http://schema.org/Article"
+
+
+  data-device="pc"
+  data-globalheader-type="pc"
+  >
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+    
+    
+    
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=7; IE=9; IE=10; IE=11" />
+    <title>Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編） - 亀岡的プログラマ日記</title>
+
+    
+
+    
+      <link rel="canonical" href="http://posaune.hatenablog.com/entry/20111203/1322927753"/>
+    
+
+    <meta itemprop="name" content="Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編） - 亀岡的プログラマ日記"/>
+    
+      <meta itemprop="image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171410.jpg"/>
+    
+
+    <meta property="og:title" content="Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編） - 亀岡的プログラマ日記"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="http://posaune.hatenablog.com/entry/20111203/1322927753"/>
+    
+      <meta property="og:image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171410.jpg"/>
+    
+        <meta property="og:description" content="さて、前回（d:id:posaunehm:20111201:1322750644）はさっくりとLivetの概要だけ説明しましたので、ここでLivetの機能を具体的にチェックしてみましょう。・・・といってもLivetはそこそこ大きなライブラリーです（Prismなんかに比べるとかなりすっきりとはしていますが・・・。 というわけで、ダウンロードページに付属しているLivetのサンプルプロジェクトを読みといてみて、そこから主要な機能を理解しておきたいと思います。 まず、プロジェクトの構造はこんな感じ。 View、ViewModel、Modelがそれぞれ2つずつとなっています。では、起動してみましょう。…" />
+    <meta property="og:site_name" content="http://posaune.hatenablog.com/"/>
+      <meta property="article:published_time" content="1322841353" />
+        <meta property="article:author" content="100001673469842" />
+        <meta property="article:tag" content="WPF" />
+        <meta property="article:tag" content="C#" />
+        <meta property="article:tag" content="Livet" />        <meta name="twitter:card"  content="summary_large_image" />
+        <meta name="twitter:image" content="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171410.jpg" />
+      <meta name="twitter:title" content="Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編） - 亀岡的プログラマ日記" />        <meta name="twitter:description" content="さて、前回（d:id:posaunehm:20111201:1322750644）はさっくりとLivetの概要だけ説明しましたので、ここでLivetの機能を具体的にチェックしてみましょう。・・・といってもLivetはそこそこ大きなライブラリーです（Prismなんかに比べるとかなりすっきりとはしていますが・・・。 という…" />      <meta name="twitter:app:name:iphone" content="はてなブログアプリ" />
+      <meta name="twitter:app:id:iphone" content="583299321" />
+      <meta name="twitter:app:url:iphone" content="hatenablog:///open?uri=http%3A%2F%2Fposaune.hatenablog.com%2Fentry%2F20111203%2F1322927753" />      <meta name="twitter:site" content="@Posaune" />        <meta name="google-site-verification" content="v0LLQTQi6VGlvLMGV10VWR9TCj1LnmtpuiDvsHFO-28">        <meta name="description" content="さて、前回（d:id:posaunehm:20111201:1322750644）はさっくりとLivetの概要だけ説明しましたので、ここでLivetの機能を具体的にチェックしてみましょう。・・・といってもLivetはそこそこ大きなライブラリーです（Prismなんかに比べるとかなりすっきりとはしていますが・・・。 という…" />
+    
+<script type="text/javascript">
+// <!--
+
+if (~navigator.userAgent.indexOf('Mac OS X')) {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27ヒラギノ角ゴ Pro W3\x27, \x27Hiragino Kaku Gothic Pro\x27, sans-serif; } </style>');
+} else {
+  document.write('<style type="text/css">html, body { font-family: \x27Helvetica\x27, \x27Arial\x27, \x27メイリオ\x27, \x27Meiryo\x27, \x27MS PGothic\x27, sans-serif; } </style>');
+}
+
+// -->
+</script>
+
+<!--[if lt IE 9]>
+<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+
+
+
+    <link rel="shortcut icon" href="http://cdn.image.st-hatena.com/image/favicon/0bd4c540b95d18c0f98d6897981ff29a0bf9717d/version=1/http%3A%2F%2Fcdn.mogile.archive.st-hatena.com%2Fv1%2Fimage%2Fposaunehm%2F302455710330190369.jpg">
+    <link rel="icon" sizes="192x192" href="http://cdn.image.st-hatena.com/image/square/eb5248d4eca4fa351d7d23d4178b4b6455499b81/backend=imagemagick;height=192;version=1;width=192/http%3A%2F%2Fcdn.mogile.archive.st-hatena.com%2Fv1%2Fimage%2Fposaunehm%2F302455710330190369.jpg">
+    <link rel="alternate" type="application/atom+xml" title="Atom" href="http://posaune.hatenablog.com/feed"/>
+    <link rel="alternate" type="application/rss+xml" title="RSS2.0" href="http://posaune.hatenablog.com/rss"/>
+    <link rel="alternate" type="application/json+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fposaune.hatenablog.com%2Fentry%2F20111203%2F1322927753&amp;format=json" title="oEmbed Profile of Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編）"/>
+    <link rel="alternate" type="text/xml+oembed" href="http://hatenablog.com/oembed?url=http%3A%2F%2Fposaune.hatenablog.com%2Fentry%2F20111203%2F1322927753&amp;format=xml" title="oEmbed Profile of Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編）"/>
+      <link rel="author" href="http://www.hatena.ne.jp/posaunehm/">
+
+    <link rel="stylesheet" type="text/css" href="https://blog.st-hatena.com/css/blog.css?version=cf1abe069c516f924b57b76f65e05e71"/>
+
+      <link rel="stylesheet" type="text/css" href="http://blog.hatena.ne.jp/-/blog_style/12704591929883902455/58e9d7413390bf84fb0167b4b8e42057cbeb7aa0"/>    <script>    </script>
+
+    
+    <style>
+      div#google_afc_user,
+      div#google_afc_user_container_0,
+      div#google_afc_user_container_1,
+      div#google_afc_user_container_2,
+      div#google_afc_user_container_3,
+      div#google_afc_user_container_4,
+      div#google_afc_user_container_5,
+      div.google_afc_image,
+      div.google_afc_blocklink {
+          display: block !important;
+      }
+    </style>
+
+    
+  </head>
+
+  <body class="page-entry      category-WPF category-C# category-Livet  ">
+    <!-- Google Universal Analytics -->
+<script id="google-analytics-script">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-29716941-6', 'auto', {'name': 'HatenaBlogTracker', 'sampleRate': 1});
+  ga('HatenaBlogTracker.require', 'displayfeatures');
+  ga('HatenaBlogTracker.send', 'pageview');
+  ga('create', 'UA-29716941-17', 'auto', {'name': 'HatenaBlogSeparatedTracker', 'sampleRate': 10});
+  ga('HatenaBlogSeparatedTracker.require', 'displayfeatures');
+  ga('HatenaBlogSeparatedTracker.send', 'pageview');
+
+    
+      ga('create', 'UA-28477961-1', 'auto', {'name': 'HatenaBlogUserTracker'});
+      ga('HatenaBlogUserTracker.require', 'displayfeatures');
+      ga('HatenaBlogUserTracker.send', 'pageview');
+    
+  
+  ga('create', 'UA-7855606-1', 'auto', {'name': 'HatenaGlobalTracker', 'sampleRate': 1});
+  ga('HatenaGlobalTracker.require', 'displayfeatures');
+  ga('HatenaGlobalTracker.send', 'pageview');
+</script>
+<!-- End Google Universal Analytics -->
+
+    
+    <div id="header-container">
+     <div id="sp-suggest" style="display: none;"><a id="sp-suggest-link" href="#">スマートフォン用の表示で見る</a></div>
+    </div>
+
+    <!-- ここから -->
+
+    <div class="quote-box">
+      <div class="tooltip-quote tooltip-quote-star">
+        <i class="blogicon-star" title="引用スターをつける"></i>
+      </div>
+      <div class="tooltip-quote tooltip-quote-stock">
+        <i class="blogicon-quote" title="引用をストック"></i>
+      </div>
+    </div>
+
+    <div class="message-box" id="quote-star-message-box" style="display: none; position: absolute;">
+      スターをつけました
+    </div>
+
+    <div class="quote-stock-panel" id="quote-stock-message-box" style="position: absolute; z-index: 3000">
+      <div class="message-box" id="quote-stock-succeeded-message" style="display: none">
+        <p>引用をストックしました</p>
+        <button class="btn btn-primary" id="quote-stock-show-editor-button" data-track-name="curation-quote-edit-button">ストック一覧を見る</button>
+        <button class="btn quote-stock-close-message-button">閉じる</button>
+      </div>
+
+      <div class="message-box" id="quote-login-required-message" style="display: none">
+        <p>引用するにはまずログインしてください</p>
+        <button class="btn btn-primary" id="quote-login-button">ログイン</button>
+        <button class="btn quote-stock-close-message-button">閉じる</button>
+      </div>
+
+      <div class="error-box" id="quote-stock-failed-message" style="display: none">
+        <p>引用をストックできませんでした。再度お試しください</p>
+        <button class="btn quote-stock-close-message-button">閉じる</button>
+      </div>
+
+      <div class="error-box" id="unstockable-quote-message-box" style="display: none; position: absolute; z-index: 3000;">
+        <p>限定公開記事のため引用できません。</p>
+      </div>
+    </div>
+
+
+    <!-- ここまで -->
+
+    <script type="x-underscore-template" id="js-requote-button-template">
+      <div class="requote-button js-requote-button">
+        <button class="requote-button-btn tipsy-top" title="引用する"><i class="blogicon-quote"></i></button>
+      </div>
+    </script>
+
+    <div id="globalheader-container" >
+  <iframe id="globalheader" height="37" frameborder="0" allowTransparency="true"></iframe>
+</div>
+
+
+    
+    <div id="hidden-subscribe-button">
+      <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box"
+  
+  >
+
+  <a href="#" class="hatena-follow-button js-hatena-follow-button">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once>
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">
+    </span>
+  </div>
+</div>
+
+    </div>
+
+    <div id="container">
+      <div id="container-inner">
+        <header id="blog-title" data-brand="hatenablog">
+  <div id="blog-title-inner" >
+    <div id="blog-title-content">
+      <h1 id="title"><a href="http://posaune.hatenablog.com/">亀岡的プログラマ日記</a></h1>
+      
+        <h2 id="blog-description">京都のベッドタウン、亀岡よりだらだらとお送りいたします。</h2>
+      
+    </div>
+  </div>
+</header>
+
+        
+        
+        
+
+
+
+<div id="content" class="hfeed"
+  
+  >
+  <div id="content-inner">
+    <div id="wrapper">
+      <div id="main">
+        <div id="main-inner">
+          
+            
+            <!-- google_ad_section_start -->
+            <!-- rakuten_ad_target_begin -->
+            
+              
+                <article class="entry hentry js-entry-article date-first autopagerize_page_element chars-4000 words-100 mode-hatena entry-odd" id="entry-12704591929883949794" data-keyword-campaign="" data-uuid="12704591929883949794">
+  <div class="entry-inner">
+    <header class="entry-header">
+      <div class="entry-date date first">
+        <a href="http://posaune.hatenablog.com/entries/2011/12/03" rel="nofollow">
+          <time pubdate datetime="2011-12-02T15:55:53Z" title="2011-12-02T15:55:53Z">
+            <span class="date-year">2011</span><span class="hyphen">-</span><span class="date-month">12</span><span class="hyphen">-</span><span class="date-day">03</span>
+          </time>
+        </a>
+      </div>
+      <h1 class="entry-title">
+        <a href="http://posaune.hatenablog.com/entry/20111203/1322927753" class="entry-title-link bookmark">Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編）</a>
+      </h1>
+      
+      
+        <div class="entry-categories categories">
+          
+          <a href="http://posaune.hatenablog.com/archive/category/WPF">WPF</a>
+          
+          <a href="http://posaune.hatenablog.com/archive/category/C%23">C#</a>
+          
+          <a href="http://posaune.hatenablog.com/archive/category/Livet">Livet</a>
+          
+        </div>
+      
+      
+
+      
+    </header>
+    <div class="entry-content">
+
+      
+        <p>さて、前回（<a href="http://d.hatena.ne.jp/posaunehm/20111201/1322750644">d:id:posaunehm:20111201:1322750644</a>）はさっくりとLivetの概要だけ説明しましたので、ここでLivetの機能を具体的にチェックしてみましょう。・・・といってもLivetはそこそこ大きなライブラリーです（<a href="http://compositewpf.codeplex.com/">Prism</a>なんかに比べるとかなりすっきりとはしていますが・・・。<br />
+というわけで、<a href="https://bitbucket.org/ugaya40/livet/downloads">&#x30C0;&#x30A6;&#x30F3;&#x30ED;&#x30FC;&#x30C9;&#x30DA;&#x30FC;&#x30B8;</a>に付属しているLivetのサンプルプロジェクトを読みといてみて、そこから主要な機能を理解しておきたいと思います。</p><br />
+<p>まず、プロジェクトの構造はこんな感じ。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203171410" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171410.jpg" alt="f:id:posaunehm:20111203171410j:image" title="f:id:posaunehm:20111203171410j:image" class="hatena-fotolife"></a></p><br />
+<p>View、ViewModel、Modelがそれぞれ2つずつとなっています。</p><p>では、起動してみましょう。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203171412" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171412.jpg" alt="f:id:posaunehm:20111203171412j:image" title="f:id:posaunehm:20111203171412j:image" class="hatena-fotolife"></a></p><br />
+<p>とまあこんな感じの外観をしています。追加・削除・終了ボタンと、メンバー一覧を表示するリストボックスからなっています。リストボックス内に<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C1%A5%A7%A5%C3%A5%AF%A5%DC%A5%C3%A5%AF%A5%B9">チェックボックス</a>やボタンが簡単に入れられるのは、最早<a class="keyword" href="http://d.hatena.ne.jp/keyword/WPF">WPF</a>の常識ですよね。</p><p>では実際にメンバーの追加を行なってみましょう。追加ボタンをポチッとな。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203171413" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171413.jpg" alt="f:id:posaunehm:20111203171413j:image" title="f:id:posaunehm:20111203171413j:image" class="hatena-fotolife"></a></p><br />
+<p>モーダルダイアログが現れました。ここで色々編集して登録を行うわけですね。ちなみに、日付ダイアログにはちゃんとエラー通知の仕組みが施してあります。このあたりは教科書的な<a class="keyword" href="http://d.hatena.ne.jp/keyword/WPF">WPF</a>の組み方がしてあり、非常に良いサンプルです。<br />
+編集画面も、上と同じ画面が立ち上がり、今度はリストにあるものが書き換わります。</p><br />
+<p>次に削除を見てみましょう。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%C1%A5%A7%A5%C3%A5%AF%A5%DC%A5%C3%A5%AF%A5%B9">チェックボックス</a>をポチポチやると削除ボタンがEnableになるので、削除ボタンをポチッとな。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203171414" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171414.jpg" alt="f:id:posaunehm:20111203171414j:image" title="f:id:posaunehm:20111203171414j:image" class="hatena-fotolife"></a></p><br />
+<p>おっと、メッセージボックスで確認してくれますね。OKで、削除です。</p><br />
+<p>あとは終了ボタンで、これは見たまんま、プログラムを終了します。これはメッセージボックス等はなし。</p><br />
+<p>さて、ざっと見ると普通のアプリです。ですが、MVVM的には実装で悩む所が入っています。こんなごくごく普通のアプリの中に実装の悩みの種が入ってしまうというのがMVVMの痛いところなのです。<br />
+まず困るところは、「モーダルダイアログの表示」や「メッセージボックスの表示」、「アプリケーションの終了」といったView依存の処理がボタンクリック＝コマンド通知で実行される、というところです。<br />
+コマンド通知で実行されるということは処理本体はViewModelにあります。ですがViewModelからViewは逆方向の参照ですし直接いじるのはキモチワルイです（コンストラクタで子に親を渡してインターフェース経由でごにょごにょするような、<span class="deco" style="font-weight:bold;">「親のすねかじり」モデル</span>になってしまいます）。MessageBoxくらいSystem.Windowsに参照持てばViewModelから呼び出しできてしまいますが、やっぱり責務の切り分けからすると若干の罪悪感を感じます。</p><br />
+<p>それでは、Livetはどうなってますかいね。とりあえず、呼び出されるMainViewのコードビハインドを見てみましょう。</p><p></p>
+<pre class="code lang-cs" data-lang="cs" data-unlink><span class="synType">namespace</span> LivetSampleProject.Views
+{
+    <span class="synComment">/// </span><span class="synIdentifier">&lt;</span><span class="synStatement">summary</span><span class="synIdentifier">&gt;</span>
+    <span class="synComment">/// MainWindow.<a class="keyword" href="http://d.hatena.ne.jp/keyword/xaml">xaml</a> の相互作用ロジック</span>
+    <span class="synComment">/// </span><span class="synIdentifier">&lt;/</span><span class="synStatement">summary</span><span class="synIdentifier">&gt;</span>
+    <span class="synType">public</span> <span class="synStatement">partial</span> <span class="synType">class</span> MainWindow : Window
+    {
+        <span class="synType">public</span> MainWindow()
+        {
+            InitializeComponent();
+        }
+    }
+}
+</pre><p><br />
+はい、見事にコンストラクタのみのビハインドコードレスなパターンになってます。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A4%D5%A4%C4%A4%AF%A4%B7%A4%A4">ふつくしい</a>・・・。では呼び出し側は何をしているのかというと・・・</p><p></p>
+<pre class="code lang-cs" data-lang="cs" data-unlink>        <span class="synType">private</span> <span class="synType">void</span> EditNew()
+        {
+            <span class="synComment">//Viewに画面遷移用メッセージを送信しています。</span>
+            <span class="synComment">//Viewは対応するメッセージキーを持つInteractionTransitionMessageTriggerでこのメッセージを受信します。</span>
+            Messenger.Raise(<span class="synStatement">new</span> TransitionMessage(<span class="synStatement">new</span> MemberViewModel(<span class="synStatement">new</span> Member(_model),<span class="synStatement">this</span>), <span class="synConstant">&quot;Transition&quot;</span>));
+        }
+</pre><p><br />
+はい、出てきました。これがかの有名な<span class="deco" style="font-weight:bold;">Messenger</span>ですね。所謂メッセンジャーパターンをサポートしているわけです。メッセンジャーパターンについては、<a href="http://d.hatena.ne.jp/griefworker/20110218/mvvm_messenger">d:id:griefworker:20110218:mvvm_messenger</a> とかは必読です。</p><br />
+<p>もう少し詳しく見てみましょう。<br />
+コード中にあるMessengerというのはクラスの<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>プロパティではありません。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203171415" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203171415.jpg" alt="f:id:posaunehm:20111203171415j:image" title="f:id:posaunehm:20111203171415j:image" class="hatena-fotolife"></a></p><br />
+<p>ご覧のように、<span class="deco" style="font-weight:bold;">ViewModel基本クラスの<del>静的</del>メンバー</span>となっています。（2011/12/04：修正）</p><br />
+<p>ん？<span class="deco" style="font-weight:bold;">ViewModel基本クラス？</span></p><br />
+<p>そう、LivetにはViewModel基本クラスが実装されています。（まあこれは誰もが最初にMVVMライブラリを作ってやることではありますが）<br />
+なのでViewModelの実装は例外なくこんな感じになります。</p><p></p>
+<pre class="code lang-cs" data-lang="cs" data-unlink>    <span class="synType">public</span> <span class="synType">class</span> MainWindowViewModel : ViewModel
+    {
+</pre><p><br />
+ViewModel基本クラスの機能について詳細はちょっと後に回して、Messenger機構に限定して解説を進めます。<br />
+<del>ViewModel基本クラスの静的プロパティとして定義されている、ということは、全てのViewModelが同じ一つのMessengerを参照していることになりますね。普通Observerパターンなどで通知機構を作るときには、通知元をコレクションに登録してどうだこうだ・・・ということをやりますが、これでも同等のことが実現できてしまいます。（もちろんやり過ぎると<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%B0%A5%ED%A1%BC%A5%D0%A5%EB%CA%D1%BF%F4">グローバル変数</a>とおなじになっちゃうのでそれはそれでNGです。<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%D5%A5%EC%A1%BC%A5%E0%A5%EF%A1%BC%A5%AF">フレームワーク</a>という形で提供されているのがありがたいですよね。）</del></p>
+
+    <blockquote>
+        
+<div class="section">
+    <h5>ご本人からの指摘により修正・追記：2011/12/04</h5>
+    <p>勘違いしてました・・・。静的じゃないです。<br />
+<a href="http://f.hatena.ne.jp/posaunehm/20111204011132" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111204/20111204011132.jpg" alt="f:id:posaunehm:20111204011132j:image" title="f:id:posaunehm:20111204011132j:image" class="hatena-fotolife"></a><br />
+<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%E1%A5%BF%A5%C7%A1%BC%A5%BF">メタデータ</a>ビューでもわかるように、どう見てもViewModel毎です。本当に(ry<br />
+しかしだからといって話は全然変わらないのが実装の妙なわけで。結局MessengerがViewModel毎で全体として複数になろうとも、こちらとしては通知機構の登録やらを意識しなくてもいいのは変わりません。何も考えずに親クラスのMessenger<a class="keyword" href="http://d.hatena.ne.jp/keyword/%A5%A4%A5%F3%A5%B9%A5%BF%A5%F3%A5%B9">インスタンス</a>を呼ぶだけで、手軽にメッセンジャー機構は実装できます。</p>
+
+</div>
+    </blockquote>
+<p>なるほど、これでViewModel側の通知を管理する方法はなんとなく理解できます。では通知の中身はどうなっているでしょう。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203231422" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203231422.jpg" alt="f:id:posaunehm:20111203231422j:image" title="f:id:posaunehm:20111203231422j:image" class="hatena-fotolife"></a></p><br />
+<p>これは通知を発火するに過ぎないわけですね。秘密は中のメッセージ自体に有りそうです。ちなみに「同期」と明示するからには「非同期」もあります。</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203231424" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203231424.jpg" alt="f:id:posaunehm:20111203231424j:image" title="f:id:posaunehm:20111203231424j:image" class="hatena-fotolife"></a></p><br />
+<p>まだまだ同期は追加のコードが必要なので（早く来い来いwait-async!）、メソッドレベルで切り分けられるって有難い！</p><p>ではメッセージ本体はというと、、、</p><br />
+<p><a href="http://f.hatena.ne.jp/posaunehm/20111203231423" class="hatena-fotolife"><img src="http://cdn-ak.f.st-hatena.com/images/fotolife/p/posaunehm/20111203/20111203231423.jpg" alt="f:id:posaunehm:20111203231423j:image" title="f:id:posaunehm:20111203231423j:image" class="hatena-fotolife"></a></p><br />
+<p>TransitionMessageという方のクラスにViewModelを渡しています。それから、stringkeyというパラメータで文字列型のキーを渡しているようですね。ここから察するに、View側で何をするかは<span class="deco" style="font-weight:bold;">メッセージクラスの種別とその文字列キー</span>が深く関わっていそうです。</p><br />
+<p>それではView側の実装を探してみましょう。といってもコードビハインドに無いわけですから、あるとすれば当然<a class="keyword" href="http://d.hatena.ne.jp/keyword/XAML">XAML</a>側のハズ。そうすると、有ります有ります。</p><p></p>
+<pre class="code lang-xml" data-lang="xml" data-unlink>        <span class="synIdentifier">&lt;</span><span class="synSpecial">l</span><span class="synComment">:</span><span class="synIdentifier">InteractionMessageTrigger </span><span class="synType">MessageKey</span>=<span class="synConstant">&quot;Transition&quot;</span><span class="synIdentifier"> </span><span class="synType">Messenger</span>=<span class="synConstant">&quot;{Binding Messenger}&quot;</span><span class="synIdentifier">&gt;</span>
+            <span class="synIdentifier">&lt;</span><span class="synSpecial">l</span><span class="synComment">:</span><span class="synIdentifier">TransitionInteractionMessageAction </span><span class="synType">WindowType</span>=<span class="synConstant">&quot;{x:Type v:DetailWindow}&quot;</span><span class="synIdentifier"> </span><span class="synType">Mode</span>=<span class="synConstant">&quot;Modal&quot;</span><span class="synIdentifier">/&gt;</span>
+        <span class="synIdentifier">&lt;/</span><span class="synSpecial">l</span><span class="synComment">:</span><span class="synIdentifier">InteractionMessageTrigger&gt;</span>
+</pre><p><br />
+InteractionMessageTriggerというトリガで、まずViewModel側で受けたメッセージを受け取り、さらにMessageKeyによって文字列フィルタリングをしているのが分かります。さらにその中にTransitionInteractionMessageActionというビヘイビアが定義してあり、指定されたウィンドウ（ここではDetailWindow）をモーダルで出す、というような事が記述されていることがわかりますね。つまり、<span class="deco" style="font-weight:bold;">ViewModel側で通知された変更は、コードビハインドを全く介さず<a class="keyword" href="http://d.hatena.ne.jp/keyword/XAML">XAML</a>側で受信からそれに対するアクションまで定義できているわけです。</span></p><br />
+<br />
+<p>えらく長くなってしまいましたので、この辺で。次は残る2つの通知、メッセージボックスとウィンドウクローズがどう扱われているかを確認してみましょう。実はこれら2つは今日説明したメッセージとはまた違う性質を持つのが、Livetの奥深いところです。</p>
+
+      
+    </div>
+    <footer class="entry-footer">
+      <p class="entry-footer-section">
+        <span class="author vcard"><span class="fn" data-load-nickname="1" data-user-name="posaunehm">posaunehm</span></span>
+        <span class="entry-footer-time"><a href="http://posaune.hatenablog.com/entry/20111203/1322927753"><time data-relative datetime="2011-12-02T15:55:53Z" title="2011-12-02T15:55:53Z" pubdate class="updated">2011-12-03 00:55</time></a></span>
+      </p>
+
+      
+        <div class="hatena-star-container">
+        </div>
+        <div class="hatena-star-metadata" style="display: none">
+          <a class="hatena-star-permalink" href="http://posaune.hatenablog.com/entry/20111203/1322927753">Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編）</a>
+        </div>
+      
+
+      
+<div class="social-buttons">
+  
+  
+    <div class="social-button-item">
+      <a href="http://b.hatena.ne.jp/entry/http://posaune.hatenablog.com/entry/20111203/1322927753" class="hatena-bookmark-button" data-hatena-bookmark-layout="vertical-balloon" data-hatena-bookmark-lang="ja" title="この記事をはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only.gif" alt="この記事をはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <div class="fb-share-button" data-layout="box_count" data-href="http://posaune.hatenablog.com/entry/20111203/1322927753"></div>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <a href="https://twitter.com/search?q=http%3A%2F%2Fposaune.hatenablog.com%2Fentry%2F20111203%2F1322927753" class="social-button-twitter-balloon" target="_blank">
+        <span class="social-button-twitter-balloon-list">list</span>
+        <i class="social-button-twitter-balloon-arrow-border"></i>
+        <u class="social-button-twitter-balloon-arrow"></u>
+      </a>
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://posaune.hatenablog.com/entry/20111203/1322927753" data-count="vertical" data-text="Livetを使ってすっきりWPFアプリを作る ②サンプルプロジェクトからLivetの機能を理解する（メッセージ基本編） - 亀岡的プログラマ日記" data-lang="ja">Tweet</a>
+    </div>
+  
+  
+    <div class="social-button-item">
+      <div class="g-plusone" data-size="tall" data-href="http://posaune.hatenablog.com/entry/20111203/1322927753"></div>
+    </div>
+  
+  
+  
+  
+</div>
+
+
+      
+        
+          
+          <div class="google-afc-image test-google-rectangle-ads blog_user_a">
+            
+            
+              <script>
+  var hatenadfp = hatenadfp || {};
+  hatenadfp.adUnits = hatenadfp.adUnits || [];
+  hatenadfp.adUnits.push(
+    
+      { unitName: 'blog_user', size: [[300, 250], [336, 280]], divId: 'google_afc_user_container_0', allowContentMatch: true }
+    
+  );
+  hatenadfp.isNGContent = false;
+  
+</script>
+
+              <div id="google_afc_user_container_0" class="google_afc_blocklink2_5 google_afc_boder"></div>
+              
+                <a href="http://blog.hatena.ne.jp/guide/pro" class="open-pro-modal" data-guide-pro-modal-ad-url="http://hatenablog.com/guide/pro/modal/ad">広告を非表示にする</a>
+              
+              
+            
+          </div>
+        
+      
+
+      <div class="customized-footer">
+
+        
+
+          
+
+          
+
+          
+        
+      </div>
+
+      <div class="comment-box">
+        
+        <ul class="comment">
+          
+        </ul>
+        
+          <a class="leave-comment-title">コメントを書く</a>
+        
+      </div>
+    </footer>
+  </div>
+</article>
+
+                
+
+                
+                  
+                  
+                  <div class="permalink pager">
+                    
+                      
+                      <span class="pager-prev">
+                        <a href="http://posaune.hatenablog.com/entry/20111203/1322930613" rel="prev">
+                          <span class="pager-arrow">≪ </span>
+                          第三回アジャイルサムライ読書会in京都 開…
+                        </a>
+                      </span>
+                    
+                    
+                      
+                      <span class="pager-next">
+                        <a href="http://posaune.hatenablog.com/entry/20111201/1322750644" rel="next">
+                          Livetを使ってすっきりWPFアプリを作る ① …
+                          <span class="pager-arrow"> ≫</span>
+                        </a>
+                      </span>
+                    
+                  </div>
+                
+
+              
+            
+            <!-- rakuten_ad_target_end -->
+            <!-- google_ad_section_end -->
+
+            
+          
+        </div>
+      </div>
+
+      
+      <aside id="box1">
+        <div id="box1-inner">
+        </div>
+      </aside>
+
+    </div><!-- #wrapper -->
+
+    <aside id="box2">
+  <div id="box2-inner">
+    
+      
+
+<div class="hatena-module hatena-module-profile">
+  <div class="hatena-module-title">
+    プロフィール
+  </div>
+  <div class="hatena-module-body">
+    
+    <a href="http://posaune.hatenablog.com/about" class="profile-icon-link">
+      <img src="http://cdn1.www.st-hatena.com/users/po/posaunehm/profile.gif"
+      alt="id:posaunehm" class="profile-icon" />
+    </a>
+    
+
+    
+    <span class="id">
+      <a href="http://posaune.hatenablog.com/about" class="hatena-id-link"><span data-load-nickname="1" data-user-name="posaunehm">id:posaunehm</span></a>
+      
+  
+    
+    
+  
+
+
+    </span>
+    
+
+    
+    <div class="profile-description">
+      <p>京都のベッドタウン、亀岡よりだらだらとお送りいたします。</p>
+
+    </div>
+    
+
+    
+      <div class="hatena-follow-button-box btn-subscribe js-hatena-follow-button-box"
+  
+  >
+
+  <a href="#" class="hatena-follow-button js-hatena-follow-button">
+    <span class="subscribing">
+      <span class="foreground">読者です</span>
+      <span class="background">読者をやめる</span>
+    </span>
+    <span class="unsubscribing" data-track-name="profile-widget-subscribe-button" data-track-once>
+      <span class="foreground">読者になる</span>
+      <span class="background">読者になる</span>
+    </span>
+  </a>
+  <div class="subscription-count-box js-subscription-count-box">
+    <i></i>
+    <u></u>
+    <span class="subscription-count js-subscription-count">
+    </span>
+  </div>
+</div>
+
+    
+
+    
+
+    
+
+    
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-search-box">
+  <div class="hatena-module-title">
+    検索
+  </div>
+  <div class="hatena-module-body">
+    <form class="search-form" role="search" action="http://posaune.hatenablog.com/search" method="get">
+      <input type="text" name="q" class="search-module-input" value="" placeholder="ブログ内検索" required>
+      <input type="submit" value="検索" class="search-module-button" />
+    </form>
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-links">
+  <div class="hatena-module-title">
+    リンク
+  </div>
+  <div class="hatena-module-body">
+    <ul class="hatena-urllist">
+      
+        <li>
+          <a href="http://blog.hatena.ne.jp/help">ヘルプ</a>
+        </li>
+      
+        <li>
+          <a href="http://hatenablog.com/">はてなブログ</a>
+        </li>
+      
+        <li>
+          <a href="http://staff.hatenablog.com/">お知らせ</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+    
+      <div class="hatena-module hatena-module-recent-entries ">
+  <div class="hatena-module-title">
+    <a href="http://posaune.hatenablog.com/archive">
+      最新記事
+    </a>
+  </div>
+  <div class="hatena-module-body">
+    <ul class="recent-entries hatena-urllist ">
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+        
+        <a href="http://posaune.hatenablog.com/entry/2016/01/03/115118" class="urllist-title-link recent-entries-title-link          urllist-title recent-entries-title        ">2016年、今年もよろしくおねがいしまーす！        </a>
+        
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+        
+        <a href="http://posaune.hatenablog.com/entry/2015/12/07/001030" class="urllist-title-link recent-entries-title-link          urllist-title recent-entries-title        ">大きすぎるDiff、縮まったDiff、縮まないDiff        </a>
+        
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+        
+        <a href="http://posaune.hatenablog.com/entry/2015/11/22/010030" class="urllist-title-link recent-entries-title-link          urllist-title recent-entries-title        ">僕にとってMaybe / Nullable / Optional が、どうしてもしっくりこないわけ。        </a>
+        
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+        
+        <a href="http://posaune.hatenablog.com/entry/2015/09/20/213941" class="urllist-title-link recent-entries-title-link          urllist-title recent-entries-title        ">恐れ多くもDDDの話をしてきたのでした #DevKan        </a>
+        
+        
+
+              </div>
+    </li>
+  
+    
+    <li class="urllist-item recent-entries-item">
+      <div class="urllist-item-inner recent-entries-item-inner">
+        
+        
+        <a href="http://posaune.hatenablog.com/entry/2015/07/30/011524" class="urllist-title-link recent-entries-title-link          urllist-title recent-entries-title        ">最近の @Posaune        </a>
+        
+        
+
+              </div>
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+    
+      
+<div class="hatena-module hatena-module-html">
+  <div class="hatena-module-body">
+    <script language="javascript" type="text/javascript" src="http://b.hatena.ne.jp/js/widget.js" charset="utf-8"></script>
+<script language="javascript" type="text/javascript">
+Hatena.BookmarkWidget.url   = "http://posaune.hatenablog.com/";
+Hatena.BookmarkWidget.title = "エントリー";
+Hatena.BookmarkWidget.sort  = "hot";
+Hatena.BookmarkWidget.width = 0;
+Hatena.BookmarkWidget.num   = 10;
+Hatena.BookmarkWidget.theme = "default";
+Hatena.BookmarkWidget.load();
+</script>
+  </div>
+</div>
+
+    
+      
+
+<div class="hatena-module hatena-module-archive" data-archive-type="default" data-archive-url="http://posaune.hatenablog.com/archive">
+  <div class="hatena-module-title">
+    <a href="http://posaune.hatenablog.com/archive">月別アーカイブ</a>
+  </div>
+  <div class="hatena-module-body">
+  </div>
+</div>
+
+    
+      
+<div class="hatena-module hatena-module-html">
+    <div class="hatena-module-title">MessageLeaf</div>
+  <div class="hatena-module-body">
+    <script type='text/javascript' src='https://www.messageleaf.jp/embed.js'></script><script>new MSGLF({ titleBgColor: '#4B75B9', titleFontColor: '#FFFFFF', position: 'right' }).changeDesign();</script>
+  </div>
+</div>
+
+    
+    
+  </div>
+</aside>
+
+  </div>
+</div>
+
+
+
+
+  <script type="text/javascript" src="http://b.hatena.ne.jp/js/hatena_dfp2.js"></script>
+
+
+
+        
+      </div>
+    </div>
+
+    
+      <footer id="footer" data-brand="hatenablog">
+  <div id="footer-inner">
+    <address>
+      
+      <a href="http://posaune.hatenablog.com/about"><img src="http://cdn1.www.st-hatena.com/users/po/posaunehm/profile.gif" width="16" height="16" alt=""/>
+        <span data-load-nickname="1" data-user-name="posaunehm">posaunehm</span>
+      </a>
+    </address>
+    <p class="services">Powered by <a href="http://hatenablog.com/">Hatena Blog</a></p>
+  </div>
+</footer>
+
+    
+
+    
+
+    
+      <script src="https://s.hatena.ne.jp/js/HatenaStar.js"></script>
+    
+
+    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {"parsetags": "explicit"}
+</script>
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+  <script type="text/javascript" src="http://cdn7.www.st-hatena.com/js/react/0.13.3/react-with-addons.min.js"></script>
+
+
+<script type="text/javascript" src="http://cdn7.www.st-hatena.com/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://cdn7.www.st-hatena.com/js/jquery/jquery-ui.1.10.0.custom.min.js"></script>
+<script type="text/javascript" src="http://cdn7.www.st-hatena.com/js/jquery/jquery.flot.0.8.3.js"></script>
+<script type="text/javascript" src="http://cdn7.www.st-hatena.com/js/jquery/jquery.flot.time.0.8.3.js"></script>
+
+
+
+<script id="hatenablog-js" data-env="production"
+  type="text/javascript" src="https://blog.st-hatena.com/js/hatenablog.js?version=cf1abe069c516f924b57b76f65e05e71"></script>
+<script type="text/javascript" src="https://blog.st-hatena.com/js/texts-ja.js?version=cf1abe069c516f924b57b76f65e05e71"></script>
+
+
+  <script type="text/javascript">Hatena.Diary.GlobalHeader.init()</script>
+
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
+
+
+
+    
+      <div id="fb-root"></div>
+      <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&appId=719729204785177&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));</script>
+    
+
+    
+       
+
+
+    
+
+  </body>
+</html>
+
