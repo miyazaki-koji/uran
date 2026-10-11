@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+<title>ソースコードの装飾表示方法　SyntaxHighlighter</title>
+<meta name="description" content="ソースコードをウェブサイト上に画像やエディタの様に再現。HTML,CSS,JS,Perl,PHPなどの各コードソース。別窓ソースビュー・印刷・コピーも出来る SyntaxHighlighter">
+<meta name="keywords" content="ソースコード,SyntaxHighlighter">
+<meta http-equiv="Content-Style-Type" content="text/css"><meta http-equiv="Content-Script-Type" content="text/javascript">
+<link rel="start" href="http://www.netyasun.com/" title="ホームページ 作成 運営">
+<link rel="stylesheet" href="../css.css" type="text/css"><style type="text/css"><!-- ol > li{ padding-top: 1em; } #sh-manual li p:first-line{ font-size: 120%;}
+.config{ width: 26em; padding: 0.5em 1em; line-height: 1; color: black;} .config span{ color: silver;}
+select,option{font-size:120%; padding-left:0.5em; border:1px solid silver;} .table{ margin:10px 0 10px 20px;}
+.table td{ font-size:0.9em; color:gray;} .table th{ padding:10px; color: black;} ul#sh-option{ margin-left:20px; border-left:3px solid #6CE26C; }
+ul#sh-option li{ list-style: none; background: url(../img/serch.gif) no-repeat 0 0.8em; padding: 6px 0 6px 44px; font-size: 90%; }
+ul#sh-option li.alt2{ background-color:#F8F8F8;} ul#sh-option small{ color:maroon;} --></style>
+<script type="text/javascript" src="SyntaxHighlighter/scripts/shCore.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/scripts/shBrushXml.js"></script>
+<script  type="text/javascript" src="SyntaxHighlighter/scripts/shBrushJScript.js"></script>
+<script type="text/javascript" src="SyntaxHighlighter/scripts/sourceView.js"></script>
+<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shCore.css">
+<link type="text/css" rel="stylesheet" href="SyntaxHighlighter/styles/shThemeDefault.css" id="css-ch">
+	<script type="text/javascript"><!--
+	SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	SyntaxHighlighter.all();
+	// --></script>
+	<script type="text/javascript"><!--
+	function changesytle(cssfile) {
+	document.getElementById('css-ch').href = cssfile;
+	}
+	// --></script>
+</head>
+<body><div id="body1">
+<div class="section1">
+<p class="p1">HTML,CSS,JS,Perl,PHPなどの各ソースコードをWebサイト上に綺麗に再現。</p><p class="p2">NetyaSun</p>
+<h1><a href="http://www.netyasun.com/syntaxhighlighter/index.html">ソースコード表示</a>　<em><a href="http://www.netyasun.com/">ホームページ　作成、運営、管理ガイド</a></em></h1>
+</div>
+<hr>
+<div style="background: url(SyntaxHighlighter.jpg) no-repeat 100% 40%;">
+<h2>行番号や各行背景色で見やすい ソースコード ビュー ライブラリ　SyntaxHighlighter</h2>
+<p><em>エディタのようにWebサイト上に綺麗にソースコードを表示する方法。</em><br />
+ソースを書くプロ達や未来の開発者のための学びの場である<br />
+HTML,CSS,JS,Perl,PHPなどのマニュアル・解説サイトなどで、<br />
+PREソースコードを行頭番号付きでカッコよく表示するソース ビューア</p>
+<p class="zoom" style="padding:1em; line-height: 1.8;"><strong>SyntaxHighlighter</strong>　　<a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Download" target="_blank">SyntaxHighlighter:Download</a><br />
+ソース上にオンマウスで <img src="clipboard.gif" width="108" height="36" alt="表示する操作画像" class="vline"> の操作タブがソースの右上に表示されるようになった。<br />
+ソースを別窓ビュー表示したりクリップボードに保存や印刷も可能な優れものです。</p>
+</div>
+<noscript><p id="noscript">このツールは、JavaScriptが無効ではご利用出来ません。　<a href="http://www.netyasun.com/browser/javascript.html">JavaScript 有効 無効</a></p></noscript>
+<div class="sourceview">
+<pre class="brush: xhtml;">&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" /&gt;
+&lt;title&gt;ソースコードを綺麗に表示&lt;/title&gt;
+&lt;meta name="description" content="HTML,CSS,JS,Perl,PHPなどのソースコードをウェブで表示" /&gt;
+&lt;meta http-equiv="Content-Style-Type" content="text/css" /&gt;
+&lt;meta http-equiv="Content-Script-Type" content="text/javascript" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="styles/shCore.css" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css" /&gt;
+  &lt;script type="text/javascript" src="scripts/shCore.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript" src="scripts/shBrushXml.js"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+    SyntaxHighlighter.all();
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id="container"&gt;
+<!-- start! -->
+&lt;pre class="brush: xhtml;"&gt;
+ここにソースコードを記述する
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<h3 style="padding: 3em 0 0;">Webサイト上に綺麗にソースコードを表示する方法</h3>
+<ol id="sh-manual">
+<li><p><a href="http://alexgorbatchev.com/wiki/SyntaxHighlighter:Download" target="_blank">SyntaxHighlighter:Download</a><br />
+SyntaxHighlighterをダウンロード＆解凍<br />
+<small>このサイトでのバージョンは、version 2.1.364(October 15 2009)　　旧バージョンとかなり違う。</small></p>
+</li>
+<li><p>SyntaxHighlighter.zip 解凍後の中身</p>
+<ul style="background: url(zip.png) no-repeat 1em 0.6em; padding-left:240px;">
+<li>scripts　<small>（JSフォルダ）</small></li><li>src　<small>（JSフォルダ）</small></li><li>styles　<small>（CSSフォルダ）</small></li><li>LGPLv3.txt<small>　（LICENSE）</small></li><li>test.html　<small>（テスト表示用.HTML）</small></li></ul>
+</li>
+<li><p>ローカルフォルダ内へドラッグ&amp;ドロップ<br />
+このサイトの場合（file:///D:/netyasun.com/syntaxhighlighter/）</p>
+<pre class="config" style="background: #F5F5F5 url(../img/folder.gif) no-repeat 4px 4px;">
+  トップディレクトリ
+   <span>|
+   +-</span> index.html
+   <span>|
+   +-</span> /syntaxhighlighter/
+       <span>|
+       +--</span> /scripts/
+       <span>|
+       +--</span> /src/
+       <span>|
+       +--</span> /styles/
+       <span>|
+       +--</span> test.html
+</pre>
+</li>
+<li><p>test.htmlを参考に<br />
+新しい.htmlを制作し、test.htmlのHEAD内のCSSとJSの&lt;link,&lt;scriptをコピペ。<br />
+（新しい.htmlへのCSSとJSのパスを正確に指定する事。相対パスでOK ）
+</p>
+</li>
+<li><p>ソースコードを記述、文字コードも確認。<br />
+テスト的なソースコードをpre内に記述しブラウザで表示確認</p>
+<pre  class="config" style="margin: 0.2em 0 1em; width: 32em;"><code>&lt;pre class="brush: c-sharp;"&gt; Hello World &lt;/pre&gt;</code></pre>
+<div class="sourceview">
+<pre class="brush: html;">&lt;pre class="brush: c-sharp;"&gt; Hello World &lt;/pre&gt;</pre></div>
+</li>
+<li id="BRUSH-NAME"><p>Brush nameを選択<br />
+&lt;pre class="brush: c-sharp;"&gt;　&lt;/pre&gt; のclass名を<br />
+記述する言語形式に合わせBrush aliases名に変更。<br />
+Brush nameに合わせ、HEAD内の不要なJSの&lt;script &gt;を削除。再度ブラウザで表示確認。</p>
+<table class="table" summary="Brushの設定">
+<tr><th>Brush name</th><th>Brush aliases</th><th>File name</th></tr>
+<tr><td>ActionScript3</td><td>as3, actionscript3</td><td>shBrushAS3.js</td></tr>
+<tr><td>Bash/shell</td><td>bash, shell</td><td>shBrushBash.js</td></tr>
+<tr><td>ColdFusion</td><td>coldfusion</td><td>shBrushColdFusion.js</td></tr>
+<tr><td>C++</td><td>cpp, c</td><td>shBrushCpp.js</td></tr>
+<tr><td>C#</td><td>c-sharp,&nbsp;csharp</td><td>shBrushCSharp.js</td></tr>
+<tr><td>CSS</td><td>css</td><td>shBrushCss.js</td></tr>
+<tr><td>Delphi</td><td>delphi, pas, pascal</td><td>shBrushDelphi.js</td></tr>
+<tr><td>Diff</td><td>diff, patch</td><td>shBrushDiff.js</td></tr>
+<tr><td>Erlang</td><td>erlang</td><td>shBrushErlang.js</td></tr>
+<tr><td>Groovy</td><td>groovy</td><td>shBrushGroovy.js</td></tr>
+<tr><td>Java</td><td>java</td><td>shBrushJava.js</td></tr>
+<tr><td>JavaFX</td><td>jfx, javafx</td><td>shBrushJavaFX.js</td></tr>
+<tr><td>JavaScript</td><td>js, jscript, javascript</td><td>shBrushJScript.js</td></tr>
+<tr><td>Perl</td><td>perl, pl</td><td>shBrushPerl.js</td></tr>
+<tr><td>PHP</td><td>php</td><td>shBrushPhp.js</td></tr>
+<tr><td>Plain Text</td><td>plain, text</td><td>shBrushPlain.js</td></tr>
+<tr><td>PowerShell</td><td>ps, powershell</td><td>shBrushPowerShell.js</td></tr>
+<tr><td>Python</td><td>py, python</td><td>shBrushPython.js</td></tr>
+<tr><td>Ruby</td><td>rails, ror, ruby</td><td>shBrushRuby.js</td></tr>
+<tr><td>Scala</td><td>scala</td><td>shBrushScala.js</td></tr>
+<tr><td>SQL</td><td>sql</td><td>shBrushSql.js</td></tr>
+<tr><td>Visual Basic</td><td>vb, vbnet</td><td>shBrushVb.js</td></tr>
+<tr><td>XML</td><td>html, xhtml, xml, xslt</td><td>shBrushXml.js</td></tr>
+</table>
+</li>
+<li><p>CSS<br />syntaxhighlighterフォルダのstyles内から一致するファイルのCSSを変更し<br />
+自分好みのソースコード画面にカスタマイズする事も可能です。</p>
+<ul style="padding-left:80px; font-size: 16px; list-style: square;"><li>shThemeDefault.css</li><li>shThemeDjango.css</li><li>shThemeEclipse.css</li><li>shThemeEmacs.css</li><li>shThemeFadeToGrey.css</li><li>shThemeMidnight.css</li><li>shThemeRDark.css</li></ul>
+</li>
+<li>CSS表示確認<img src="../img/next-1.gif" width="60" height="10" alt="クリック"><select onchange="changesytle(value);">
+<option value="styles/shTheme-My.css">カスタマイズ</option>
+<option value="styles/shThemeDefault.css" selected>標準スタイル</option>
+<option value="styles/shThemeDjango.css">Django</option>
+<option value="styles/shThemeEclipse.css">Eclipse</option>
+<option value="styles/shThemeEmacs.css">Emacs</option>
+<option value="styles/shThemeFadeToGrey.css">FadeToGrey</option>
+<option value="styles/shThemeMidnight.css">Midnight</option>
+<option value="styles/shThemeRDark.css">RDark</option>
+<option value="styles/secret.css">スタイルなし</option>
+</select>
+<div class="sourceview" style="margin-left:-1em;">
+<pre class="brush: xhtml;highlight:[36,37,38];">&lt;?xml version="1.0" encoding="Shift_JIS"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja"&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS" /&gt;
+&lt;title&gt;ソースコードを綺麗に表示&lt;/title&gt;
+&lt;meta name="description" content="HTML,CSS,JS,Perl,PHPなどのソースコードをウェブで表示" /&gt;
+&lt;meta http-equiv="Content-Style-Type" content="text/css" /&gt;
+&lt;meta http-equiv="Content-Script-Type" content="text/javascript" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="styles/shCore.css" /&gt;
+&lt;link type="text/css" rel="stylesheet" href="styles/shThemeDefault.css" /&gt;
+&lt;script type="text/javascript" src="scripts/shCore.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushBash.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushCpp.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushCSharp.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushCss.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushDelphi.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushDiff.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushGroovy.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushJava.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushJScript.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushPhp.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushPlain.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushPython.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushRuby.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushScala.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushSql.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushVb.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="scripts/shBrushXml.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript"&gt;
+   SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+   SyntaxHighlighter.all();
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;pre class="brush: c-sharp;"&gt;
+ここにソースコードを記述する
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+<div class="sourceview" style="margin:2em 0 0 -1em;">
+<p>ソースの展開可能　<small>クリックでソースが展開</small></p>
+<pre class="brush: xhtml; collapse: true;">
+&lt;pre class="brush: xhtml; collapse: true;"&gt;
+ここにソースコードを記述する
+&lt;pre&gt;
+
+&lt;!-- これも使えます。 --&gt;
+&lt;script type="syntaxhighlighter" class="brush: html; collapse: true;"&gt;&lt;![CDATA[
+ここにソースコードを記述する
+]]&gt;&lt;/script&gt;
+</pre>
+</div>
+</li>
+<li><p>javascript 追加<br />
+<img src="clipboard.gif" alt="表示する操作画像" class="vline" width="108" height="36"> の操作タブを日本語化。（不要なauto-links仕様も解除）</p>
+<div class="sourceview" style="margin-left:-1em;">
+<pre class="brush: javascript;">
+SyntaxHighlighter.config.clipboardSwf = 'clipboard.swf';
+SyntaxHighlighter.config.strings.expandSource = 'ソース';
+SyntaxHighlighter.config.strings.viewSource = 'ソース表示';
+SyntaxHighlighter.config.strings.copyToClipboard = 'コピー　Clipboard';
+SyntaxHighlighter.config.strings.copyToClipboardConfirmation ='コピー完了';
+SyntaxHighlighter.config.strings.print = 'プリンタ';
+SyntaxHighlighter.config.strings.help = 'SyntaxHighlighter version 2.1.364';
+SyntaxHighlighter.all();
+SyntaxHighlighter.defaults['auto-links'] = false;
+</pre>
+</div>
+</li>
+<li><p>注意：オプション</p>
+<ul id="sh-option"><li class="alt2">面倒でもお約束の &lt; &amp; &gt; を &amp;lt; &amp;amp; &amp;gt; にエスケープしなければ、<br />
+&lt; DTD &gt;などそのままHTML認識されてしまいます・・・<br />
+　&lt;textarea&gt;の利用は？　version 2.での利用法は不明・・・</li>
+<li>IE6で崩れるのでハック・IE6バグ対策を忘れずに。</li>
+<li class="alt2">環境によってクリップボードに不具合。（Flash10）</li>
+<li><small>SyntaxHighlighter.config.bloggerMode = true;<br />
+SyntaxHighlighter.defaults['auto-links'] = false;<br />
+SyntaxHighlighter.defaults['gutter'] = false;<br />
+SyntaxHighlighter.defaults['smart-tabs'] = false;</small><br />
+のようにtrueかfalseの設定。jsで統一させるかpre毎にclass設定するか。</li>
+<li class="alt2"><small>auto-links: false;</small>　http://から始まるURL記述がアンカー対応になるのを回避。</li>
+<li><small>gutter:false;</small>　行頭番号無し設定。</li>
+<li class="alt2"><small>toolbar: false;</small>　ツールバー（タブ）無し。</li>
+<li><small>light:true;</small>　行頭番号もツールバーも無し。</li>
+<li class="alt2"><small>highlight:[1,2,3];</small>　指定した数値の行をハイライト（カンマ区切り）。</li>
+<li><small>collapse: true;</small>　ソース折りたたみ・展開</li>
+<li class="alt2"><small>first-line: 7;</small>　途中の行頭番号からの開始値。&lt;ol start="7"&gt;と同じ。</li>
+<li><small>tab-size: 4;</small>　tabインデントの幅サイズ設定。</li>
+<li class="alt2"><small>wrap-lines: false;</small>　改行無しでスクロール。<br />
+　overflow:auto;のwhite-space:nowrap;と同じ。</li>
+<li style="margin: 2em 0 0; background: none;">SyntaxHighlighter version 2.1.364 alexgorbatchev.com<br />
+http://alexgorbatchev.com/wiki/SyntaxHighlighter<br />
+http://alexgorbatchev.com/wiki/SyntaxHighlighter:Configuration</li>
+</ul>
+</li>
+<li style="padding: 60px 0 30px"><p>サーバにアップロード<br />
+HTMLファイルと各フォルダ（ scripts , src , styles ）をアップロード（制作）<br />
+必要なBrush aliases要素を<a href="#BRUSH-NAME" class="font3">Brush name</a>を参考に、syntaxhighlighterディレクトリ内の<br />
+scriptsディレクトリ内に必要なFile nameのJSファイルをアップロード。<br />
+同じく、stylesディレクトリ内に好みのデザインのCSSファイルをアップロード。</p>
+</li>
+</ol>
+
+<div style="padding: 40px 0 60px 20px; background: url(SyntaxHighlighter.jpg) no-repeat 100% 100%;">
+<h2>SyntaxHighlighter</h2>
+<p>やっぱりjavascript環境。一瞬の表示が少し遅い。<br />
+PREの各行を判断しol,liとbacgroundで実装していると思いきや、毎行table枠で固めた仕様。<br />
+また、ソースをコピーする場合、普通にソースをShiftキーやマウスでなぞってコピペすると、行頭記号なども一緒にペーストされてしまうので（ol仕様）、このSyntaxHighlighterのボタンや操作性が普及して欲しいところです。</p>
+<p>今後、shTheme*.cssで各有名エディタ仕様のデザインスキンや、<br />
+メモ帳の仕様やブラウザまで対応し、未知のHTML6頃には、<br />
+&lt;editor&gt;要素？とかでソースがデザインされると面白いかも。<br />
+※　Japanese仕様など今後の開発に期待します。</p>
+</div>
+<hr>
+<ul id="foot-nav">
+<li>このページは、<a href="http://www.netyasun.com/syntaxhighlighter/index.html">ソースコードの装飾表示方法</a></li>
+<li>TOPページは、<a href="http://www.netyasun.com/">ホームページ　作成、運営管理ガイド</a></li>
+</ul>
+<p class="rig min" style="margin-top: -2em;"><a href="source-escape.html">HTMLソースコード変換</a></p>
+<hr>
+<div class="section1 footer">
+	<p id="copy">Copyright &copy; NetyaSun All rights reserved.</p>
+	<p id="logo"><a href="http://www.netyasun.net/" title="ホームページ制作"><strong>格安　ホームページ制作</strong></a>
+	<img src="../img/netyasun1.gif" width="88" height="31" alt="ホームページ制作">
+	<img src="../img/W3C-HTML.gif" width="88" height="31" alt="HTML">
+	<img src="../img/W3C-CSS.gif" width="88" height="31" alt="CSS">
+	</p>
+</div>
+</div>
+<script type="text/javascript"><!--
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+// -->
+</script>
+<script type="text/javascript"><!--
+try {
+var pageTracker = _gat._getTracker("UA-11614225-1");
+pageTracker._trackPageview();
+} catch(err) {}
+// -->
+</script>
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+<head>
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|8-2.画面遷移の骨格～WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="画面遷移の骨格,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
+			</span>			
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     			<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 		</a>
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+	<!-- Start Menu -->   
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+		
+			<h3 class="title">8-2.画面遷移の骨格</h3>
+			<br />
+			<a  href="basic08.html" >戻る</a>
+			<br />
+
+
+			<h4>従来のWindowsフォームアプリケーションの画面遷移</h4>
+				<p>通常はボタンをクリックして画面遷移します。</p>
+			<br />
+			
+
+
+			<b>遷画面移元(親)</b>
+			&nbsp;<div id="source"><pre class="brush: csharp;">  // 親画面で子画面を開く時
+ private void button1_Click(object sender, EventArgs e)
+ {
+    Form F = new クラス名();  
+    F.Owner = this;
+    //F.ShowDialog(this);　ダイアログで開く時
+    F.Show();
+    F.Owner.Hide();
+  }</pre>
+			</div>
+			<br />
+			<b>遷移先(子画面)</b>
+			<div id="source"><pre class="brush: csharp;" > // 子画面を閉じて親画面を開く時
+ private void button2_Click(object sender, EventArgs e)
+ {
+   //this.Close();   終了する時
+   this.Owner.Show();
+   this.Close();
+ }</pre>
+			</div>
+			<br />
+				<p>
+				上記の例は、Windowsフォームアプリケーションでは、親画面でButtonをWクリックして、button1_Clickメソッドを自動作成させて、その内に画面遷移のコードを書きます。子画面では「閉じる」のButtonをWクリックして、button2_Clickメソッドを自動作成させて、その内に画面遷移のコードを書きます。つまりデザイン画面でButtonをWクリックすればbuttonX_Clickメソッドが自動作成されます。WPFでも同様にClickメソッドを自動作成させて、その内に処理のコードを書くという簡単な方法はあります。(後述のコードビハインドによるコーディング)</p>
+			<br />
+				<p>しかし、折角、WPFを勉強するならば、次から説明するMVVMを採用すべきです。MVVMは画面とコードをファイルで分離します。そのために、ちょっとコーディング量が多くなりますが慣れれば既に書いたコードをコピーするという方法をとれば面倒さも軽減します。</p>				
+			<a href="./download_files/LivetWPFApplicationBasic.lzh">ここのサンプルのダウンロード(LivetWPFApplicationBasic.lzh)</a>
+			<br />
+			<br />	
+			<h4>WPFのMVVMでの画面遷移</h4>	
+				<p>Buttonクリックによる画面遷移を実装するには、</p>
+				<p>XAMLでは、</p>
+				<p>&nbsp;&nbsp;&nbsp;①Buttonをクリックした時のトリガーの記述</p>
+				<p>&nbsp;&nbsp;&nbsp;②Buttonに画面遷移の処理を記述するCommandの記述</p>
+				<p>ViewModelでは、</p>
+				<p>&nbsp;&nbsp;&nbsp;③遷移元画面をタスクバーに残さない記述方法</p>
+				<p>&nbsp;&nbsp;&nbsp;④画面遷移の処理を記述するICommandと言うメソッドの記述</p>
+				<p>が必要となります。</p>	
+				<br/>	
+				
+
+
+				<p>例ainWiえば、Mndowの「Window2へ」ボタンを押してWindow2ヘ画面遷移する例です。<br />
+				Windows2が表示されても、下のタスクバーには、Window2のみが表示されて、MainWindowは表示されていません。<br />
+				又、Window2を表示してからMainWindowを隠すので、画面の途切れが発生しないのでちらつきは発生しません。<br />
+				</p>
+			<div id="top"><img src="./images/livet07_2_10.png" alt=""  border = "1" /></div>
+			<br />	
+			<div id="top"><img src="./images/livet07_2_20.png" alt=""  border = "1" /></div>			
+
+			<br />			
+				<p>MainWindowのXAMLは下記のようになります。<br />
+			12～14行は、ViewとViewModelの紐付けの設定です。。<br />
+			Interaction.Triggersは、<br />
+			21～22行は、「Initialize｣処理」を実行します。<br />
+			26～28行は、「Window2への画面遷移」を実行します。<br />
+			Interaction.Behaviorsは、<br />
+			33～36行は、「コントロールボックスの閉じるボタンの非使用化」を実行します。<br />
+			39～41行は、「「Window2への画面遷移」ボタンの実行します。<br />
+			43～45行は、「「Window2への画面遷移」ボタンの実行します。	<br />		
+			</p>
+			<br />
+			<div style="position: absolute; width: 100px; height: 100px; z-index: 1" id="layer1"></div>
+			<b>View</b>
+			<div id="source"><pre class="brush: html;highlight:[12,13,14,21,22,26,27,28,33,34,35,36,39,40,41,43,44,45];　"title="MainWindow.xaml"  style="width: 666px">
+&lt;Window x:Class="LivetWPFApplication100.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views"
+        xmlns:vm="clr-namespace:LivetWPFApplication100.ViewModels"        
+        xmlns:b="clr-namespace:LivetWPFApplication100.Behaviors"        
+        Title="MainWindow" Height="300" Width="450" 
+        WindowStartupLocation="CenterScreen"&gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:MainViewModel /&gt;
+    &lt;/Window.DataContext&gt;
+    
+    &lt;i:Interaction.Triggers&gt;
+        
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelの
+        　　　　　　　Initializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+            &lt;l:LivetCallMethodAction MethodTarget="{Binding}" MethodName=
+            　　　　"Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;
+        
+        &lt;l:InteractionMessageTrigger 
+            MessageKey="MessageKey2" Messenger="{Binding Messenger}"&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType="{x:Type v:Window2}" Mode="Modal"/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;i:Interaction.Behaviors&gt;
+        &lt;b:CloseButtonBehavior IsWindowCloseEnable=
+        　　　　"{Binding ElementName=CloseCheck, Path=IsChecked}"/&gt;
+    &lt;/i:Interaction.Behaviors&gt;
+
+    &lt;Grid&gt;
+        &lt;Button Command="{Binding GotoCommand2}"  Content="Window2へ" 
+                Height="32" HorizontalAlignment="Left" Margin="34,34,0,0" 
+                Name="button2" VerticalAlignment="Top" Width="147" /&gt;
+
+        &lt;Button Command="{Binding CloseCommand}" Content="終了" 
+                Height="32" HorizontalAlignment="Left" Margin="319,217,0,0" 
+                Name="button1" VerticalAlignment="Top" Width="97" /&gt;
+    &lt;/Grid&gt;
+
+&lt;/Window&gt;</pre>
+			</div>
+			<br/>
+				<p>MainWindow.xamlとMainViewModel.csの紐付けは、MainWindow.xamlのコードビハインドファイルであるMainWindow.xaml.csのコンストラクタに「<b>this.DataContext = new MainViewModel();</b>」とも記述出来ます。</p>
+
+			<br />			<b>コードビハインドによるViewとViewModelの紐付け</b>
+			<div id="source"><pre class="brush: csharp; highlight:[1,4];　"title="MainWindow.xaml.cs"  style="width: 666px">
+public MainWindow()
+{
+   InitializeComponent();
+   this.DataContext = new MainViewModel();
+}</pre>
+			</div>
+				<p>ZAMLのButton(39～41行)をクリックした時の処理(命令)はCommandと呼ばれています。このCommandはViewModelの「<b>GotoCommand2</b>」メソッドと紐付け(Binding)されています。</p>
+				<p>MainWindowのViewModelである<b>MainViewModel</b>は下記のようになります。</p>
+			<br />
+			<b>GotoCommand2(ViewModel)</b>
+			<div id="source"><pre class="brush: csharp;"title="MainViewModel.cs"  style="width: 666px">
+public ViewModelCommand GotoCommand2
+{
+   get { return new Livet.Commands.ViewModelCommand(Goto2); }
+}
+public void Goto2()
+{
+   Messenger.Raise(new TransitionMessage(new ViewModel2() { NeedHideOwner = true },
+   "MessageKey2"));
+}</pre>
+			</div>
+			<br />
+				<p>ZAMLのButton(43～45行)をクリックした時の処理(命令)は「<b>CloseCommand</b>」メソッドと紐付け(Binding)されています。</p>
+			<br />
+			<b>CloseCommand(ViewModel)</b>
+			<div id="source"><pre class="brush: csharp;"title="MainViewModel.cs"  style="width: 666px">
+private ViewModelCommand _CloseCommand;
+public ViewModelCommand CloseCommand
+{
+   get
+   {
+       if (_CloseCommand == null)
+       {
+          _CloseCommand = new ViewModelCommand(Close);
+       }
+       return _CloseCommand;
+   }
+}
+public void Close()
+{
+   var window = Application.Current.Windows.OfType&lt;Window&gt;().SingleOrDefault((w) =&gt; 
+   w.IsActive);
+}</pre>
+			</div>
+
+			<p>遷移先のWindow2のXAMLは下記のようになります。太字部分(LoadedやClosing)はMVVMパターンでは有名な Expression Blend SDK に含まれる System.Windows.Interactivity.dll のクラス
+(EventTrigger, InvokeAction, Interaction 等)を使用してWPFのコントロールのイベントとViewModel等で公開される ICommand を実装したコマンドプロパティをコードビハインドファイルやハンドラを使用せずにxaml上で関連付ける方法
+でSystem.Windows.Interactivity名前空間の EventTrigger クラスの EventName に コマンドと関連付けるイベントを設定し、 InvokeCommandAction によりコマンドとの関連づけを行っています。
+ListBoxでは、EventTriggerのEventNameとしては「MouseEnter」、「MouseLeave」、「SelectionChanged」などがあります。</p>
+<a href="http://www.pine4.net/Memo/Article/Archives/417">[WPF] コントロールの任意のイベントとコマンド xaml上で関連付ける
+</a>
+			<br />
+			<br />	
+			<b>View</b>
+			<div id="source"><pre class="brush: html;　"title="Window2.xaml"  style="width: 666px">	&lt;Window x:Class="LivetWPFApplication100.Views.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views" 
+        xmlns:vm="clr-namespace:LivetWPFApplication100.ViewModels" 
+        xmlns:b="clr-namespace:LivetWPFApplication100.Behaviors"        
+        Title="Window2" Height="300" Width="450" 
+        WindowStartupLocation="CenterScreen"&gt;
+    
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelの
+        Initializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+            &lt;l:LivetCallMethodAction MethodTarget="{Binding}" MethodName=
+            		"Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Loaded"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Loaded}" 
+                CommandParameter="{Binding Mode=OneTime,RelativeSource=
+                		{RelativeSource 
+                Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Closing"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Closing}"
+                CommandParameter="{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey="Close" Messenger=
+        		"{Binding Messenger}"&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;        
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;i:Interaction.Behaviors&gt;
+       &lt;b:CloseButtonBehavior IsWindowCloseEnable="{Binding ElementName=CloseCheck, 
+                Path=IsChecked}"/&gt;
+    &lt;/i:Interaction.Behaviors&gt;
+
+    &lt;Grid&gt;
+        &lt;Button Command="{Binding CloseCommand}" Content="閉じる" Height="32" 
+                HorizontalAlignment="Left" Margin="319,217,0,0" Name="button1" 
+                VerticalAlignment="Top" Width="97" /&gt;
+    &lt;/Grid&gt;
+    
+&lt;/Window&gt;
+</pre>
+			</div>
+
+			<br />			
+				<p>Window2のViewModelである<b>ViewModel2.cs</b>は下記のようになります。</p>
+			<br />
+			<b>ViewModel</b>
+			<div id="source"><pre class="brush: csharp;　"title="ViewModel2.cs"  style="width: 666px">using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//ICommand
+//using System.Windows.Input;
+
+using System.Windows;
+
+
+namespace LivetWPFApplication100.ViewModels
+{
+    class ViewModel2 : ViewModel
+    {
+        public ViewModel2()
+        {
+            var Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == 
+                				Visibility.Visible)
+                {
+                    w.Owner.Hide();
+                }
+            });
+
+            var Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+        }
+
+        public bool NeedHideOwner { get; set; }
+        //public ICommand Loaded { get; private set; }
+        //public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+            XCloseButtonManager.Disable();
+        }
+  
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().
+            					SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+    }
+}
+
+
+</pre>
+			</div>
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<!-- End floatbox -->
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">MVVM</a><br /> 
+		    	<a href="basic02.html">WPF</a><br />
+		    	<a href="basic03.html">XAML</a><br />
+		    	<a href="basic04.html">サンプル</a><br />
+		    	<a href="basic05.html">リソース</a><br />
+		    	<a href="basic06.html">ユーザーコントロール</a><br />
+				<a href="basic07.html">コントロールボックス</a><br />
+				<a href="basic08.html">画面遷移</a><br /> 
+				<a href="basic09.html">ログイン画面</a><br /> 
+				<a href="basic10.html">メインメニュー画面</a><br />
+				<a href="basic11.html">一覧表画面</a><br />
+				<a href="basic12.html">明細画面</a><br />
+				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+				
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

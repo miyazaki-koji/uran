@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Livetを使ったCSharpのWPF|トップページ～C#のWPFが開発できるようになるサイトです。</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="C#,WPF,Livet,LIVET,,入門,プログラミング," lang="ja" xml:lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" xml:lang="ja" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="./style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="./style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="./style_files/img/favicon.ico" />
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="./syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+
+<script type='text/javascript'>
+
+	<!-- google analytics -->
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48887342-7', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a href="index.html" accesskey="1">Livetを使ったCSharpのWPF</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったCSharpのWPFシステムの開発技能を身に付ける為の学習サイトです
+			</span>
+		</div>		
+		<div id="main" class="auto-style1" >			
+		<h3>Visual Studio Express Edition をユーザー登録せずに使う方法</h3>
+		<br />
+		<a href="http://inno-setup.sidefeed.com/archives/cat_2_inno_setup_.html" target="_blank">Paramsを削除</a>すればOK<br />
+
+			<p class="MsoNormal"><span>上記のサイトが正しければ、</span><span lang="EN-US">C#</span><span>だから、</span><span lang="EN-US">VCS<span>&nbsp;
+			</span>Express</span><span>になるとおもう</span><span lang="EN-US"><o:p></o:p></span></p>
+			<p class="MsoNormal"><span lang="EN-US">
+			[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\VCSExpress\9.0\Registration\0500.0x0004]</span></p>
+			<span>この</span><span lang="EN-US">Params</span><span>を消した</span><p>&nbsp;</p>
+			<br/>
+			
+			<br />						
+			<h4>レジストリ</h4>			
+			<p>全体(上)</p>
+			<div id="top">
+				<img src="./img/express_registration_1.png" alt=""  border = "1"  /></div>
+
+			<p>下</p>
+			<div id="top">
+				<img src="./img/express_registration_3.png" alt=""  border = "1"  /></div>
+			<br />
+
+			<p>右</p>
+			<div id="top">
+				<img src="./img/express_registration_4.png" alt=""  border = "1" /></div>
+			<br />
+			
+		</div>
+
+		<div id="links-right">
+		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">WPF</a><br />
+		    	<a href="basic02.html">XAML</a><br />
+		    	<a href="basic03.html">リソース</a><br />
+		    	<a href="basic04.html">ユーザーコントロール</a><br />
+				<a href="basic05.html">MVVM</a><br /> 
+				<a href="basic06.html">コントロールボックス</a><br />
+				<a href="basic07.html">画面遷移</a><br /> 
+				<a href="basic08.html">　・ログイン</a><br /> 
+				<a href="basic09.html">　・メインメニュー</a><br />
+				<a href="basic10.html">　・一覧表</a><br />
+				<a href="basic11.html">　・明細</a><br />
+				<a href="basic12.html">Button</a><br />
+				<a href="basic13.html">TextBox</a><br />
+				<a href="basic14.html">ComboBox</a><br />
+				<a href="basic15.html">Grid</a><br />
+				<a href="basic16.html">CheckBox</a><br />
+			</div> 				
+			<div class="sidetitle">開発で役立つツールのサイト</div>
+			<div class="side">
+				<a href="http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/" target="_blank">ER図作成ツール(フリー）</a>は便利です。<br />
+				<a href="http://inno-setup.sidefeed.com/archives/cat_2_inno_setup_.html" target="_blank">インストーラ作成ツール(フリー）</a>(Inno Setup)<br />
+			</div>
+			<div class="sidetitle">HTMLのお勉強のサイト</div>
+			<div class="side">
+				<a href="http://e-words.jp/p/r-htmlentity.html">HTMLの特殊文字</a>は重要です。<br />
+				<a href="http://algorhythnn.jp/blg/2014/04/11/expression_web_4-install/">Expression Web 4</a>を使って作成<br />
+				<a href="http://www.vector.co.jp/soft/dl/win95/art/se108932.html">JTrim</a>で綺麗にトリミング<br />
+				<a href="http://html-color-codes.info/japanese/">カラーコード</a>の入力で色表示<br />
+				<a href="http://www.vector.co.jp/soft/dl/win95/art/se108932.html">色</a>を見てコードを確認<br />
+			</div>
+			
+		</div> <!-- End links-right -->		
+
+		<div id="footer">
+			<a href="basic16.html" title="トップページへ" >トップページへ</a>
+			<hr />
+			<br />
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			</p>
+		</div> <!--End footer -->
+	</div>  <!-- End container -->
+</body>
+</html>

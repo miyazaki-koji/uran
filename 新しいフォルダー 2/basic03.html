@@ -1,0 +1,490 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|3.XAML～ViewはXAMLで記述,WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="XAML,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="XAML(Extensible Application Markup Language⇒ザムル)は、WPFに宣言的言語で拡張版XML言語で、画面(View)はXAMLで記述し処理はC#等で記述する方式です" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
+			</span>			
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     			<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 		</a>
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->   
+
+   	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+    	
+		
+		<div id="main" >
+			<h3 class="title">3.XAML</h3>
+			<br />		
+			<h4>ViewはXAMLで記述</h4>
+			<p>XAML(Extensible Application Markup Language⇒ザムル)は、WPFに宣言的言語で拡張版XML言語で、画面(<b>View</b>)はXAMLで記述し処理はC#等で記述する方式です。</p>
+
+			<h4>LivetをインストールしたVisual Studio 2010 Express</h4>
+				<p>新しいプロジェクトは、プロジェクトノ名前を入力して、「Livet WPF4 MVVM アプリケーション」をクリックします。</p>
+			<div id="top"><img src="./images/livet001.png" alt="" width="440" height="300" />
+			</div>
+			<br/>
+			<div id="top"><img src="./images/livet001_2.png" alt=""  />
+			</div>
+			<br/>	
+				<p>次にOKをクリックしますと次の画面になります。</p>			
+			<b>全体</b>
+			<div id="top"><img src="./images/livet002.png" alt="" width="440" height="300" />
+			</div>
+			<br/>
+				<p>通常のWPFアプリケーションの新しいプロジェクトの作成でできる画面と比べますとソリューション　エックスプローラーに
+				<b>InfrastructureAssembliesフォルダ</b>が作成されており、その中に</p>
+				<p>　　①Livet.dll</p>
+				<p>　　②Microsoft.Expression.Interactions.dll</p>
+				<p>　　③System.Windows.Interactivity.dll</p>
+			<p>の<b>LivetとMicrosoftのライブラリ</b>が格納されています。また、参照設定の中を見ますと、この3つのライブラリへの参照が設定されています。</p>			
+			<br/>
+
+			<img src="./images/livet003_2.png" alt="" border = "1"/>
+				<p>通常のWPFアプリケーションの新しいプロジェクトの作成ではエックスプローラーは次の画面になります。</p>
+			<div id="top"></div>
+			<br/>
+		
+			<h4>Livetをインストールした時のViewModel</h4>
+				<p>自動で作成されたViewModelを見ますと</p>
+			<div id="source"><pre class="brush:csharp ; highlight:[6,7,8,9,10,11,12]" title="MainViewModel.cs">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.ComponentModel;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+using Livet.Messaging.IO;
+using Livet.EventListeners;
+using Livet.Messaging.Windows;
+
+using LivetWPFApplication1.Models;
+
+namespace LivetWPFApplication1.ViewModels
+{
+    public class MainWindowViewModel : ViewModel
+    {
+        public void Initialize()
+        {
+        }
+    }</pre>
+			</div>
+			<br/>				
+				<p>Livetライブラリの名前空間がusingディレクティブで追加されています。</p>
+				<p>また、LivetWPFApplication1は、LivetのViewModelを継承すると書かれています。</p>
+				<p>メソッドとしては、最初に実行される<b>Initialize</b>が書かれています。</p>			
+			<br/>
+			<h4>コードビハインド(ファイル)</h4>
+				<p>zamlファイルの下に「～zaml.cs」というファイルが自動でできています。これは、Windowsフォームアプリケーションの時に画面をWクリックして表示されるコードが記述されたファイルと同様な機能のファイルです。</p>
+				<p>WPFなら<b>xaml.cs</b>、Windowsフォームなら<b>フォーム.cs</b>、ASP.NETなら<b>aspx.cs</b>となります。これらをコードビハインド(ファイル)と呼んでいます。</p>
+				<p>例えばXAMLの画面でButtonをWクリックしますと、このファイルにClickイベントが書き込まれZAMLのButtonにはClickの記述が追加されます。</p>
+			<b>View</b>
+			<div id="source"><pre class="brush: html;   highlight:[3];　"title="MainWindow.xaml"  style="width: 666px">&lt;Button Content="Button" Height="23" HorizontalAlignment="Left" 
+	Margin="395,441,0,0" Name="button1"
+        VerticalAlignment="Top" Width="75" Click="button1_Click" /&gt;</pre>
+			</div>
+			<br/>
+			<b>コードビハインドファイル</b>
+			<div id="source"><pre class="brush: html; 　"title="MainWindow.cs"  style="width: 666px">
+private void button1_Click(object sender, RoutedEventArgs e)
+{
+
+}
+</pre>
+			</div>
+			<br />
+				<p>5章 MVVMで解説するように、このサイトでは、LivetというMVVMを使用してWPFのシステムを開発しますので、このコードビハインドは使用しません。</p>
+				<p>よって、間違ってコントロールをクリックして、このコードが書かれてしまったら、XAMLの3行目のClick="button1_Clickの部分とインドのイコードビハベントプロシージャを削除して下さい。</p>
+			<br />
+
+			
+			<!-- Staet One Point Lesson -->
+	<!--	<a name="OPL03-1-ZAMLとViewModelの記述のまとめ"></a> -->
+			<a id="OPL03-1-ZAMLとViewModelの記述のまとめ"></a>
+
+
+
+			<div id="framestyle">
+				<div class="reversetitle">One Point Lesson 【ZAMLとViewModelの記述のまとめ】</div>
+			<b></b>
+<b>View</b>
+<br />
+■画面遷移の時は「InteractionMessageTrigger 」が必要<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&lt;l:InteractionMessageTrigger<br /> 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            MessageKey=&quot;MessageKey8&quot; Messenger=&quot;{Binding Messenger}&quot;&gt;<br />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &lt;l:TransitionInteractionMessageAction<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                WindowType=&quot;{x:Type v:Window8}&quot; Mode=&quot;Modal&quot;/&gt;<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &lt;/l:InteractionMessageTrigger&gt;<br />
+<br />
+■TextBox<br />
+　       　&lt;TextBox Text=&quot;{Binding Path=txtReceiptNumber, Mode=TwoWay}&quot;<br />  
+　　　　　Height=&quot;24&quot;  Width=&quot;105&quot; VerticalContentAlignment=&quot;Center&quot;<br /> 
+　　　　　HorizontalAlignment=&quot;Left&quot; Margin=&quot;114,54,0,0&quot;<br /> 
+　　　　　VerticalAlignment=&quot;Top&quot; Foreground=&quot;White&quot;  Background=&quot;Black&quot; /&gt;<br />
+　　　※バックがBlackの時は、Foreground=&quot;White&quot;  Background=&quot;Black&quot;を入れる<br />
+<br />
+■処理のコマンドボタン<br />
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+       &lt;Button Command=&quot;{Binding CopyCommand1}&quot;  Style=&quot;{StaticResource <br />
+				　　　　　CommandTemplate}&quot; Foreground=&quot;White&quot;<br />   
+                　　　　　Content=&quot;CopyCommand&quot; Height=&quot;40&quot; HorizontalAlignment=&quot;<br />
+　　　　　Left&quot; Margin=&quot;342,65,0,0&quot;<br /> 
+                　　　　　Name=&quot;button16&quot; VerticalAlignment=&quot;Top&quot; Width=&quot;333&quot; /&gt;<br />
+<br />
+<b>ViewModel</b><br />
+■TextBoxの変更通知プロパティ<br />
+        #region 変更通知プロパティ<br />
+        public string txtCopy1 { get; set; }<br />
+        //<br />
+        private string _txtCopy2;<br />
+        public string txtCopy2<br />
+        {<br />
+            	　　get { return _txtCopy2; }<br />
+            	　　set<br />
+            	　　{<br />
+                　　　　_txtCopy2 = value;<br />
+                　　　　RaisePropertyChanged(&quot;txtCopy2&quot;);<br />
+            	　　}<br />
+        }<br />
+        #endregion<br />
+<br />
+■処理のコマンド<br />
+        #region CopyCommand1<br />
+        private ViewModelCommand _copyCommand1;<br />
+        public ViewModelCommand CopyCommand1<br />
+        {<br />
+            	　　get<br />
+            	　　{<br />
+                　　　　if (this._copyCommand1 == null)<br />
+                　　　　{<br />
+                    　　　　　　this._copyCommand1 = new ViewModelCommand(CopyExecute, <br />
+　　　　　　CanCopyExecute);<br />
+                　　　　}<br />
+                　　　　return this._copyCommand1;<br />
+            	　　}<br />
+        }<br />
+        private bool CanCopyExecute()<br />
+        {<br />
+            	　　return true;<br />
+        }<br />
+        private void CopyExecute()<br />
+        {<br />
+            	　　txtCopy2 = txtCopy1;<br />
+        }<br />
+        #endregion<br />
+<br />
+■画面遷移のコマンド<br />
+       #region GotoCommand<br />
+        public ViewModelCommand GotoCommand2<br />
+        {<br />
+            	　　get { return new Livet.Commands.ViewModelCommand(Goto2); }<br />
+        }<br />
+        public void Goto2()<br />
+        {<br />
+            	　　Messenger.Raise(new TransitionMessage(new ViewModel2(){ NeedHideOwner = <br />
+　　　　　　true }, &quot;MessageKey2&quot;));<br />
+        }<br />
+        #endregion<br />
+<br />
+■閉じるのコマンド<br />
+        #region CloseCommand<br />
+        private ViewModelCommand _CloseCommand;<br />
+        public ViewModelCommand CloseCommand<br />
+        {<br />
+            	　　get<br />
+            	　　{<br />
+                　　　　if (_CloseCommand == null)<br />
+                　　　　{<br />
+                    　　　　　　_CloseCommand = new ViewModelCommand(Close);<br />
+                　　　　}<br />
+                　　　　return _CloseCommand;<br />
+            	　　}<br />
+        }<br />
+        public void Close()<br />
+        {<br />
+            	　　var window = Application.Current.Windows.OfType&lt;Window&gt;<br />
+            	　　().SingleOrDefault((w) =&gt; w.IsActive);<br />
+            	　　window.Close();<br />
+        }<br />
+        #endregion<br />
+<br />
+			</div> <!-- End framestyle -->
+		
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<!-- End floatbox -->
+		
+		
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">MVVM</a><br /> 
+		    	<a href="basic02.html">WPF</a><br />
+		    	<a href="basic03.html">XAML</a><br />
+		    	<a href="basic04.html">サンプル</a><br />
+		    	<a href="basic05.html">リソース</a><br />
+		    	<a href="basic06.html">ユーザーコントロール</a><br />
+				<a href="basic07.html">コントロールボックス</a><br />
+				<a href="basic08.html">画面遷移</a><br /> 
+				<a href="basic09.html">ログイン画面</a><br /> 
+				<a href="basic10.html">メインメニュー画面</a><br />
+				<a href="basic11.html">一覧表画面</a><br />
+				<a href="basic12.html">明細画面</a><br />
+				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

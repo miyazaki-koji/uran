@@ -1,0 +1,731 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|6-1.汎用ボトムボタン～WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="汎用,ボトムボタン,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja"  />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+ 	
+ <!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
+			</span>			
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     			<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 		</a>
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+	<!-- Start Menu -->   
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+			<h3 class="title">6-1.汎用ボトムボタン</h3>
+			<br />
+				<a href="basic06.html" >戻る</a>		
+				<p>ここでは、ボトムのボタンを画面ごとに異なる処理をするボタンにする方法を解説します。</p>
+				<p>下の画像は、画面の下に配置するボタンをViewsフォルダの内にUserControlFooterという名前のユーザーコントロールを作成した例です。</p>
+				<p>6.ユーザーコントロールのボトムボタンとの違いは、ボタンに表示されている文字です。ここでは、一番左に「保存」、中央に「閉じる」としています。<br />
+				この文字は、元々はブランクで、画面が開いた時に編集しています。</p>
+				
+
+			<br/>
+			<b>Buttonをユーザーコントロールで作成</b>
+			<div id="top"><img src="./images/livet06_1_20.png" alt="" width="664" height="68" border="1"/></div>
+			<br />
+			<br />
+			<b>Windowの代わりにUserControlとなる</b>
+			<div id="source"><pre class="brush: html; highlight:[1];　"title="UserControlFooter.xaml"  style="width: 666px">
+&lt;UserControl 
+    x:Class="LivetWPFApplication100.Views.UserControlFooter"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    mc:Ignorable="d" 
+    d:DesignHeight="84" d:DesignWidth="1035"&gt;
+
+    &lt;UserControl.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/StylesBG.xaml"/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/UserControl.Resources&gt;
+
+    &lt;Grid Width="1025" Height="84"&gt;
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Foreground="White" 
+                Content="{Binding ButtonContent0}" Height="40" 
+                HorizontalAlignment="Left" Margin="9,12,0,0" Name="button0" 
+                VerticalAlignment="Top"  Width="8"  IsEnabled="False"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}"  
+                Command="{Binding Button1Command}" 
+                IsEnabled="{Binding ButtonIsEnabled1}"
+                Foreground="White"  
+                Content="{Binding ButtonContent1}" Height="40" 
+                HorizontalAlignment="Left" Margin="17,12,0,0" Name="button1" 
+                VerticalAlignment="Top" Width="80" /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button2Command}" 
+                IsEnabled="{Binding ButtonIsEnabled2}"
+                Foreground="White"  
+                Content="{Binding ButtonContent2}" Height="40" 
+                HorizontalAlignment="Right" Margin="0,12,848,0" Name="button2" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}"  
+                Command="{Binding Button3Command}" 
+                IsEnabled="{Binding ButtonIsEnabled3}"
+                Foreground="White"  
+                Content="{Binding ButtonContent3}" Height="40" 
+                HorizontalAlignment="Right" Margin="0,12,768,0" Name="button3" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button4Command}" 
+                IsEnabled="{Binding ButtonIsEnabled4}"
+                Foreground="White"  
+                Content="{Binding ButtonContent4}" Height="40" 
+                HorizontalAlignment="Left" Margin="257,12,0,0" Name="button4" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button5Command}"  
+                IsEnabled="{Binding ButtonIsEnabled5}"
+                Foreground="White"  
+                Content="{Binding ButtonContent5}" Height="40" 
+                HorizontalAlignment="Left" Margin="351,12,0,0" Name="button5" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button6Command}"  
+                IsEnabled="{Binding ButtonIsEnabled6}" 
+                Foreground="White"  
+                Content="{Binding ButtonContent6}" Height="40" 
+                HorizontalAlignment="Left" Margin="431,12,514,0" Name="button6" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button7Command}"  
+                IsEnabled="{Binding ButtonIsEnabled7}" 
+                Foreground="White" 
+                Content="{Binding ButtonContent7}" Height="40" 
+                HorizontalAlignment="Left" Margin="511,12,0,0" Name="button7" 
+                VerticalAlignment="Top" Width="80" /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button8Command}"  
+                IsEnabled="{Binding ButtonIsEnabled8}"
+                Foreground="White"  
+                Content="{Binding ButtonContent8}" Height="40" 
+                HorizontalAlignment="Left" Margin="591,12,0,0" Name="button8" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button9Command}"  
+                IsEnabled="{Binding ButtonIsEnabled9}" 
+                Foreground="White"  
+                Content="{Binding ButtonContent9}" Height="40" 
+                HorizontalAlignment="Left" Margin="687,12,0,0" Name="button9" 
+                VerticalAlignment="Top" Width="80" /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button10Command}"  
+                IsEnabled="{Binding ButtonIsEnabled10}"
+                Foreground="White"  
+                Content="{Binding ButtonContent10}" Height="40" 
+                HorizontalAlignment="Left" Margin="767,12,0,0" Name="button10" 
+                VerticalAlignment="Top" Width="80" /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button11Command}"  
+                IsEnabled="{Binding ButtonIsEnabled11}" 
+                Foreground="White"  
+                Content="{Binding ButtonContent11}" Height="40" 
+                HorizontalAlignment="Left" Margin="848,12,98,0" Name="button11" 
+                VerticalAlignment="Top" Width="80"  /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}" 
+                Command="{Binding Button12Command}"  
+                IsEnabled="{Binding ButtonIsEnabled12}" 
+                Foreground="White" 
+                Content="{Binding ButtonContent12}" Height="40"                  
+                HorizontalAlignment="Right" Margin="0,12,18,0" Name="Exit" 
+                VerticalAlignment="Top" Width="80"   /&gt;
+
+        &lt;Button Style="{StaticResource ButtonStyle1}"  
+                Foreground="White" 
+                Content="{Binding ButtonContent11}" Height="40" 
+                HorizontalAlignment="Left" Margin="1005,12,0,0" Name="button13" 
+                VerticalAlignment="Top" Width="8"  IsEnabled="False" /&gt;
+
+        &lt;TextBox Text="{Binding txtSQL}" Height="20" 
+                 HorizontalAlignment="Left" 
+                 Margin="12,58,0,0" Name="txtMessage" 
+                 VerticalAlignment="Top" Width="917"/&gt;
+        
+        &lt;TextBox Text="{Binding Path=txt本日}" TextAlignment="Center" Height="20" 
+                 HorizontalAlignment="Center" 
+                 Margin="929,58,15,0" Name="txt本日" 
+                 VerticalAlignment="Top" Width="81" /&gt;
+        
+    &lt;/Grid&gt;
+&lt;/UserControl&gt;</pre>
+			</div>
+
+	
+			<!-- ****************************************************** -->
+			<br />
+
+
+
+			<br />
+			<h4>Viewでのユーザーコントロールの指定</h4>			
+				<p>画面(例えばWindow11.xaml)ではユーザーコントロールは下記のように指定します。</p>
+			<b>View</b>
+			<div id="source"><pre class="brush: html; highlight:[72,73];　"title="Window11.xaml"  style="width: 666px">&lt;Window x:Class="LivetWPFApplication100.Views.Window11"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+	    xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+	    xmlns:local="clr-namespace:LivetWPFApplication100.ViewModels"
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views"  
+        xmlns:vm="clr-namespace:LivetWPFApplication100.ViewModels"   
+	    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	    mc:Ignorable="d"       
+        WindowStartupLocation="CenterScreen"
+	    Title="Window11" Height="714" Width="1035" &gt;
+
+    &lt;Window.DataContext&gt;
+        &lt;vm:ViewModel11 /&gt;
+    &lt;/Window.DataContext&gt;
+    
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles2.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/StylesBG.xaml"/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングで
+        ViewModelのInitializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+            &lt;l:LivetCallMethodAction MethodTarget="{Binding}" 
+            MethodName="Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Loaded"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Loaded}" 
+                CommandParameter="{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Closing"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Closing}"
+                CommandParameter="{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey="Button7Execute" 
+                                     Messenger="{Binding Messenger}"&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey="WindowAction" 
+			Messenger="{Binding Messenger, Mode=OneWay}"&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;Grid   Background="#FFE6E6FA"&gt;
+
+        &lt;v:UserControlFooter Margin="0,0,0,0" HorizontalAlignment="Left" 
+                             VerticalAlignment="Bottom" /&gt;
+
+    &lt;/Grid&gt;
+&lt;/Window&gt;</pre>
+			</div>
+			<br />							
+			<!-- ****************************************************** -->
+			<br />
+			<h4>ViewModel</h4>			
+				<p>ViewModel(例えばViewModel11.cs)は下記の通りです。</p>
+			<b>View</b>
+			<div id="source"><pre class="brush: csharp;  highlight:[0];　"title="Window11.xaml"  style="width: 666px">using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//[DllImport("user32.dll")]
+using System.Runtime.InteropServices;
+
+//コントロールボックスの閉じるの無効化
+using System.Windows.Interop;
+
+//ICommand
+using System.Windows.Input;
+
+//MessageBox
+using System.Windows;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+
+//CloseCommand
+using Livet.Messaging.Windows;
+
+using Common;
+
+namespace LivetWPFApplication100.ViewModels
+{
+    class ViewModel11 : ViewModel
+    {
+        #region 変更通知プロパティ
+        //-----------------------------------------------
+        public string txtMessage { get; set; }
+        public string txt本日 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent1 { get; set; }
+        public bool ButtonIsEnabled1 { get; set; }
+        public bool CommandParameter1 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent2 { get; set; }
+        public bool ButtonIsEnabled2 { get; set; }
+        public bool CommandParameter2 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent3 { get; set; }
+        public bool ButtonIsEnabled3 { get; set; }
+        public bool CommandParameter3 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent4 { get; set; }
+        public bool ButtonIsEnabled4 { get; set; }
+        public bool CommandParameter4 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent5 { get; set; }
+        public bool ButtonIsEnabled5 { get; set; }
+        public bool CommandParameter5 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent6 { get; set; }
+        public bool ButtonIsEnabled6 { get; set; }
+        public bool CommandParameter6 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent7 { get; set; }
+        public bool ButtonIsEnabled7 { get; set; }
+        public bool CommandParameter7 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent8 { get; set; }
+        public bool ButtonIsEnabled8 { get; set; }
+        public bool CommandParameter8 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent9 { get; set; }
+        public bool ButtonIsEnabled9 { get; set; }
+        public bool CommandParameter9 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent10 { get; set; }
+        public bool ButtonIsEnabled10 { get; set; }
+        public bool CommandParameter10 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent11 { get; set; }
+        public bool ButtonIsEnabled11 { get; set; }
+        public bool CommandParameter11 { get; set; }
+        //-----------------------------------------------
+        public string ButtonContent12 { get; set; }
+        public bool ButtonIsEnabled12 { get; set; }
+        public bool CommandParameter12 { get; set; }
+        //-----------------------------------------------
+        #endregion
+
+		Window win = null;
+        public ViewModel11()
+        {
+           // txtMessage = "Loaded";
+            txt本日 = DB.str本日;
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == 
+                Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+
+            ButtonContent1 = "保存";
+            ButtonIsEnabled1 = true;
+
+            ButtonIsEnabled2 = false;
+            ButtonIsEnabled3 = false;
+            ButtonIsEnabled4 = false;
+            ButtonIsEnabled5 = false;
+            ButtonIsEnabled6 = false;
+
+            ButtonContent7 = "閉じる";
+            ButtonIsEnabled7 = true;
+
+            ButtonIsEnabled8 = false;
+            ButtonIsEnabled9 = false;
+            ButtonIsEnabled10 = false;
+            ButtonIsEnabled11 = false;
+            ButtonIsEnabled12 = false; 
+
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+
+
+        public void Initialize()
+        {
+        	if (win != null) win.Owner.Hide();
+            XCloseButtonManager.Disable();
+        }
+
+        #region Button1Command //ボトムボタン1のコマンド
+
+        private ViewModelCommand _button1Command;
+        public ViewModelCommand Button1Command
+        {
+            get
+            {
+                if (this._button1Command == null)
+                {
+                    this._button1Command = new ViewModelCommand(Button1Execute, 
+                    CanButton1Execute);
+                }
+                return this._button1Command;
+            }
+        }
+        private void Button1Execute()
+        {
+            MessageBox.Show("Button1Command");
+        }
+        private bool CanButton1Execute()
+        {
+            return true;
+        }
+        #endregion
+        
+        #region Button7Command //ボトムボタン7のコマンド (閉じる)
+
+        private ViewModelCommand _button7Command;
+        public ViewModelCommand Button7Command
+        {
+            get
+            {
+                if (this._button7Command == null)
+                {
+                    this._button7Command = new ViewModelCommand(Button7Execute, 
+                    CanButton7Execute);
+                }
+                return this._button7Command;
+            }
+        }
+        private void Button7Execute()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().
+            SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        private bool CanButton7Execute()
+        {
+            return true;
+        }
+        #endregion
+
+    }
+}
+
+</pre>
+			</div>
+			<br />
+
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<!-- End floatbox -->
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">MVVM</a><br /> 
+		    	<a href="basic02.html">WPF</a><br />
+		    	<a href="basic03.html">XAML</a><br />
+		    	<a href="basic04.html">サンプル</a><br />
+		    	<a href="basic05.html">リソース</a><br />
+		    	<a href="basic06.html">ユーザーコントロール</a><br />
+				<a href="basic07.html">コントロールボックス</a><br />
+				<a href="basic08.html">画面遷移</a><br /> 
+				<a href="basic09.html">ログイン画面</a><br /> 
+				<a href="basic10.html">メインメニュー画面</a><br />
+				<a href="basic11.html">一覧表画面</a><br />
+				<a href="basic12.html">明細画面</a><br />
+				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|12.明細画面～WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="明細画面,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
+			</span>			
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     		<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 	</a>
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+		
+			<h3 class="title">12.明細画面</h3>
+			<br />
+			<h4>明細画面</h4>
+				<p>前の一覧画面からこの明細画面へ遷移します。</p>	
+				
+
+		
+			<b>View(画像をクリックすると拡大)</b>
+			<div id="top"><a href="./images/livet1020.png" rel="lightbox">
+			<img src="./images/livet1020.png" alt="" width="440" height="300" /></a>
+			</div>
+
+			<br />
+				<p>ZAMLは下記になります。</p>
+			<br />
+			<b>View</b>
+			<div id="source"><pre class="brush: html;　 highlight:[0]; "title="Window74.xaml"  style="width: 666px">
+&lt;Window x:Class="LivetWPFApplication100.Views.Window74"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"       
+        xmlns:core="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=
+        	Microsoft.Expression.Interactions"        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views"
+        xmlns:vm="clr-namespace:LivetWPFApplication100.ViewModels"        
+        xmlns:b="clr-namespace:LivetWPFApplication100.Behaviors"        
+        Title="Window74" Height="714" Width="1035" 
+        WindowStartupLocation="CenterScreen"&gt;
+   
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles2.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/StylesBG.xaml"/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitialize
+        	メソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+            &lt;l:LivetCallMethodAction MethodTarget="{Binding}" MethodName=
+            	"Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Loaded"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Loaded}" 
+                CommandParameter=
+                "{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="Closing"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Closing}"
+                CommandParameter="{Binding Mode=OneTime,RelativeSource=
+                {RelativeSource Mode=FindAncestor,AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;l:InteractionMessageTrigger MessageKey="Close" Messenger=
+        	"{Binding Messenger}"&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;Grid Height="686" Width="1025"  Background="#FFE6E6FA" &gt;
+
+        &lt;TextBox Background="AliceBlue" Height="23" HorizontalAlignment="Left" 
+        	Margin="10,12,0,0" 
+                 Name="txtMessage" 
+                 Text="{Binding Path=txtMessage}" VerticalAlignment="Top" 
+                 	Width="700" /&gt;
+        &lt;Button  Style="{StaticResource CommandTemplate}" Foreground="White"  
+        	Content="" Height="40" HorizontalAlignment="Left" 
+        	Margin="1009,613,0,0" Name="button15" VerticalAlignment="Top" 
+        	Width="8" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}" 
+                 Height="21" HorizontalAlignment="Right" Margin="0,52,717,0" 
+                 Name="txt年度プロジェクトコード" 
+                 Text="{Binding Path=txt年度プロジェクトコード}" VerticalAlignment=
+                 "Top" Width="140" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"  TextWrapping="Wrap" 
+                 Height="37" HorizontalAlignment="Left" Margin="168,82,0,0" Name=
+                 "txtプロジェクト名" 
+                 Text="{Binding Path=txtプロジェクト名}" VerticalAlignment="Top" 
+                 Width="140" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Right" Margin="0,134,717,0" 
+                 Name="txt作成日" 
+                 Text="{Binding Path=txt作成日}" VerticalAlignment="Top" 
+                 Width="140" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Right" Margin="0,166,717,0" 
+                 Name="txt部名" 
+                 Text="{Binding Path=txt部名}" VerticalAlignment="Top" Width="140"/&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Left" Margin="169,0,0,463" 
+                 Name="txt作成者" 
+                 Text="{Binding Path=txt作成者}" VerticalAlignment="Bottom" 
+                 Width="139" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Right" Margin="0,234,717,0" 
+                 Name="textBox1" 
+                 Text="{Binding Path=txt販売金額,StringFormat={}{0:N2}}" 
+                 VerticalAlignment="Top" Width="140" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Right" Margin="0,268,717,0" 
+                 Name="textBox2" 
+                 Text="{Binding Path=txt販売先名}" VerticalAlignment="Top" 
+                 Width="140" /&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Right" Margin="0,302,717,0" 
+                 Name="textBox3" 
+                 Text="{Binding Path=txt検収}" VerticalAlignment="Top" Width="139"/&gt;
+        &lt;TextBox Style="{StaticResource HighlightTextBox}"
+                 Height="21" HorizontalAlignment="Left" Margin="169,0,0,336" 
+                 Name="textBox4" 
+                 Text="{Binding Path=txt仕入金額,StringFormat={}{0:N0}}" 
+                 VerticalAlignment="Bottom" Width="139" /&gt;
+
+        &lt;Label Content="年度プロジェクトコード" Background="LightBlue" Height="21" 
+        HorizontalAlignment="Left" Margin="35,52,0,0" Name="label1" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="プロジェクト名" Height="21" 
+        HorizontalAlignment="Left" Margin="35,82,0,0" Name="label2" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="作成日" Height="21" 
+        HorizontalAlignment="Left" Margin="35,132,0,0" Name="label3" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="部名" Height="21" 
+        HorizontalAlignment="Left" Margin="35,166,0,0" Name="label4" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="作成者" Height="21" 
+        HorizontalAlignment="Left" Margin="35,200,0,0" Name="label5" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="販売金額" Height="21" 
+        HorizontalAlignment="Left" Margin="35,234,0,0" Name="label6" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="販売先名" Height="21" 
+        HorizontalAlignment="Left" Margin="35,266,0,0" Name="label7" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="検収" Height="21" 
+        HorizontalAlignment="Left" Margin="35,300,0,0" Name="label8" 
+        VerticalAlignment="Top" Width="127" /&gt;
+        &lt;Label Background="LightBlue" Content="仕入金額" Height="21" 
+        HorizontalAlignment="Left" Margin="35,329,0,0" Name="label9" 
+        VerticalAlignment="Top" Width="127" /&gt;
+
+        &lt;v:UserControlFooterN2  Margin="0,0,0,0" HorizontalAlignment="Left" 
+        VerticalAlignment="Bottom"  /&gt;
+
+    &lt;/Grid&gt;
+&lt;/Window&gt;
+</pre>
+			</div>
+			<br />
+			<br />
+			
+
+				<p>ViewModelは下記の通りです。
+			<br />
+				68行目のpublic ViewModel74(Project project)は、モデルのprojectを引数としています。<br />
+				91行目のCopyExecute()で、このモデルのデータを122～137行でTextBoxに貼り付けています。</p>
+			<br />
+			<b>ViewModel</b>
+			<div id="source"><pre class="brush:csharp ; highlight:[68,91,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137]" title="ViewModel74.cs">
+using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+using Livet.Messaging.IO;
+using Livet.EventListeners;
+
+//CloseCommand
+using Livet.Messaging.Windows;
+
+using System.Windows.Interactivity;
+
+//ICommand
+using System.Windows.Input;
+
+//MessageBox
+using System.Windows;
+
+using Common;
+
+using LivetWPFApplication100.ViewModels;
+using LivetWPFApplication100.Models;
+
+namespace LivetWPFApplication100.ViewModels
+{
+    class ViewModel74 : ViewModel
+    {
+        #region  変更通知プロパティ
+        //----------------------------------------------
+        public string Parameter { get; set; }
+        public string txtMessage { get; set; }
+        public string txt本日 { get; set; }
+        public string txt状況 { get; set; }
+        public string txt区分 { get; set; }
+        public string txt年度プロジェクトコード { get; set; }
+        public string txtプロジェクト名 { get; set; }
+        public string txt作成日 { get; set; }
+        public string txt作成者 { get; set; }
+        public string txt部名 { get; set; }
+        public int txt販売金額 { get; set; }
+        public string txt販売先名 { get; set; }
+        public string txt検収 { get; set; }
+        public int txt仕入金額 { get; set; }
+        //----------------------------------------------
+        private Project _Project;
+        public Project Project
+        {
+            get { return _Project; }
+            private set
+            {
+                if (_Project == value) return;
+                _Project = value;
+                RaisePropertyChanged("Project");
+            }
+        }
+        //----------------------------------------------
+        #endregion
+
+	    Window win = null;
+        public ViewModel74(Project project)
+        {
+            this.Project = project;
+
+            txtMessage = "Loaded";
+            txt本日 = DB.str本日;
+            Loaded = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; w.Owner.Visibility == 
+                	Visibility.Visible)
+                {
+                    win = w;
+                }
+            });
+            Closing = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });
+            CopyExecute();
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+
+        public void Initialize()
+        {
+            if (win != null) win.Owner.Hide();
+            XCloseButtonManager.Disable();
+        }
+
+        public void MouseEnterCommand(object sender, RoutedEventArgs e)
+        {
+            txtMessage = "MouseEnter";
+
+        }
+
+        private ViewModelCommand _copyCommand;
+        public ViewModelCommand CopyCommand
+        {
+            get
+            {
+                if (this._copyCommand == null)
+                {
+                    this._copyCommand = new ViewModelCommand(CopyExecute, 
+                    	CanCopyExecute);
+                }
+                return this._copyCommand;
+            }
+        }
+        
+        private void CopyExecute()
+        {
+            txt状況 = Project.状況;
+            txt区分 = Project.区分;
+            txt年度プロジェクトコード = Project.年度プロジェクトコード;
+            txt部名 = Project.部名;
+            txtプロジェクト名 = Project.プロジェクト名;
+            txt作成日 = Project.作成日;
+            txt作成者 = Project.作成者;
+
+            txt販売金額 = Project.販売金額;
+
+            txt販売先名 = Project.販売先名;
+            txt検収 = Project.検収;
+            txt仕入金額 = Project.仕入金額;
+        }
+
+        private bool CanCopyExecute()
+        {
+            return true;
+        }
+
+        #region CloseCommand
+        private ViewModelCommand _CloseCommand;
+        public ViewModelCommand CloseCommand
+        {
+            get
+            {
+                if (_CloseCommand == null)
+                {
+                    _CloseCommand = new ViewModelCommand(Close);
+                }
+                return _CloseCommand;
+            }
+        }
+        public void Close()
+        {
+            var window = Application.Current.Windows.OfType&lt;Window&gt;().
+            	SingleOrDefault((w) =&gt; w.IsActive);
+            window.Close();
+        }
+        #endregion
+
+        #region CancelCommand
+        private ViewModelCommand _CancelCommand;
+
+        public ViewModelCommand CancelCommand
+        {
+            get
+            {
+                if (_CancelCommand == null)
+                {
+                    _CancelCommand = new ViewModelCommand(Cancel);
+                }
+                return _CancelCommand;
+            }
+        }
+
+        public void Cancel()
+        {
+        }
+        #endregion
+    }
+}
+</pre>
+			</div>
+			<br />	
+
+
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+　　　　　　　　　　　　<br />
+			<!-- End floatbox -->
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">MVVM</a><br /> 
+		    	<a href="basic02.html">WPF</a><br />
+		    	<a href="basic03.html">XAML</a><br />
+		    	<a href="basic04.html">サンプル</a><br />
+		    	<a href="basic05.html">リソース</a><br />
+		    	<a href="basic06.html">ユーザーコントロール</a><br />
+				<a href="basic07.html">コントロールボックス</a><br />
+				<a href="basic08.html">画面遷移</a><br /> 
+				<a href="basic09.html">ログイン画面</a><br /> 
+				<a href="basic10.html">メインメニュー画面</a><br />
+				<a href="basic11.html">一覧表画面</a><br />
+				<a href="basic12.html">明細画面</a><br />
+				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
+<title>Livetを使ったC#のWPFプログラミング|9.ログイン画面～WindowChrom,Sample,プログラミング,アカデミー,</title>
+<meta name="robots" content="INDEX,FOLLOW" />
+<meta name="keywords" content="ログイン画面,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
+
+
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<meta http-equiv="content-language" content="ja" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
+<script type="text/javascript" src="scripts/smooth.pack.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
+<script type="text/javascript" charset="UTF-8" src="../resource/lightbox_plus.js"></script>
+
+
+<!-- Google analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-71798843-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+	<!-- ========================================= -->
+	<!-- ▼SyntaxHighlighterを読み込むためのソース -->
+	<!-- ========================================= -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shCore.js"></script><!-- 必須 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushXml.js"></script><!-- HTML,XMLを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCss.js"></script><!-- CSSを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushJScript.js"></script><!-- JavaScriptを使う場合 -->
+	<script type="text/javascript" src="syntaxhighlighter/scripts/shBrushCSharp.js"></script>
+	<link type="text/css" rel="stylesheet" href="syntaxhighlighter/styles/shCoreDefault.css" /><!-- デフォルトの配色を使う場合（※何らかのCSSは必須） -->
+	<script type="text/javascript">SyntaxHighlighter.all();</script><!-- 必須 -->
+	<!-- ========== -->
+	<!-- ▲ここまで -->
+	<!-- ========== -->
+	
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+	    SyntaxHighlighter.defaults['toolbar'] = false;
+		SyntaxHighlighter.all();		
+	</script>
+	
+<!--	
+<style type="text/css">
+.auto-style1 {
+	color: #0000FF;
+}
+</style>
+-->
+
+	<style type="text/css">
+ 	<!--
+        ul {list-style:none;}
+        li {float:left;}
+ 		-->
+ 	</style>
+
+<!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</head>
+<body>
+	<div id="wrapper">
+		<div id="title">
+			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
+			<span class="description">
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
+			</span>			
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     			<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 		</a>	
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
+		
+		<div id="main" >
+		
+			<h3 class="title">9.ログイン画面</h3>
+			<br />
+			<h4>この画面のポイント</h4>
+				<p>下記の3つです。</p>
+				<p>①パスワードボックスの表示をアスタリスク(*)にする方法と</p>
+				<p>②Buttonのクリック時の入力されたユーザーID・パスワードと社員マスターとの照合処理の方法と</p>
+				<p>③ユーザーコントロール(UserControl)の設定方法です。</p>
+
+
+
+			<br />
+			<div id="top"><img src="./images/livet005.png" alt="" width="440" height="300" /><br />
+			<br />
+			<div id="top"><img src="./images/livet005trim1.png" alt=""  border = "1" /></div>
+			<br />
+			</div>
+
+
+			<br />
+			<h4>画面</h4>
+				<p>上の画面は下記のXAMLで書かれています。</p>
+				<p>i:Interaction.Triggersの25行目のContentRenderedイベントがInitializeメソッドを呼び出し、30行目のl:TransitionInteractionMessageActionで
+				Window2ヘの画面遷移を行います。<br />
+				実際の遷移は、65行目のButtonのクリックで発生するCommandであるGotoCommand22で行います。<br />
+				40行目のGridタグのBackground="#FFE6E6FA"でGridの背景色を指定しています。<br />
+				52行目がTextBoxにtxtユーザーIDをバインディング(紐付け)しています。<br />
+				55～61行でpasswordBoxにtxtパスワードをバインディングしています。<br />
+				Behaviorとは、既存のコントロールに機能を追加するもので、58行目では、入力文字をアスタリスク(*)に変換しています。
+				</p>
+			<br />
+			<b>View</b>
+			<div id="source"><pre class="brush: html; highlight:[22,25,26,27,28,29,30,31,32,33,40,52,58,65]" title="MainWindow.xaml">&lt;Window x:Class="LivetWPFApplication100.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf" 
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views"
+        xmlns:vm="clr-namespace:LivetWPFApplication100.ViewModels"        
+        xmlns:b="clr-namespace:LivetWPFApplication100.Behaviors"       
+        Title="MainWindow" Height="714" Width="1035" 
+        WindowStartupLocation="CenterScreen"&gt;
+    
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles2.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/StylesBG.xaml"/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングで
+        ViewModelのInitializeメソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+         &lt;l:LivetCallMethodAction MethodTarget="{Binding}" MethodName="Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;        
+        &lt;l:InteractionMessageTrigger 
+            MessageKey="MessageKey2" Messenger="{Binding Messenger}"&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType="{x:Type v:Window2}" Mode="Modal"/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;i:Interaction.Behaviors&gt;
+        &lt;b:CloseButtonBehavior IsWindowCloseEnable="{Binding ElementName=CloseCheck, 
+        Path=IsChecked}"/&gt;
+    &lt;/i:Interaction.Behaviors&gt;
+
+    &lt;Grid  Background="#FFE6E6FA"&gt;
+        &lt;Label Background="AliceBlue" Content="ユーザーID" Height="22" 
+         HorizontalAlignment="Left" Margin="381,259,0,0" Name="label1" 
+         VerticalAlignment="Top" Width="70" /&gt;
+        &lt;Label Background="AliceBlue" Content="パスワード" Height="22" 
+        HorizontalAlignment="Left" Margin="381,287,0,0" Name="label2" 
+        VerticalAlignment="Top" Width="70" /&gt;
+
+        &lt;TextBox InputMethod.PreferredImeState="Off" 
+        Style="{StaticResource HighlightTextBox}" Height="22" 
+        HorizontalAlignment="Left"
+        Margin="450,259,429,0" Name="txtユーザーID"  
+        Text="{Binding Path=txtユーザーID}" 
+        VerticalAlignment="Top" Width="134" /&gt;
+
+        &lt;PasswordBox MaxLength="10"   Height="22" HorizontalAlignment="Left" 
+        Margin="450,287,0,0" VerticalAlignment="Top" Width="134"&gt;
+            &lt;i:Interaction.Behaviors&gt;
+                &lt;b:PasswordBindBehavior Password="{Binding txtパスワード, 
+                   Mode=TwoWay}" /&gt;
+            &lt;/i:Interaction.Behaviors&gt;
+        &lt;/PasswordBox&gt;
+
+        &lt;Button Style="{StaticResource CommandTemplate}" Content="ログイン" 
+        Width="130" Height="30"
+                Command="{Binding GotoCommand22}"
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Margin="450,322,433,323" 
+                Foreground="White" /&gt;
+                
+        &lt;v:UserControlFooterN1  Margin="0,0,0,0" HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom"  /&gt;
+    &lt;/Grid&gt;
+&lt;/Window&gt;
+</pre>
+			</div>
+
+			<br />			
+				<b>ビヘイビア</b>
+			<div id="source"><pre class="brush: csharp;　"title="PasswordBindBehavior.cs"  style="width: 666px">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using System.Windows.Controls;
+using System.Windows.Interactivity;
+using System.Windows;
+
+namespace LivetWPFApplication100.Behaviors
+{
+    public class PasswordBindBehavior : Behavior&lt;PasswordBox&gt;
+    {
+        static bool initialized = false;
+        public string Password
+        {
+            get
+            {
+                return (string)GetValue(PasswordProperty);
+            }
+            set
+            {
+                SetValue(PasswordProperty, value);
+            }
+        }
+        public static readonly DependencyProperty PasswordProperty = 
+        					DependencyProperty.Register(
+            "Password"
+            , typeof(string)
+            , typeof(PasswordBindBehavior)
+            , new UIPropertyMetadata(null));
+        private void Init()
+        {
+            if (this.AssociatedObject is PasswordBox)
+            {
+               this.AssociatedObject.Password = (string)GetValue(PasswordProperty);
+            }
+        }
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+            if (!initialized)
+            {
+                this.Init(); initialized = true;
+            }
+            this.AssociatedObject.PasswordChanged += PasswordChanged;
+        }
+
+        void PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            SetValue(PasswordProperty, ((PasswordBox)sender).Password);
+        }
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            this.AssociatedObject.PasswordChanged -= PasswordChanged;
+        }
+    }
+}
+</pre>
+			</div>
+			<br />
+			<br />			
+			<h4>処理</h4>
+				<p>MainWindowの処理はViewModelフォルダにMainViewModelという名称で作成しました。(名称は何でもよろしいです)</p>
+				<p>ソースはリンクをクリックしますとフルコードで表示されます。</p>
+				<a href="./download_files/MainViewModel.lzh">ここのサンプルのダウンロード(MainViewModel.lzh)</a>
+			<br />	
+			<br />
+				<p>MainWindowのViewModelであるMainViewModelの<b>変更通知プロパティ</b>は下記のようになります。</p>
+			<br />
+			<b>ViewModel</b>
+			<div id="source"><pre class="brush: csharp;　"title="MMainViewModel.cs"  style="width: 666px">
+ #region 変更通知プロパティ
+   public string txtユーザーID { get; set; }
+   public string txtパスワード { get; set; }        
+#endregion
+</pre>
+			</div>
+			<br />				
+				<p>MainWindowのViewModelである<b>MainViewModel</b>は下記のようになります。</p>
+			<br />	
+			<b>ViewModel</b>
+			<div id="source"><pre class="brush: csharp; "title="MainViewModel.cs"  >
+  public ViewModelCommand GotoCommand22
+ {
+   get { return new Livet.Commands.ViewModelCommand(Goto22); }
+ }
+ public void Goto22()
+ {
+   if (txtユーザーID == null)
+   {
+     MessageBox.Show("ユーザーIDが未入力です");
+     return;
+   }
+   if (txtパスワード == null)
+   {
+      MessageBox.Show("パスワードが未入力です");
+      return;
+   }            
+   if (!作業員マスターログインチェック(txtユーザーID.ToUpper(), txtパスワード))
+   {
+      MessageBox.Show("ユーザーIDが違うかパスワードが違います");
+      return;
+   }
+            
+      Messenger.Raise(new TransitionMessage(new ViewModel2() 
+      { NeedHideOwner = true }, "MessageKey2"));
+   }</pre>
+			</div>
+			<br />
+				<p>社員マスターログインチェックメソッドは、引数で渡した社員コードが社員マスターに存在すれば、<br />
+				trueを返します。 </p>
+				<p>ここでのConnectionStringの書き方は、Oracleノ場合です。SQLサーバー等々の他のデータベースの<br />
+				時は、別途、調べて下さい。</p>
+				<p>ここでは、OracleConnectionをusing ステートメントで指定しています。これによって、リソースを取得し、ステートメントを実行してから、リソースを自動的に破棄します。</p>
+
+			<br />
+						
+			<b>社員マスターログインチェック</b>
+			<div id="source">
+			<pre class="brush: csharp;">
+#region 社員マスターログインチェック
+  public bool 社員マスターログインチェック(string str社員コード, 
+  string strパスワード)
+  {
+    bool bRet = false;
+
+    using (OracleConnection con = new OracleConnection())
+    {
+
+       con.ConnectionString = "User Id=<font COLOR=RED>UserId</font>; Password=<font COLOR=RED>Password</font>; 
+       			Data Source=<font COLOR=RED>DnsName</font>;Pooling=false;";
+                con.Open();
+                //
+                string strSQL = String.Format("SELECT COUNT(*) AS CNT FROM 
+                社員マスター Where 社員コード = '{0}' AND パスワード = '{1}'", 
+                str社員コード.ToUpper(), strパスワード);
+
+                OracleCommand oracmd = new OracleCommand(strSQL, con);
+                OracleDataReader reader = oracmd.ExecuteReader();
+
+                while (reader.Read() == true)
+                {
+                    if (Convert.ToInt16(reader["CNT"].ToString()) > 0)
+                    {
+                        bRet = true;
+                    }
+                }
+                return bRet;
+            }
+        }
+        #endregion
+</pre>
+			</div>
+			<p><b>UserId、Password、DnsNameは実際のものに置き換えてください。</b></p>			
+			<br/>
+			<p>遷移先のWindow2のXAMLは下記のようになります。太字部分(LoadedやClosing)はMVVMパターンでは有名な Expression Blend SDK に含まれる System.Windows.Interactivity.dll のクラス
+(EventTrigger, InvokeAction, Interaction 等)を使用してWPFのコントロールのイベントとViewModel等で公開される ICommand を実装したコマンドプロパティをコードビハインドファイルやハンドラを使用せずにxaml上で関連付ける方法
+でSystem.Windows.Interactivity名前空間の EventTrigger クラスの EventName に コマンドと関連付けるイベントを設定し、 InvokeCommandAction によりコマンドとの関連づけを行っています。
+ListBoxでは、EventTriggerのEventNameとしては「MouseEnter」、「MouseLeave」、「SelectionChanged」などがあります。</p>
+<a href="http://www.pine4.net/Memo/Article/Archives/417">[WPF] コントロールの任意のイベントとコマンド xaml上で関連付ける
+</a>
+<br />
+			<br />			
+			<b>View</b>
+			<div id="source"><pre class="brush: html;　"title="Window2.xaml"  >
+&lt;Window x:Class="LivetWPFApplication100.Views.Window2"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"         
+        xmlns:l="http://schemas.livet-mvvm.net/2011/wpf"
+        xmlns:v="clr-namespace:LivetWPFApplication100.Views"        
+        xmlns:b="clr-namespace:LivetWPFApplication100.Behaviors"
+        
+        Title="Window2" Height="714" Width="1035" 
+        WindowStartupLocation="CenterScreen"&gt;
+
+    &lt;Window.Resources&gt;
+        &lt;ResourceDictionary&gt;
+            &lt;ResourceDictionary.MergedDictionaries&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/Styles2.xaml"/&gt;
+                &lt;ResourceDictionary Source="/Resources/StylesBG.xaml"/&gt;
+            &lt;/ResourceDictionary.MergedDictionaries&gt;
+        &lt;/ResourceDictionary&gt;
+    &lt;/Window.Resources&gt;
+    
+    &lt;i:Interaction.Triggers&gt;
+        &lt;!--WindowのContentRenderedイベントのタイミングでViewModelのInitialize
+        メソッドが呼ばれます--&gt;
+        &lt;i:EventTrigger EventName="ContentRendered"&gt;
+            &lt;l:LivetCallMethodAction MethodTarget="{Binding}" 
+　　　　　　　　　　MethodName="Initialize"/&gt;
+        &lt;/i:EventTrigger&gt;
+        &lt;l:InteractionMessageTrigger 
+            MessageKey="MessageKey3" Messenger="{Binding Messenger}"&gt;
+            &lt;l:TransitionInteractionMessageAction
+                WindowType="{x:Type v:Window3}" Mode="Modal"/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;
+
+        <b>&lt;i:EventTrigger EventName="<font COLOR=RED>Loaded</font>"&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Loaded}" 
+            　　CommandParameter="{Binding Mode=OneTime,
+　　　　　　　　 RelativeSource={RelativeSource Mode=FindAncestor,
+　　　　　　    AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;
+
+        &lt;i:EventTrigger EventName="<font COLOR=RED>Closing</font> "&gt;
+            &lt;i:InvokeCommandAction Command="{Binding Path=Closing}"
+            CommandParameter="{Binding Mode=OneTime,
+            RelativeSource={RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type Window}}}"/&gt;
+        &lt;/i:EventTrigger&gt;</b>
+
+        &lt;l:InteractionMessageTrigger MessageKey="Close" 
+        　　Messenger="{Binding Messenger}"&gt;
+            &lt;l:WindowInteractionMessageAction/&gt;
+        &lt;/l:InteractionMessageTrigger&gt;        
+    &lt;/i:Interaction.Triggers&gt;
+
+    &lt;i:Interaction.Behaviors&gt;
+      &lt;b:CloseButtonBehavior IsWindowCloseEnable="{Binding ElementName=CloseCheck, 
+      Path=IsChecked}"/&gt;
+    &lt;/i:Interaction.Behaviors&gt;
+
+    &lt;Grid  Background="#FFE6E6FA"&gt;            
+        &lt;Button Command="{Binding Path=GotoCommand63-2}" Content="Goto63-2" 
+        FontSize="16" Foreground="White"  Width="470" Height="35" 
+        Margin="40,0,503,266" Style="{StaticResource CommandTemplate}" 
+        VerticalAlignment="Bottom" /&gt;
+        &lt;v:UserControlFooterN2 Margin="0,0,0,0" HorizontalAlignment="Left" 
+        VerticalAlignment="Bottom" /&gt;
+    &lt;/Grid&gt;
+&lt;/Window&gt; 
+ </pre>
+			</div>
+
+			<br />
+			<p>Window2のViewModelである<b>ViewModel2.cs</b>は下記のようになります。</p>
+			<b>ViewModel2.cs</b>
+			<div id="source"><pre class="brush: csharp;">
+using System;
+
+// ObservableCollection
+using System.Collections.Generic;
+using System.Linq;
+
+
+//INotifyPropertyChanged
+//PropertyChanged
+using System.ComponentModel;
+
+//参照設定が必要
+//using System.Configuration;
+
+using Livet;
+using Livet.Commands;
+using Livet.Messaging;
+//CloseCommand
+using Livet.Messaging.Windows;
+
+//ICommand
+using System.Windows.Input;
+using System.Windows;
+using Common;
+
+namespace LivetWPFApplication100.ViewModels
+{
+    class ViewModel2 : ViewModel
+    {
+    	Window win = null;
+        public ViewModel2()
+        {
+            <b><span class="red">Loaded</span> = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null &amp;&amp; 
+                w.Owner.Visibility == Visibility.Visible)
+                {
+                    win = w;
+                    //w.Owner.Hide();
+                }
+            });
+			
+            <span class="red">Closing</span>  = new Livet.Commands.ListenerCommand&lt;Window&gt;((w) =&gt;
+            {
+                if (NeedHideOwner &amp;&amp; w.Owner != null)
+                {
+                    w.Owner.Show();
+                }
+            });</b>
+        }
+        public bool NeedHideOwner { get; set; }
+        public ICommand Loaded { get; private set; }
+        public ICommand Closing { get; private set; }
+        
+        public void Initialize()
+        {
+        	if (win != null) win.Owner.Hide();
+            XCloseButtonManager.Disable();
+        }
+
+</pre>
+			</div>
+
+			<br />
+			<p>ここで使われているデータベースは下記の通りです。</p>
+			<b>社員マスター</b>
+			<div id="source"><pre class="brush: html; 　"title="社員マスター"  style="width: 666px">CONNECT beluran/beluran@beluran;
+
+DROP TABLE 社員マスター CASCADE CONSTRAINTS; 
+CREATE TABLE 社員マスター
+	(
+	社員コード		VARCHAR2(10)　NOT NULL ENABLE,
+    　　社員名		　　　　VARCHAR2(20)　NOT NULL ENABLE,
+	社員姓名		　　　　VARCHAR2(14)　NOT NULL ENABLE,
+	カナ名			VARCHAR2(25)　NOT NULL ENABLE,
+	部署コード		VARCHAR2(7),
+	会社コード		VARCHAR2(7),
+	ログインコード		VARCHAR2(20),　
+	メールアドレス		VARCHAR2(50),
+	パスワード		VARCHAR2(50),
+	SEQ  			NUMBER(9,0) NOT NULL,
+	統括区分			CHAR(1) DEFAULT '0' NOT NULL ENABLE,
+	SYS_DEL_FLG		CHAR(1)　DEFAULT '0' NOT NULL ENABLE,
+	PRIMARY KEY(社員コード)
+);</pre>
+			</div>
+			<p>CONNECT beluran/beluran@beluran;は、最初のbeluranはユーザーIDで、次のbeluranはパスワードで、最後のbeluranはデータベース名です。</p>
+
+
+
+			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width:336px;height:280px"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<!-- End floatbox -->
+
+		</div> <!-- End main -->
+
+		<div id="links-right">		
+			<div class="sidetitle">メニュー</div>
+			<div class="side">
+				<a href="../index.html"><b>ホームへ戻る</b></a><br />
+		    	<a href="index.html">ばじめに</a><br />
+		    	<a href="basic01.html">MVVM</a><br /> 
+		    	<a href="basic02.html">WPF</a><br />
+		    	<a href="basic03.html">XAML</a><br />
+		    	<a href="basic04.html">サンプル</a><br />
+		    	<a href="basic05.html">リソース</a><br />
+		    	<a href="basic06.html">ユーザーコントロール</a><br />
+				<a href="basic07.html">コントロールボックス</a><br />
+				<a href="basic08.html">画面遷移</a><br /> 
+				<a href="basic09.html">ログイン画面</a><br /> 
+				<a href="basic10.html">メインメニュー画面</a><br />
+				<a href="basic11.html">一覧表画面</a><br />
+				<a href="basic12.html">明細画面</a><br />
+				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
+			</div> 
+			
+			<div class="sidetitle">コーナー</div>
+			<div class="side">
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
+			</div>
+
+				
+
+			<!-- Start floatbox -->
+<hr />
+<br />
+<p class="gad">Ads by Google</p>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block; width: 190px; height: 600px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<br />
+<br />
+			<!-- End floatbox -->	
+
+
+
+
+		</div> <!-- End links-right -->		
+
+		<div id="footer">	
+			<ul style="list-style:none">
+      			<li><a href="../index.html">|ホーム</a></li>
+      			<li><a href="index.html">|TOP</a></li>
+      			<li><a href="javascript:history.back();">|戻る</a></li>
+      			<li><a name="footer" href="#top" >|先頭|</a></li>
+    		</ul>
+			<br />
+			<hr />
+			Copyright &copy; 2015-2016 koji miyazaki All rights reserved.<br/>
+			<p class="pos_c">当サイトへのリンクはご自由にどうぞ。<br />
+			&lt;a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/" target="_blank"&gt;Livetを使ったC#のWPF &lt;/a&gt;
+			</p>
+		</div> <!--End footer -->
+		
+	</div>  <!-- End container -->
+	
+<script>
+SyntaxHighlighter.autoloader
+(
+"xml xhtml xslt html    ./syntaxhighlighter/scripts/shBrushXml.js"
+"css                    ./syntaxhighlighter/scripts/shBrushCss.js",
+"c# c-sharp csharp      ./syntaxhighlighter/scripts/shBrushCSharp.js",
+);
+SyntaxHighlighter.all();
+</script>
+
+</body>
+</html>
+
