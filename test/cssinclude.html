@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CSS3 でのレイアウトで使える box 要素系のまとめのデモページ｜CSS Lecture</title>
+<meta name="keywords" content="CSS,XHTML,デモページ" />
+<meta name="description" content="CSS3 でのレイアウトで使える box 要素系のまとめのデモページ" />
+<meta name="robots" content="index,follow" />
+<link rev="made" href="mailto:miya@css-lecture.com" />
+<link href="/index.html" rel="index" />
+<link href="/common/image/ico/favicon.png" rel="icon" type="image/png" />
+<link href="/common/image/ico/favicon.ico" rel="shortcut icon" />
+<meta http-equiv="Content-Style-type" content="text/css" />
+<meta http-equiv="Content-Script-type" content="text/javascript" />
+<link rel="stylesheet" href="../style/demo.css" type="text/css" media="all" />
+
+
+<style type="text/css">
+html	{ background: #121212; }
+body	{ background: #FFF; font-weight: bold; }
+a	{ color: #2D88B3; }
+#page	{
+	width: 100%;
+}
+	#page > div	{
+		min-width: 1000px;
+	}
+#header	{
+	width: 100%;
+	background: #121212;
+	padding: 30px 0;
+	font-size: 180%;
+	color: #FFF;
+	text-align: center;
+}
+#container	{
+	width: 100%;
+	display: -webkit-box;
+	display: -moz-box;
+}
+	#container > div	{
+		padding: 20px;
+		min-height: 500px;
+		box-sizing: content-box;
+	}
+#leftBox	{
+
+float: left;
+
+	width: 250px;
+	background: #999;
+	-webkit-box-ordinal-group: 1;
+	-moz-box-ordinal-group: 1;
+	border-right: 2px solid #09F;
+	border-left: 2px solid #09F;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#main	{
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	min-width: 500px;
+	background: #EEE;
+	-webkit-box-ordinal-group: 2;
+	-moz-box-ordinal-group: 2;
+	position: relative;
+}
+#main p	{
+	position: absolute;
+	right: 20px;
+	bottom: 20px;
+}
+
+
+#rightBox	{
+float: right;
+
+	width: 250px;
+	background: #666;
+	-webkit-box-ordinal-group: 3;
+	-moz-box-ordinal-group: 3;
+}
+#footer	{
+	width: 100%;
+	background: #121212;
+	padding: 10px 0;
+	color: #FFF;
+	text-align: center;
+}
+.copyright	{ font-family: Arial, Helvetica, sans-serif; }
+
+</style>
+</head>
+
+<body id="cssLecture">
+
+<div id="page">
+
+<div id="header">
+<h1>CSS3 での 3カラムレイアウト</h1>
+<!--/ #header--></div>
+
+<div id="container">
+
+
+
+
+<div id="leftBox">
+
+leftBox
+
+<!--/ #leftBox--></div>
+
+
+<div id="rightBox">
+
+rightBox
+
+<!--/ #rightBox--></div>
+
+<div id="main">
+
+main
+
+<p><a href="/log/css3/css3-layout-box.html">ブログ記事に戻る</a></p>
+
+<!--/ #main--></div>
+
+
+
+<!--/ #container--></div>
+
+<div id="footer">
+<p class="copyright">Copyright &copy; 2010 <a href="http://www.css-lecture.com/" title="CSS Lecture">CSS Lecture</a> All rights reserved.</p>
+<!--/ #footer--></div>
+
+
+<!--/ #page--></div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4230783-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>
