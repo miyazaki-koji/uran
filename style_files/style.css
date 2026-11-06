@@ -4,787 +4,920 @@ padding: 2px 4px; … ［上下］ と ［左右］ を指定
 padding: 2px 4px 6px; … ［上］ と ［左右］ と ［下］ を指定
 padding: 2px 4px 6px 8px; … ［上］ と ［右］ と ［下］ と ［左］ を指定
 
-Home
+WPFCSharpUsingLivet
+*/
+#twittertitle{
+/*	height				: 90px;　*/
+
+/* 旧メニュー */
+/*	height				: 55px; 
+	padding				: 35px 0px 0px 10px;
 */
 
+/* dropdownメニュー */
+	height				: 53px; 
+	padding				: 34px 0px 0px 10px;
+	width				: 800px; 
+
+	margin				: 0px;
+	text-align			: left;
+	background-color	: #D7EEFF;
+	/* 下の文字  */
+	color				: #000000; 
+	
+/*	border-bottom		: 1px solid #999999; */
+	border-color		: 1px solid #999999;
+	float				: left;
+
+	
+}
+
 .twitterlogo {
-	padding: 0px 10px 0px 0px;
+	padding: 25px 10px 12px 0px;
 	text-align: right;
+	
+	float				: right;
+	width				: 200px; 
+	
+	
+	/* dropdownメニュー */
+	height				: 50px; 
+
+	text-align			: right;
+	
+	float				: right;
+	width				: 180px; 
+	margin				: 0px;
+	background-color	: #D7EEFF;
+	/* 下の文字  */
+	color				: #000000; 
+	border-color		: 1px solid #999999;
+
 }
 
 
- * {
-	margin: 0; padding: 0;
+* {
+	padding				: 0;
+	margin				: 0;
 }
 
-.gad{
-	font-size:10px;
-	color:#999999;
-	margin-top:0px;
-	margin-bottom:5px;
-	padding-top:0px;
-	padding-bottom:0px;
-}
-
-
+/* Start Miy */
 .red
 {
-	color: #ff0000;
-}
-
-.blue
-{
-	color: #0000ff;
+	color				: #ff0000;
 }
 
 .gray
 {
-	color: #000000;
+	color				: #000000;
 }
 
-.pink
+.blue
 {
-	color: #ff4081;
+	color				: #0000ff;
+}
+#links-right  a:hover{
+	color				: #FF0000;
+	text-decoration		: none;
 }
 
-body {
-	text-align: center;
-	font-size			: 12px;
-	font-family			: Verdana;	
-/**
-	font: 11px Verdana;
-**/
-	color: #565656;
-	background: none; 
-	
 
-/*	background-image	: url("../images/back4.jpg"); */
-	
-}
-/*	color: #565656;
-	background: none; */
-	
-}
-a {
-	text-decoration: none;
-	color: #63777F;
-}
-a:hover {
-	text-decoration: underline; 
-	color		: #FF0000;
-}
-
-img {
-	border: 0;
-}
-
-/* Start Miy */
-/*
 img.border { border: 1px #555555 solid; 
 }
 a img { border: none; 
 }
-*/
 /* End Miy */
+
+
+.bg-color {
+		background-color: #EEFFFF;
+	}
+
+body {
+	color				: #000;
+	font-family			: Verdana;	
+/*	background-image	: url("../img/back3.png");	*/
+/*	background-image	: url("../img/back4.jpg");	*/
+	
+	font-size			: 13px;
+	*font-size			: small; 	/* IE7 */
+	*font				: x-small; 	/* IE6 */
+}
+
+p {
+	line-height			: 1.6;
+	text-align			: justify;
+	text-justify		: distribute;
+}
+
+p, ul, ol, dl, table, pre {
+	font-size			: 100%;
+	letter-spacing		: 0.02em;
+}
+
+/*
+ul li:before {
+   content: "•";
+   font-size: 170%; /* or whatever */
+   padding-right: 5px;
+}
+*/
+
+p.pos_l {text-align		: left; }
+p.pos_c {text-align		: center; }
+p.pos_r {text-align		: right; }
+p.pos_j {text-align		: justify; }
+
+
+/**** ヘッダー ****/ 
+#title{
+/*	height				: 90px;　*/
+
+/* 旧メニュー */
+/*	height				: 55px; 
+	padding				: 35px 0px 0px 10px;
+*/
+
+/* dropdownメニュー */
+	height				: 53px; 
+	padding				: 34px 0px 0px 10px;
+
+	
+/*	width				: 900px;  */
+/*	width				: 950px;  */
+/*	width				: 1000px; */
+	width				: 990px; 
+		width				: 800px; 
+
+
+	margin				: 0px;
+	text-align			: left;
+
+/*	background-color	: #BBEEFF; */
+/*	background-color	: #245987; */
+/*	background-color	: #33CCFF; */
+	background-color	: #D7EEFF;
+	/* 下の文字  */
+	color				: #000000; 
+	
+/*	border-bottom		: 1px solid #999999; */
+	border-color		: 1px solid #999999;
+	/* ******************************************* */
+	float				: left;
+	/* ******************************************* */
+
+}
+
+/* Start Miy Add */
+
 .break {
 	font-size: 0;
-	width: 0; 
-	height: 0;
+	width: 0; height: 0;
 	clear: both;
 }
+/* Start Miy Add */
+#title22 {
 
-.alignleft {
-	float: left;
-	margin: 4px 10px 5px 0;
-}
-.alignright {
-	float: right;
-	margin: 4px 0 5px 10px;
-}
-.aligncenter {
-	text-align: center;
-}
-.hidden {
-	display: none;
 }
 
-/******************************************************************************/
-/** BEGIN wrap**/
-#wrap {
-/*	width: 950px; */
-	width: 1000px;
+#title2 {
 
-	margin: auto auto;
-	text-align: left;
-	
-	/* Add */
-	border-width: 0 1px;
-	border-style: solid;
-	border-color: #D7D7D7;
-
-			
 }
-/** END wrap **/
-
-/******************************************************************************/
-
-/** BEGIN wrapper **/
-#wrapper {
-/*	width: 950px; */
-	width: 1000px;
-
-	margin: auto auto;
-	text-align: left;
-	
-	/* Add */
-	border-width: 0 1px;
-	border-style: solid;
-	border-color: #D7D7D7;
-
-			
-}
-/** END wrapper **/
-
-/** BEGIN header1 *************************************************************/
-/******************************************************************************/
-#header1 {
-/*	height: 102px; */
-	height: 98px;
-
-/*	background: url("../images/header.gif") repeat-x 0 bottom; */
-	padding-top: 25px;
-	/* Add */
-	background-color	: #D7EEFF;
-}
-
-		#header1 ul li a {
-			color: #ffffff;
-			display: block;
-			/* 11を大きくするとhoverで大きくなってしまう   */
-			padding: 11px 12px;
-
-		}
-
-		#header1 ul li a:hover {
-			/*color: #ff0000;*/
-			color: #ffff00;
-			text-decoration: none;
-
-		}
-
-		/* End Miy Add */
-
-	#header1 .logo2 {
-		float: left;
-		padding-left: 15px;
-	}
-		#header1 .logo2 h1 a {
-			display: block;
-			outline: none;
-			text-indent: -9999px;
-			background: url("../images/LOGO-Academy40-5.png") no-repeat 0 0;
-			background: url("../images/LOGO-DANKAI40-2.png") no-repeat 0 0;
-			background: url("../images/LOGO-beluran-40.png") no-repeat 0 0;
-
-			width: 324px; 
-			height: 53px;
-		}
-
-
-/******************************************************************************/
-/** END header1 ***************************************************************/
-
-/** BEGIN header **/
-#header {
-	height: 102px;
-	background: url("../images/header.gif") repeat-x 0 bottom;  
-	padding-top: 25px; 
-	/* Add */
-	background-color	: #D7EEFF;
-}
-/* Start Add Miy */
-#header2 {
-/*	height: 102px; */
-	height: 98px;
-/*	background: url("../images/header.gif") repeat-x 0 bottom; */
-	padding-top: 25px;
-	/* Add */
-	background-color	: #D7EEFF;
-}
-
-
-	#header ul {
+	#title2 ul {
 		list-style-type: none;
 		height: 35px;
-	/*	margin-top: 6px; */
-		margin-top: 3px; 
+	/*	margin-top: 3px; */
+		margin-top: 0px;
+		background: url("../img/header.gif") repeat-x 0 bottom;
 
-		background: url("../images/rightround.jpg") no-repeat right 0;
 	}
-		#header ul li {
+		#title2 ul li {
 			float: left;
 			/*
 			text-transform: uppercase;
 			*/
 			font-weight: bold;
 			font-family: Verdana;
-			padding-left: 1px;
+	padding-left: 1px;  
 			background: url("../images/divider.gif") no-repeat 0 11px;
 		}
-		#header ul li.f {
+		#title2 ul li.f {
 			background: url("../images/leftround.gif") no-repeat 0 0;
 			padding-left: 10px;
 		}
-		#header ul li a {
+		#title2 ul li a {
+		text-align: center;
 			color: #ffffff;
 			display: block;
-			padding: 11px 12px;
-		}
-		#header2 ul li a {
-			color: #ffffff;
-			display: block;
-			/* 11を大きくするとhoverで大きくなってしまう   */
-			padding: 11px 12px;
-
+		/*	padding: 11px 12px; */
+		/*	padding: 11px 7px;  */
+		/* 上ではMainとの間に隙間ができる */
+			padding: 8px 7px; 
 		}
 
-		/* Start Miy Add */
-		#header ul li a:hover {
+		#title2 ul li a:hover {
 			/*color: #ff0000;*/
 			color: #ffff00;
 			text-decoration: none;
-		}
-		#header2 ul li a:hover {
-			/*color: #ff0000;*/
-			color: #ffff00;
-			text-decoration: none;
-
-		}
-
-		/* End Miy Add */
-
-	#header .logo {
-		float: left;
-		padding-left: 15px;
-	}
-	#header .logo2 {
-		float: left;
-		padding-left: 15px;
-	}
-	#header2 .logo2 {
-		float: left;
-		padding-left: 15px;
-	}
-
-
-		#header .logo h1 {
-			font-size: 0;
 		}
 		
-		#header .logo2 h1 {
-			font-size: 0;
-		}
-		#header2 .logo2 h1 {
-			font-size: 0;
-		}
+/* End Miy Add */
 
 
-		#header .logo h1 a {
-			display: block;
-			outline: none;
-			text-indent: -9999px;
-		/*	
-			background: url("../images/logo3.gif") no-repeat 0 0;
-			background: url("../images/LOGO-Accademy.png") no-repeat 0 0;
-			background: url("../images/LOGO-Academy30-2.png") no-repeat 0 0;
-			background: url("../images/LOGO-Academy40.png") no-repeat 0 0;
-			background: url("../images/LOGO-Academy40Blue.png") no-repeat 0 0;
-		*/
-			background: url("../images/LOGO-Academy40-5.png") no-repeat 0 0;
-			width: 324px; 
-			height: 53px;
-		}
-		#header .logo2 h1 a {
-			display: block;
-			outline: none;
-			text-indent: -9999px;
-			background: url("../imagesToyosu/LOGO-Toyosu40.png") no-repeat 0 0;
-			width: 324px; 
-			height: 53px;
-		}
-		#header2 .logo2 h1 a {
-			display: block;
-			outline: none;
-			text-indent: -9999px;
-			background: url("../imagesToyosu/LOGO-Toyosu40.png") no-repeat 0 0;
-			width: 324px; 
-			height: 53px;
-		}
 
-		#header .logo p {
-			display: none;
-		}
-	#header .ad468x60 {
-		float: right;
-		margin: -10px 0 10px;
-	}
-/** END header **/
+/* #title a,a:link,a:visited,a:active{ */
+#title a,a:link,a:active{
 
+	text-decoration		: none;
+	/* 上の文字 */
+/*	color 				: #FFF */
+	color 				: #000
 
-#header3 {
-	height: 125px;
+}
+
+#title  a:hover{
+	color				: #FF0000;
+	text-decoration		: none;
+}
+
+#title3 {
+/*	border-top		: 1px solid #999999; */
 	border-bottom		: 1px solid #999999;
 }
 
-#headerSlideShow {
-	height: 445px;
-	border-bottom		: 1px solid #999999;  
-	
+.description {
+	font-family			: Verdana;
+	font-weight			: bold;
+	padding				: 0px 10px 0px 5px;
+/*	width				: 975px; */
+/*	width				: 1025px; */
+	width				: 1075px;
+	margin				: 0px 0px 35px 0px;
+}
 
+#wrapper{
+	margin				: 0 auto 0px auto;
+/*	width				: 900px; */
+/*	width				: 950px; */
+	width				: 1000px;
+
+	background-color	: #FFFFFF;
+	border				: 1px solid #999999;
+/*	min-width			: 900px; */
+/*	min-width			: 950px; */
+	min-width			: 1000px;
+	
+	/* float で並べた2つの要素の高さを揃える 
+	min-height:100%;
+	overflow:hidden;
+	*/	
+}
+
+
+div .gazo-floatbox {
+	float				: left;
+	padding-right		: 10px;
+}
+div .ads-floatbox {
+	float				: left;
+/*	padding-right		: 10px; */
+	padding				: 0;    
+/*	margin				: 0px 0px 0px 0px; */
+	/* ******************************************* */
+	margin				: 18px 0px 0px 0px;
+	/* ******************************************* */
+
+	/* Add */
+/*	border				: 1px #555555 solid; */	
+}
+
+
+div .big-ads {
+	width				: 1000px;
+	float				: left;
+/*	padding-right		: 10px; */
+	padding				: 0;    
+	margin				: 0px 0px 0px 0px;
+	border-bottom		: 1px solid #999999; 
+}
+
+
+.clear {  
+     clear:both;
+} 
+
+
+#main{
+	clear				: left;
+	margin				: 0 auto;
+	float				: left;
+/*	width				: 74%; */
+/*	width				: 668px; */
+/*	width				: 718px; */
+	width				: 768px;
+		
+
+	height				: 100%;
+	padding				: 5px 10px 5px 10px;
+
+	background-color	: #FFFFFF;
+/*	border-color		: 1px solid #999999; */
+	
+	border-right		: 1px solid #999999; */
+		
+	/* float で並べた2つの要素の高さを揃える 
+	padding-bottom:32767px;
+	margin-bottom:-32767px;
+	*/
+}
+
+#main a {
+	text-decoration		: none;
+}
+
+#main a:link {
+	color				: #0000FF;
+	text-decoration		: none;
 }
 
 /*
-#header4 {
-	height: 300px;
-	border-bottom		: 1px solid #999999;
+#main a:visited {
+	color				: #56AEE1;
+	text-decoration		: none;
+}
+*/
+#main a:hover {
+	color				: #337ED2;
+	text-decoration		: none;
 }
 
-/* End Add Miy */
-
-/** BEGIN body **/
-#body {
-	border-width: 0 1px;
-	border-style: solid;
-	border-color: #D7D7D7;
-
-/*	background: url("/images/body.gif") repeat-y 615px 0; */
-	
-
-
+#main .left {
+	float				: left;
+	margin				: 0 10px 10px 0;
 }
-/** END body **/
-
-/** BEGIN content **/
-#content {
-/*	width: 615px; */
-	width: 665px;
-
-	float: left;
-	padding-bottom: 20px;
+#main .right {
+	float				: right;
+	margin				: 0 10px 10px 0;
 }
-	#content p {
-		margin-bottom: 10px;
-	}
-	#content h3 {
-		margin-bottom: 10px; 
-		font-size: 1.5em;
-		font-weight: normal;
-	}
-	#content blockquote {
-		margin-bottom: 10px;
-		padding: 10px 10px 5px;
-		background-color: #eeeeee;
-		border-width: 1px 0;
-		border-style: solid;
-		border-color: #cccccc;
-		font-style: italic;
-		font-weight: bold;
-	}
-	#content ul {
-		margin: 0 0 10px 18px;
-	}
-	#content ol {
-		margin: 0 0 10px 16px;
-		padding-left: 10px;
-	}
-	#content li {
-		padding: 2px 0;
-	}
-	#content .title {
+
+
+/* Start Add Miy */
+#main .title {
 		background-color: #EFEFEF;
 		border-bottom: 1px solid #E1E1E1;
 	/*	padding: 15px; */
-		padding: 7px;
+		padding: 7px; 
 
 		color: #63777F;
-		font-size: 1em; 
-	/*	font-size: 1.3em; */
+		font-size: 1em;
 		font-family: Verdana;
 		/*
 		text-transform: uppercase;
 		*/
-	}
-	#content .post {
-		padding: 15px;
-		clear: both;
-		border-top: 4px solid #E1E1E1;
-	}
-	#content .f {
-		border-top: 0;
-	}
-	
-	#content .post .thumb {
-			float: left;
-		/*	margin: 0 10px 10px 0; */
-		/*	margin: 0 10px 2px 0;  */
-			margin: 0 10px 0 0;
-	}
-	
-	#content .post .thumb2 {
-			float: left;
-		/*	margin: 0 10px 10px 0; */
-			margin: 0 3px 2px 0; 
-			width: 575px;
-	}
+}
+		padding: 7px;
 
-	#content .post .thumb img {
-		/*	width: 250px; */
-			width: 120px;
-	}
-	#content .post .thumb2 img {
-			width: 250px; 
-			float	: left; 
-			margin-right: 10px;
-	}
+		color: #63777F;
+		font-size: 1em;
+		font-family: Verdana;
+		/*
+		text-transform: uppercase;
+		*/
+}
+/* End Add Miy /*
 	
-	/* リンクの色の変更 Miy*/
-	#content .post .thumb h4 a {
-			color: #000000;
-	}
+a{
+	color				: #0000FF;
+	text-decoration		: none;
+}
 
-	#content .post .thumb2 h4 a {
-			color: #000000;
-	}
+h1 {
+	margin				: 0px;
+	padding				: 15px 0px 10px 10px;
+/*	font-weight			: bolder; */
+	font-weight			: normal;
+ 	font-size			: 24px;
+/* 	font-size			: 160%; */
+/*	font-family			: Verdana; */
+}
 
-	#content .post h2 {
-			font-size: 1.6em;
-			line-height: 1.5em;
-			margin-bottom: 10px;
-	}
-	#content .post p {
-			margin-bottom: 0px; 
-			line-height: 1.4em;
-	}
-	#content .post .details {
-			font-weight: bold;
-			color: #63777F;
-			padding-top: 10px;
-	}
-	#content .post .details a {
-				margin: 0 5px;
-	}
-	
-	/* Miy Start*/
-	#content .left {
-		float				: left;
-		margin				: 0 10px 10px 0;
-	}
-	#content .right {
-		float				: right;
-		margin				: 0 10px 10px 0;
-	}
-	#content .photos img {
-			margin: 5px;
-			width: 120px; height: 90px;
-			padding: 0px 10px 5px;
-	}
-	#content .photos p {
-		padding: 5px;
-	}
-	
+h1 a{
+	color				: #000000;
+	text-decoration		: none;
+/*	font-weight			: bolder; */
 
-	/* Miy End*/
-	
-/** END content **/
+}
 
-/** BEGIN sidebar **/
-#sidebar {
-	width: 332px;
-	float: right;
-	padding-bottom: 20px;
+h2 {
+	padding				: 0px;
+	font-weight			: bold;
+	text-align			: left;
+}
+
+h3 {
+	font-size			: 130%;
+	font-weight			: bold;
+/*
+	margin				: 1.5em 0 1em 0;
+*/	
+	margin				: 0.5em 0 0.5em 0; 
+	padding				: 0px 0px 0px 10px;
 	
-/*	
-			background-color	: #D9E5FF; 
+	border-left			: 5px solid #245987;
+	border-bottom		: 1px dotted #CCCCCC;
+	background-repeat	: no-repeat;
+	
+	line-height			: 4px;
+}
+
+H3 a{
+	text-decoration		: none;
+	color				: #000;
+}
+
+h4 {
+	font-size			: 100%;
+	font-weight			: bold;
+}
+
+
+/** テーブル ***/
+
+/*
+* --- 表全体 --- *
+table.system {
+width: 650px;  表の幅 
+border: 1px #c0c0c0 solid;  大枠の境界線 
+border-collapse: collapse;
+font-size: 80%;
+}
+
+* --- 表タイトル --- *
+table.system caption {
+padding-bottom: 5px; * 表タイトルの下パディング *
+}
+
+* --- セル --- *
+table.system th,
+table.system td {
+* width: 20%; * * セルの幅（セルの幅を均等にする場合） *
+padding: 6px 8px; * セルのパディング（上下、左右） *
+border: 1px #c0c0c0 solid; * セルの境界線 *
+}
+
+* --- 見出しセル --- *
+table.system thead th {
+background-color: #deefff; * 見出しセルの背景色 *
+text-align: center;
+}
+
+* --- フッタセル --- *
+table.system tfoot td {
+background-color: #f5f5f5; * フッタセルの背景色 *
+}
 */
+
+
+*/
+
+
+/* --- 表ボディ --- */
+table.system tbody {
+	background-color	: #ffffff; /* ボディの背景色 */
 }
-	#sidebar h2 {
-		font-size: 1em;
-		/*
-		text-transform: uppercase;
-		*/
-		padding: 15px 15px 10px;
-	}
-	#sidebar ul {
-		list-style-type: none;
-		padding: 0 15px 15px;
-		border-bottom: 1px solid #ECECEC;
-	}
-		#sidebar ul li {
-			line-height: 1.4em;
-			/*padding: 5px 0;*/
-			padding: 2px 0;
 
-		}
-		#sidebar ul li a {
-			color: #565656;
-		}
-		#sidebar ul li a:hover {
-		/*	color: #63777F; */
-			color: #ff0000;
-			text-decoration: none;
-		}
-	#sidebar .l {
-		float: left;
-		width: 165px;
-	}
-	#sidebar .r {
-		float: right;
-		width: 165px;
-	}
-	
-	/* Miy Start */
-	#sidebar .lr {
-	/*	margin-top:15px; */
-
-    	padding: 0 15px 15px 10px; 
-		line-height: 1.4em;
-		width: 308px;
-		text-transform: none;
-	}
-	
-	#sidebar .lr h2 {
-		font-size: 1em;
-		text-transform: none;
-		/*
-		text-transform: uppercase;
-		*/
-	/*	padding: 15px 15px 10px; */
-		padding: 10px 15px 5px  7px;	
-	}
-
-	/* Miy End */
-
-		#sidebar .l ul, #sidebar .r ul {
-			border-bottom: 0;
-		}
-						
-		#sidebar ul li a {
-			width: 330px;
-			color: #0000FF;
-			text-decoration: none;
-		/*	padding: 0 15px 15px; */
-			padding: 0 3px 5px;
-			border-bottom: 1px solid #ECECEC;
-		}
-				
-	#sidebar form {
-		border-bottom: 1px solid #E1E1E1;
-/*		background: #EFEFEF url("../images/search.gif") no-repeat 10px 8px; */
-		background: #EFEFEF;
-
-		width: 310px; 
-		height: 27px;
-/*		padding: 8px 11px; */
-		padding: 1px 11px;
-
-	}
-	#sidebar form input {
-			border: 1px solid #ffffff;
-			width: 222px;
-			font-size: 1.2em;
-			font-family: Verdana;
-			margin: 4px 7px 0 3px;
-			float: left;
-		}
-	#sidebar form button {
-			text-indent: -9999px;
-			border: 0;
-			width: 75px; 
-			height: 27px;
-			background-color: transparent;
-		}
-	#sidebar .photos {
-			padding: 0 15px 15px;
-			border-bottom: 1px solid #ECECEC;
-			text-align: center;
-	}
-	#sidebar .photos img {
-			margin: 5px;
-			width: 75px; 
-			height: 75px;
-	}
-	#sidebar .video {
-			padding: 0 15px 15px 20px;
-			border-bottom: 1px solid #ECECEC;
-	}
-	
-	/* Miy */
-	#sidebar .video h2{
-			padding-left: 0px;
-
-	}
-
-	#sidebar .tags {
-			padding: 0 15px 15px;
-			border-bottom: 1px solid #ECECEC;
-		}
-/** END sidebar **/
-
-/** BEGIN footer **/
-#footer {
-	clear: both;
-	background-color: #63777F;
-	color: #ffffff;
-	padding: 10px 20px;
-	
-	line-height: 1.6em;
-}
-	#footer a {
-		color: #ffffff;
-	}
-	
-    .copyright{
-	     text-align:center;
-    }
-
-    .center{
-	     text-align:center;
-    }
-
-/** END footer **/
-
-/** BEGIN miscellaneous **/
-.postnav {
-	clear: both;
-	padding: 0 15px;
-	font-size: 0.9em;
-}
-	.postnav a {
-		border: 1px solid #cccccc;
-		padding: 3px 8px;
-		color: #999999;
-	}
-	.postnav a:hover {
-		border: 1px solid #000000;
-		color: #000000;
-		text-decoration: none;
-	}
-#comments {
-	padding: 10px 15px;
-	border-top: 1px solid #ECECEC;
-}
-	#comments h2 {
-		margin: 20px 0 5px;
-		font-size: 1.5em;
-		font-weight: normal;
-	}
-	#comments p {
-		margin-bottom: 10px;
-		line-height: 1.5em;
-	}
-	#comments form {
-		padding-top: 20px;
-	}
-	#comments form p {
-		margin-bottom: 5px;
-	}
-		#comments form input, textarea {
-			border: 1px solid #cccccc;
-			font-size: 0.9em;
-			font-family: Verdana;
-			padding: 4px;
-			background-position: 4px 4px;
-			background-repeat: no-repeat;
-		}
-		#comments form input {
-			width: 260px;
-			border: 1px solid #cccccc;
-		}
-		#comments form textarea {
-			width: 350px;
-			padding: 4px 4px !important;
-			border: 1px solid #cccccc;
-		}
-		#comments form button {
-			border: 1px solid #909090;
-			background-color: #cccccc;
-			font-size: 0.9em;
-			font-family: Verdana;
-			width: 120px; 
-			height: 23px;
-		}
-	.commentdetails {
-		margin-top: 25px;
-	}
-	.commentauthor {
-		margin-bottom: 5px !important;
-		font-weight: bold;
-	}
-	.commentdate {
-		font-size: 0.8em;
-		margin-bottom: 5px;
-		color: #909090;
-	}
-	.required {
-		color: #ff0000;
-	}
-.notfound {
-	padding: 40px;
-}
-	.notfound h2 {
-		font-size: 18px;
-		font-weight: normal;
-		margin-bottom: 10px;
-	}
-/** END miscellaneous **/
-
-#comments ol {
-	list-style-type: none;
-	clear: both;
-	padding: 0;
-	margin: 0;
-}
-	#comments ol li {
-		padding: 10px;
-		border: 1px solid #cccccc;
-		margin-bottom: 10px;
-	}
-	#comments ol li .avatar {
-		float: right;
-	}
-	#comments ol li .comment-author {
+/* --- マウスオーバー時 --- */
+table.system tbody tr:hover {
+	background-color	: #e5e5e5; /* 行の背景色 */
 		
-	}
-		#comments ol li .comment-author .fn {
-			font-weight: bold;
-			font-size: 1.2em;
-		}
-	#comments ol li .comment-meta {
-		font-size: 0.9em;
-		color: #999999;
-		margin: 5px 0 10px;
-	}
-	#comments ol li .reply {
-		font-size: 0.9em;
-		font-weight: bold;
-		padding-bottom: 10px;
-	}
-	#comments .children {
-		list-style-type: none;
-	}
-#comments .navigation {
-	padding: 10px 0 20px;
-	font-size: 0.9em;
+	color				: #FF0000
 }
-	#comments .navigation a {
-		color: #999999;
-		padding: 3px 8px;
-		border: 1px solid #cccccc;
-	}
-	#comments .navigation a:hover {
-		color: #000000;
-		border-color: #000000;
-		text-decoration: none;
-	}
 
 
+#tab table{
+	width				: 100%
+	border				: 1px #999999 solid; 
+	border-collapse		: collapse;
+	table-layout		: auto;
+}
+
+#tab th{
+    padding				: 0.3em 1em;
+    text-align			: center;
+    border				: 1px #999999 solid; 
+}
+
+#tab td{
+    padding				: 0.3em 1em;
+    border				: 1px #999999 solid; 
+}
+
+#tab caption{
+	text-align			: left;
+	font-weight			: bold;
+}
+
+
+
+.navi {
+	text-align			: center;
+	margin-bottom		: 10px;
+	margin-top			: 10px;
+}
+
+
+.blog {
+	text-align			: left;
+	font-family			: Verdana;
+}
+
+.blogbody {
+	margin-top			: 15px;
+	font-weight			: normal;
+}
+
+.date{
+	font-family			: Verdana;
+	font-size			: 10px;
+	clear				: left;
+	color				: #AFAFAF;
+	margin-top			: 0px;
+	margin-bottom		: 0px;
+	padding				: 12px 0px 25px 0px;
+	border-top			: 1px solid #D3D3D3;
+}
+
+.title{
+	margin-top			: 0px;
+	margin-bottom		: 0px;
+	font-weight			: bold;
+}
+.title a{
+	border				: none;
+}
+
+.text{
+	padding				: 10px 0px 5px 0px;
+	margin-top			: 0px;
+	line-height			: 1.8em;
+	font-family			: Verdana;
+}
+.posted{ 
+	text-align			: left;
+	margin-bottom		: 5px;
+	padding				: 15px 0px 3px 0px;
+	font-size			: 10px;
+	font-family			: Verdana;
+}
+.posted a{
+	font-weight:bold;
+}
+
+/**　枠 **/
+#framestyle{
+    padding				: 0.3em 0.3em;
+    border-width		: 1px;
+    border-style		: solid;
+    border-color		: #777777;
+    color				: #2222BB;
+/**    background-color	: #EFEFEF; **/
+    background-color	: #EEFFFF; 
+
+}
+
+#framestyle .reversetitle {
+	padding				: 4px 10px 4px 10px;
+	font-weight			: bold;
+	color			   	: #000;
+	background-color 	: #33CCFF;
+	background-color	: #D7EEFF;	
+	font-family     	: Verdana;
+	margin-top			: 10px;
+	margin-bottom		: 5px;
+	border				: 1px solid #484848;
+}
+
+
+/** ソースコードスタイル **/
+#source{
+    padding				: 0.3em 0.3em;
+    border-width		: 1px;
+    border-style		: solid;
+    border-color		: #777777;
+    color				: #2222BB;
+}
+
+
+/** 実行結果のスタイル **/
+
+#result
+{
+    margin-top			: 0em;
+    margin-bottom		: 1em;
+    padding				: 0.3em 1em;
+    background-color	: #EFEFEF;
+    border-width		: 1px;
+    border-style		: solid;
+    border-color		: #777777;
+    padding				: 1em;
+    font-weight			: bold; 
+    font				: bold normal 120%/125% "ＭＳ ゴシック";
+}
+
+/** 右 **/
+#links-right {
+	font-weight			: normal;
+	width				: 190px;
+	clear				: right;
+	float				: right;
+	/* padding			: 5px 10px 10px 10px; */	
+	padding				: 0px 15px 5px 5px;
+
+/*	margin-right		: 10px; */
+/*	background-color	: #FFFFFF; */
+	background-color	: #f3f3f3; 	
+	text-align			: left;
+
+	border-left			: 1px solid #999999; */
+/*	border-color		: 1px solid #999999; */
+
+	/* float で並べた2つの要素の高さを揃える 
+	padding-bottom:32767px;
+	margin-bottom:-32767px;
+	*/
+
+
+}
+
+/** 右 **/
+/*
+#right{
+	float				: right;
+	width				: 18%
+	padding				: 0px 15px 5px 5px;
+	background-color	: #FFFFFF;
+	margin-right		: 10px;
+}
+*/
+.sidetitle {
+	padding				: 4px 10px 4px 10px;
+	font-weight			: bold;
+/*	color			   : #FFF; */
+	color			   : #000;
+/*	background-color : #245987; */
+	background-color 	: #33CCFF;
+	background-color	: #D7EEFF;	
+
+	font-family     	: Verdana;
+	padding				: 3px;
+	margin-top			: 10px;
+	margin-bottom		: 5px;
+	border				: 1px solid #484848;
+}
+
+.side {
+	padding				: 5px 5px 5px 5px;
+	margin-bottom		: 10px;
+	font-size			: 12px;
+	line-height			: 1.8em;
+	font-family			: Verdana;
+}
+.side a{
+	font-size			: 12px;
+}
+.side input{
+	border				: 1px solid #959595;
+	background-color	: #EAEAEA;
+}
+
+#links-right hr{
+	border-width		: 1px 0 0 0;
+	border-style		: dotted;
+	border-color		: #999999;
+	height				: 1px;
+	clear				: both;
+}
+
+/* #links-right a,a:link,a:visited,a:active{ */
+#links-right a,a:link,a:active{
+/*	color				: #337ED2; */
+	color				: #0000FF;
+	text-decoration		: none;
+}
+#links-right a:visited{
+	 /* 訪問済みリンクに用いることができるプロパティは使えるスタイルは制限されています。
+   		次のものだけです。
+		•color
+		•background-color
+		•border-color（およびそのサブプロパティ）
+		•outline-color
+		•fill および stroke プロパティの色の部分
+	  */
+	color				: #800000;
+}
+
+#links-right a:hover{
+	color				: #FF0000;
+	text-decoration		: none;
+}
+
+#links-right h4 {
+	font-size			: 90%;
+	font-weight			: bold;
+	text-align			: center;
+	padding				: 0 0 0px 10px;
+ 	border-left			: 18px solid #BBEEFF;
+ 	border-right		: 18px solid #BBEEFF;
+ 	
+ 	background-color 	: #245987;
+    color 				: #FFF;    
+    clear				: both;
+}
+
+#links-right ul{
+	margin-left			: 15px;
+	padding				: 0px;
+}
+
+#links-right li{
+	list-style-type		: dot;
+	color				: #5D5D5D;
+}
+
+
+
+
+
+#calendar {
+margin-bottom			: 10px;
+font-size				: 12px;
+border					: 2px solid #F1F1F0;
+baclground-color		: #FFF;
+width					: 98%;
+}
+#calendar table {
+width					: 100%;
+font-family				: Verdana;
+}
+.calendarhead {
+padding					: 4px 0px;
+font-weight				: bold;
+background-color		: #F1F1F0;
+text-align				: center;
+color					: #5D5D5D;
+font-size				: 12px;
+font-family				: Verdana;
+width					: 100%;
+}
+
+.calendarday {
+padding					: 3px;
+margin-bottom			: 10px;
+color					: #5D5D5D;
+font-size				: 10px;
+font-family				: Verdana;
+}
+.calendarday a {
+font-weight				: bold;
+}
+
+.powered {
+padding					: 10px 5px 10px 5px;
+text-align				: center;
+}
+
+.syndicate {
+margin-right			: 10px;
+text-align				: center;
+font-size				: 10px;
+font-family				: Verdana;
+}
+
+#comments {
+margin-bottom			: 30px;
+margin-top				: 25px;
+text-align				: left;
+padding					: 0px;
+}
+#comments form {
+margin					: 0px;
+padding					:0px;
+}
+#comments input {
+max-width				: 200px;
+border					: 1px solid #959595;
+background-color		: #EAEAEA;
+}
+#comments textarea{
+width					: 300px;
+margin-bottom			: 5px;
+border     				: 1px solid #959595;
+background-color		: #EAEAEA;
+}
+.comments-head{ 
+font-weight:bold;
+margin					: 0px;
+font-family				: Verdana;
+}
+.comments-body {
+margin					: 0px;
+font-family				: Verdana;
+}
+
+.comments-post {
+padding					: 3px 0px 3px 0px;
+font-size				: 10px;
+text-align				: right;
+font-family				: Verdana;
+}
+#trackback {
+margin-bottom			: 30px;
+margin-top				: 25px;
+border					: 1px dotted #666;
+padding					: 5px;
+text-align				: left;
+font-family				: Verdana;
+}
+
+#footer{
+	clear				: both;
+	text-align			: center;
+/*
+	height				: 60px;
+*/
+	height				: 80px;
+	border-top			: 1px solid #999999;
+	padding				: 5px;
+	background-color	: #D9E5FF;
+}
+
+.copyright{
+	text-align			: center;
+}
+.diet-content{
+padding-left			: 10px;
+}
+#diet-foods{
+padding-left			:10px;
+}
+.food-title{
+width					:20%;
+clear					:left;
+float					:left;
+}
+.food-content{
+width					:75%;
+padding-top				:10px;
+}
+#diet-container{
+border					:1px solid #999;
+padding					:5px;
+margin-bottom			:5px;
+}
+.diet-title{
+padding					:2px 10px 2px 5px;
+margin-top				:5px;
+}
+.diet-content{
+padding-left			:10px;
+}
+#diet-foods{
+padding-left			:10px;
+}
+.food-title{
+width					:20%;
+clear					:left;
+float					:left;
+}
+.food-content{
+width					:75%;
+padding-top				:10px;
+}
+
+.gad{
+font-size				:10px;
+font-color				:#999999;
+margin-top				:0px;
+margin-bottom			:5px;
+padding-top				:0px;
+padding-bottom			:0px;
+}
+
+.pg{
+border					:1px solid #cccccc;
+background-color		:#ffffcc;
+margin					:0px;
+padding					:0px 5px;
+}
+
+/* img  */
+#top{
+text-align				:left;
+}
+#top h1{
+color					:#fff;
+font-size				:24px;
+letter-spacing			:2px;
+margin					:0;
+text-align				:left;
+}
