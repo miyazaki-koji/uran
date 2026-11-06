@@ -1,15 +1,19 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+
+<link rel="stylesheet" type="text/css" href="css/html5reset.css" />
+<!--&#91;if lt IE 9&#93;> 
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<!&#91;endif&#93;-->
+
 <title>Livetを使ったC#のWPFプログラミング|6-1.汎用ボトムボタン～WindowChrom,Sample,プログラミング,アカデミー,</title>
 <meta name="robots" content="INDEX,FOLLOW" />
-<meta name="keywords" content="汎用,ボトムボタン,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" xml:lang="ja" />
-<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja" xml:lang="ja" />
+<meta name="keywords" content="汎用,ボトムボタン,C#,WPF,Livet,MVVM,LIVET,WindowChrome,入門,プログラミング,アカデミー" lang="ja" />
+<meta name="description" content="もっと自由に画面を表現したいのでWPFを使ってみたいが、Sampleが少なくてよくわからない。WPFはメモリーリーク防止の為にMVVMで作る必要があるらしいが全然わからない」という人を対象" lang="ja"  />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2" />
 
 
@@ -17,8 +21,9 @@
 <meta http-equiv="content-script-type" content="text/javascript" />
 <meta http-equiv="content-language" content="ja" />
 <link rel="stylesheet" 		type="text/css"		href="style_files/style.css" />
+<link rel="stylesheet" 		type="text/css"		href="style_files/dropmenustyle.css" />
 <link rel="stylesheet" 		type="text/css"		href="style_files/user-common.css" />
-<link rel="shortcut icon"	type="image/ico"	href="style_files/img/favicon.ico" />
+<link rel="shortcut icon"	type="image/ico"	href="style_files/images/favicon.ico" />
 <script type="text/javascript" src="scripts/smooth.pack.js"></script>
 
 <link rel="stylesheet" type="text/css" href="../resource/lightbox.css" media="screen,tv" />
@@ -58,18 +63,6 @@
 	</script>
 
 
-<script type='text/javascript'>
-
-	<!-- google analytics -->
-	<script>
-	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-	  ga('create', 'UA-48887342-7', 'auto');
-	  ga('send', 'pageview');
-</script>
 	
 <!--	
 <style type="text/css">
@@ -85,6 +78,19 @@
         li {float:left;}
  		-->
  	</style>
+ 	
+ <!-- google analytics -->
+<script type='text/javascript'>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76246476-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
 
 </head>
 <body>
@@ -92,40 +98,102 @@
 		<div id="title">
 			<h1><a name="top" href="index.html" accesskey="1">Livetを使ったC#のWPFプログラミング</a></h1>
 			<span class="description">
-				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイトです
+				システムとして機能が網羅されたサンプルをもとに、Livetを使ったC#のWPFシステムの開発技能を身に付ける為の学習サイト
 			</span>			
-		</div>		
-		<div id="main" >
+		</div>
+		<div class="twitterlogo">
+			<a href="https://instagram.com/gongqixiaozhi/">    		
+     			<img src="images/instagram.jpg" alt="instagramアイコン" height="48" width="48" />
+	 		</a>
+     		<a href="http://twitter.com/BelBeluran">				
+     			<img src="images/twitter.png" alt="Twitterアイコン" />
+	 		</a>
+	 		<a href="https://www.facebook.com/beluran3">
+				<img src="images/FB-f-Logo__blue_48.jpg" alt="Twitterアイコン" />
+	 		</a>
+		</div> 
+
+
+	<!-- Start Menu -->   
+	<!-- Start Menu -->   
+    <div class="break2"></div>    
+	<div id="dropmenutitle2">
+		<ul id="dropmenu">
+  			<li><a href="#wrapper">ホーム /　ウラン<span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../index.html">ホーム</a></li>
+      				<li><a href="../about.html">メール・掲示板</a></li>
+      				<li><a href="../toyosu.html">マイタウン豊洲</a></li>
+      				<li><a href="../uran/index.html">ウランのホームページ</a></li>
+      			</ul>   
+   			</li>    
+   			<li><a href="#wrapper">プログラミング <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../WPFCSharpUsingLivet/index.html">WPFプログラミング</a></li>
+      				<li><a href="../WindowChrome/index.html">Chromeプログラミング</a></li>
+      				<li><a href="../SampleHelpDesk/index.html">Chromeサンプル</a></li>
+				<li><a href="../Tips/index.html">WPF Tips</a></li>
+    			</ul>
+  			</li>
+   		<li><a href="#wrapper">Oracle　/ フリーソフト<span class="red">v</span></a>
+    			<ul>
+    				<li><a href="../OracleExpress/index.html">Oracle Express</a></li>
+				<li><a href="../FreeSoft/index.html">フリー・ソフト</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">Oldies 60's /　曲 <span class="red">v</span></a>
+    			<ul>
+      				<li><a href="../Oldies/index.html">YouTube Oldies 60's</a></li>
+      				<li><a href="../DearFilmMusic/index.html">懐かしの映画・映画音楽</a></li>
+      				<li><a href="../simple-lp/ShowaSong/index.html">思い出の歌</a></li>
+    			</ul>
+  			</li>
+    		<li><a href="#wrapper">動画サイト /　映画 <span class="red">v</span></a>
+    			<ul>
+					<li><a href="../Dorama/index.html">心に残るドラマ</a></li>
+					<li><a href="../Documentary/index.html">感動のドキメンタリー</a></li>
+					<li><a href="../Movie/index.html">YouTubeで見つけた映画</a></li>
+					<li><a href="../Earth/index.html">宇宙・銀河・地球･誕生と進化</a></li>
+					<li><a href="../History/index.html">動画サイトで学ぶ歴史</a></li>
+     			</ul>
+  			</li>
+		</ul>   	
+	</div>
+	<!-- End Menu -->       	
+    	
+    	<div id="title3">   	
+ 			<!-- Start floatbox -->
+			<br />
+			<div class="ads-floatbox" style="width: 1000px">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- beluran_responsive -->
+<ins class="adsbygoogle"
+     style="display:block;width: 970px; height: 90px;"
+     data-ad-client="ca-pub-1302894290654620"
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>		
+			</div>	
+				<p style="clear:left;"/>
+			<br />
+			<!-- End floatbox -->	
+    	</div> <!-- End title3 -->
 		
-
-
-			<h3>6-1.汎用ボトムボタン</h3>
+		<div id="main" >
+			<h3 class="title">6-1.汎用ボトムボタン</h3>
+			<br />
 				<a href="basic06.html" >戻る</a>		
 				<p>ここでは、ボトムのボタンを画面ごとに異なる処理をするボタンにする方法を解説します。</p>
 				<p>下の画像は、画面の下に配置するボタンをViewsフォルダの内にUserControlFooterという名前のユーザーコントロールを作成した例です。</p>
 				<p>6.ユーザーコントロールのボトムボタンとの違いは、ボタンに表示されている文字です。ここでは、一番左に「保存」、中央に「閉じる」としています。<br />
 				この文字は、元々はブランクで、画面が開いた時に編集しています。</p>
 				
-			<!-- Start floatbox -->
-			<br />
-			<div class="ads-floatbox">
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- beluran -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1302894290654620"
-     data-ad-slot="3126707799"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-			</div>
-				<p style="clear:left;"/>
-			<br />		
-			<!-- End floatbox -->
 
 			<br/>
 			<b>Buttonをユーザーコントロールで作成</b>
-			<div id="top"><img src="./img/livet06_1_20.png" alt="" width="664" height="68" border="1"/></div>
+			<div id="top"><img src="./images/livet06_1_20.png" alt="" width="664" height="68" border="1"/></div>
 			<br />
 			<br />
 			<b>Windowの代わりにUserControlとなる</b>
@@ -275,22 +343,8 @@
 	
 			<!-- ****************************************************** -->
 			<br />
-			<!-- Start floatbox  yoko long -->
-			<br />
-			<div class="ads-floatbox">
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- beluran -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
-     data-ad-client="ca-pub-1302894290654620"
-     data-ad-slot="3126707799"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-			</div>
-				<p style="clear:left;"/>
-			<br />
-			<!-- End floatbox -->
+
+
 
 			<br />
 			<h4>Viewでのユーザーコントロールの指定</h4>			
@@ -570,23 +624,22 @@ namespace LivetWPFApplication100.ViewModels
 			<br />
 
 
-			<!-- Start floatbox  yoko long -->
+			<!-- Start floatbox -->
 			<br />
 			<div class="ads-floatbox">
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- beluran -->
+<!-- beluran_responsive -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:728px;height:90px"
+     style="display:block; width:336px;height:280px"
      data-ad-client="ca-pub-1302894290654620"
-     data-ad-slot="3126707799"></ins>
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-			</div>
+</script>		
+			</div>	
 				<p style="clear:left;"/>
-			<br />
 			<!-- End floatbox -->
-
 
 		</div> <!-- End main -->
 
@@ -610,56 +663,41 @@ namespace LivetWPFApplication100.ViewModels
 				<a href="basicOPL.html">One Point Lesson 一覧表</a><br />
 			</div> 
 			
-
-				
-			<div class="sidetitle">開発で役立つツールのサイト</div>
+			<div class="sidetitle">コーナー</div>
 			<div class="side">
-				<a href="https://visualstudiogallery.msdn.microsoft.com/ee198b62-fa45-496c-9c1c-e8f63b43f677">Livetのダウンロードサイト</a>です<br />
-				<a href="http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/">ER図作成ツール</a>は便利です。<br />
-				<a href="http://inno-setup.sidefeed.com/archives/cat_2_inno_setup_.html">インストーラ作成ツール</a><br />
-				<a href="http://www.forest.impress.co.jp/library/software/kuronekosql/">黒猫 SQL Studio Next</a><br />
-			</div>
-			<div class="sidetitle">HTMLのお勉強のサイト</div>
-			<div class="side">
-				<a href="http://e-words.jp/p/r-htmlentity.html">HTMLの特殊文字</a>は重要です。<br />
-				<a href="http://algorhythnn.jp/blg/2014/04/11/expression_web_4-install/">Expression Web 4</a>を使って作成<br />
-				<a href="http://www.vector.co.jp/soft/dl/win95/art/se108932.html">JTrim</a>で綺麗にトリミング<br />
-				<a href="http://html-color-codes.info/japanese/">カラーコード</a>の入力で色表示<br />
-				<a href="http://www.netyasun.com/home/color.html">色を見てコード</a>を確認<br />
-				<a href="http://www.netyasun.com/syntaxhighlighter/">SyntaxHighlighter</a>でソース装飾<br />			
-				<a href="http://www.free-css.com/free-css-templates/page1">Free CSS</a>を使う<br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WPFCSharpUsingLivet/index.html">WPFプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/WindowChrome/index.html">WindowChromeプログラミング</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/SampleHelpDesk/index.html">Chromeサンプル HelpDesk</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/Tips/index.html">C# WPF Tips</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/toyosu.html">マイタウン豊洲</a><br />
+				<a href="http://www.aa.cyberhome.ne.jp/~bel/uran/index.html">ウランのホームページ</a><br />
 			</div>
 
+
+
+
+			<!-- Start floatbox -->
 <hr />
 <br />
 <p class="gad">Ads by Google</p>
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- beluran -->
+<!-- beluran_responsive -->
 <ins class="adsbygoogle"
-     style="display:inline-block;width:170px;height:600px"
+     style="display:block; width: 190px; height: 600px;"
      data-ad-client="ca-pub-1302894290654620"
-     data-ad-slot="3126707799"></ins>
+     data-ad-slot="9181302993"
+     data-ad-format="auto"></ins>
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 <br />
 <br />
+			<!-- End floatbox -->	
 
 
 
-<hr />
-<br />
-<p class="gad">Ads by Google</p><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<!-- beluran -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:170px;height:600px"
-     data-ad-client="ca-pub-1302894290654620"
-     data-ad-slot="3126707799"></ins>
-<script>
-(adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-<br />
-<br />
+
+
 		</div> <!-- End links-right -->		
 
 		<div id="footer">	
