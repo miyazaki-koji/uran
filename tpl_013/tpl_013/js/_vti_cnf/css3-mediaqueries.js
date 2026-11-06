@@ -10,3 +10,5 @@ vti_extenderversion:SR|12.0.0.0
 vti_backlinkinfo:VX|tpl_013/tpl_013/tomodachi1.html tpl_013/tpl_013/index\\ -\\ original.html tpl_013/tpl_013/index.html tpl_013/tpl_013/subpage.html
 vti_syncofs_www.aa.cyberhome.ne.jp\:21/public_html:TW|01 Feb 2023 09:07:06 -0000
 vti_syncwith_www.aa.cyberhome.ne.jp\:21/public_html:TW|31 Dec 2023 14:09:57 -0000
+vti_syncofs_beluran.web.cyberhome.ne.jp\:21/public_html:TW|27 Oct 2026 05:40:48 -0000
+vti_syncwith_beluran.web.cyberhome.ne.jp\:21/public_html:TW|31 Dec 2023 14:09:57 -0000
