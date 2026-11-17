@@ -1,0 +1,16 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - names: pages
+    label:ページ編集
+    type: file
+    path: index.md
+    fields:
+     - name: tytle
+       label: uran
+       type: string
+     - name: body
+       label: 本文
+       type: rich-text
