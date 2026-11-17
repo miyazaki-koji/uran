@@ -3,12 +3,12 @@ media:
   output: /images
 
 content:
-  - names: pages
-    label:ページ編集
+  - name: pages
+    label: ページ編集
     type: file
     path: index.md
     fields:
-     - name: tytle
+     - name: title
        label: uran
        type: string
      - name: body
